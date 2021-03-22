@@ -1,26 +1,25 @@
 package me.andreraimundo.belarosa_backend.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
+import me.andreraimundo.belarosa_backend.services.CategoriaService;
 
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
     
-    @RequestMapping(method = RequestMethod.GET)
-    public List <Categoria> list (){
-        Categoria cat1 = new Categoria(1,"Bolsas");
-        Categoria cat2 = new Categoria(2,"Maquiagem");
-
-        List<Categoria> list = new ArrayList<>();
-        list.add(cat1);
-        list.add(cat2);
-        return list;
+    @Autowired
+    CategoriaService categoriaService;
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find (@PathVariable Integer id) {
+        Categoria objcategoria = categoriaService.find(id);
+        return ResponseEntity.ok().body(objcategoria);
     }
 }

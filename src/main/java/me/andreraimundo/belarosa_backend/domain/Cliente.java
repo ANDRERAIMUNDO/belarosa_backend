@@ -16,15 +16,15 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private Integer cpf;
-    private Integer dateNasc;
-    private Integer phone;
+    private String cpf;
+    private String dateNasc;
+    private String phone;
 
     public Cliente (){
 
     }
 
-    public Cliente(Integer id, String name, Integer cpf, Integer dateNasc, Integer phone) {
+    public Cliente(Integer id, String name, String cpf, String dateNasc, String phone) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -43,22 +43,22 @@ public class Cliente implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public Integer getDateNasc() {
+    public String getDateNasc() {
         return dateNasc;
     }
-    public void setDateNasc(Integer dateNasc) {
+    public void setDateNasc(String dateNasc) {
         this.dateNasc = dateNasc;
     }
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     @Override
