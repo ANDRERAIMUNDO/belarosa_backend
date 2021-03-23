@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
+import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -16,7 +17,7 @@ public class CategoriaService {
     
     public Categoria find (Integer id){
         Optional <Categoria> obj = categoriaRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado ! Id; " + id +"Tipo: "+ Categoria.class.getName()));
     }
     
 }
