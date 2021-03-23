@@ -1,11 +1,16 @@
 package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente implements Serializable {
@@ -19,6 +24,12 @@ public class Cliente implements Serializable {
     private String cpf;
     private String dateNasc;
     private String phone;
+
+    @OneToMany
+    @JoinTable(name = "CLIENTE_ENDERECO",
+    joinColumns = @JoinColumn(name= "cliente_id"),
+    inverseJoinColumns = @JoinColumn(name= "endereco_id"))
+    private List <Endereco> enderecos = new ArrayList<>();
 
     public Cliente (){
 
@@ -62,6 +73,15 @@ public class Cliente implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -69,6 +89,7 @@ public class Cliente implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -85,6 +106,5 @@ public class Cliente implements Serializable {
             return false;
         return true;
     }
-
     
 }
