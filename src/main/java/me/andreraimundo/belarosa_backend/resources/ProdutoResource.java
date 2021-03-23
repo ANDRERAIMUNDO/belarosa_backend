@@ -17,9 +17,9 @@ public class ProdutoResource {
     @Autowired
     ProdutoService produtoService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity <?> find(@PathVariable Integer id){
-        Produto objProduto = produtoService.find(id);
-        return ResponseEntity.ok().body(objProduto);
+        Produto obj = produtoService.find(id);
+        return ResponseEntity.ok().body(obj);
     }
 }

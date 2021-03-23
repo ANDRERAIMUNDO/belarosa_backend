@@ -1,11 +1,16 @@
 package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Produto implements Serializable {
@@ -18,11 +23,18 @@ public class Produto implements Serializable {
     private String name;
     private Double price;
 
+    @ManyToMany
+    @JoinTable(name = "PRODUTO_CATEGORIA",
+    joinColumns = @JoinColumn(name = "produto_id"),
+    inverseJoinColumns = @JoinColumn(name="categoria_id"))
+    private List<Categoria> categorias = new ArrayList<>();
+
     public Produto (){
 
     }
 
     public Produto(Integer id, String name, Double price) {
+        super();
         this.id = id;
         this.name = name;
         this.price = price;
@@ -52,6 +64,14 @@ public class Produto implements Serializable {
         this.price = price;
     }
 
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }   
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -76,5 +96,5 @@ public class Produto implements Serializable {
             return false;
         return true;
     }
-    
+
 }

@@ -15,8 +15,8 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
     
     public Produto find (Integer id){
-        Optional <Produto> objCategoria = produtoRepository.findById(id);
-        return objCategoria.orElse(null);
+        Optional <Produto> obj = produtoRepository.findById(id);
+        return obj.orElse(null);
     }
     
 }

@@ -15,8 +15,8 @@ public class RegistroService {
     private RegistroRepository registroRepository;
     
     public Registro find (Integer id){
-        Optional <Registro> objCategoria = registroRepository.findById(id);
-        return objCategoria.orElse(null);
+        Optional <Registro> obj = registroRepository.findById(id);
+        return obj.orElse(null);
     }
     
 }

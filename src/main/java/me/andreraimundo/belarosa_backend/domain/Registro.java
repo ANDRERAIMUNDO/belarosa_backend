@@ -23,6 +23,7 @@ public class Registro  implements Serializable{
     }
 
     public Registro(Integer id, String email, String password) {
+        super();
         this.id = id;
         this.email = email;
         this.password = password;

@@ -15,8 +15,8 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
     
     public Cliente find (Integer id){
-        Optional <Cliente> objCliente = clienteRepository.findById(id);
-        return objCliente.orElse(null);
+        Optional <Cliente> obj = clienteRepository.findById(id);
+        return obj.orElse(null);
     }
     
 }
