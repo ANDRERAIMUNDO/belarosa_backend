@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Produto;
 import me.andreraimundo.belarosa_backend.repositories.ProdutoRepository;
+import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {
@@ -16,7 +17,9 @@ public class ProdutoService {
     
     public Produto find (Integer id){
         Optional <Produto> obj = produtoRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(()-> new 
+        ObjectNotFoundException("Objeto não encontrado Id: "+ id + " Tipo: "
+         + Produto.class.getName()));
     }
     
 }
