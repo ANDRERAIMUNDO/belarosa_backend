@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco implements Serializable {
@@ -22,12 +26,17 @@ public class Endereco implements Serializable {
     private String localidade;
     private String uf;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
     public Endereco () {
 
     }  
 
     public Endereco(Integer id, String cep, String logradouro, String complemento, String bairro, String localidade,
-            String uf) {
+            String uf, Cliente cliente) {
         this.id = id;
         this.cep = cep;
         this.logradouro = logradouro;
@@ -35,6 +44,7 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
         this.localidade = localidade;
         this.uf = uf;
+        this.cliente = cliente;
     }
 
     public Integer getId() {
@@ -93,6 +103,14 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -117,5 +135,4 @@ public class Endereco implements Serializable {
             return false;
         return true;
     }
-    
 }

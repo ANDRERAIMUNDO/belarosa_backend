@@ -7,19 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.andreraimundo.belarosa_backend.domain.Produto;
-import me.andreraimundo.belarosa_backend.services.ProdutoService;
+import me.andreraimundo.belarosa_backend.domain.Pedido;
+import me.andreraimundo.belarosa_backend.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutoResource {
-
+@RequestMapping(value = "/pedidos")
+public class PedidoResource {
+    
     @Autowired
-    ProdutoService produtoService;
+    PedidoService pedidoService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity <?> find(@PathVariable Integer id){
-        Produto obj = produtoService.find(id);
+    public ResponseEntity <?> find (@PathVariable Integer id) {
+         
+        Pedido obj = pedidoService.find(id);
         return ResponseEntity.ok().body(obj);
     }
 }

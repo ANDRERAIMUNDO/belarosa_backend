@@ -2,7 +2,9 @@ package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
@@ -25,14 +28,18 @@ public class Produto implements Serializable {
     private String name;
     private Double price;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
     joinColumns = @JoinColumn(name = "produto_id"),
     inverseJoinColumns = @JoinColumn(name="categoria_id"))
     private List<Categoria> categorias = new ArrayList<>();
 
-    public Produto (){
+    @JsonIgnore
+	@OneToMany(mappedBy="id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
+
+    public Produto () {
 
     }
 
@@ -41,6 +48,15 @@ public class Produto implements Serializable {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    @JsonIgnore
+    public List <Pedido> getPedidos() {
+        List<Pedido> listaDePedidos = new ArrayList<>();
+        for (ItemPedido x: itens) {
+            listaDePedidos.add(x.getPedido());
+        }
+        return listaDePedidos;
     }
 
     public Integer getId() {
@@ -59,7 +75,7 @@ public class Produto implements Serializable {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public Double getPrice() {  
         return price;
     }
 
@@ -74,6 +90,14 @@ public class Produto implements Serializable {
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
     }   
+
+    public Set <ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
 
     @Override
     public int hashCode() {
