@@ -1,39 +1,35 @@
 package me.andreraimundo.belarosa_backend.domain.enums;
 
-public enum SituacaoPedido {
-    
-    PENDENTE(1, "Pendente"),
-	QUITADO(2, "Quitado"),
-	CANCELADO(3, "Cancelado");
+public enum TipoUsuario {
+
+    COMUM(1, "Comum"),
+	ADMIN(2, "Admin");
 
     private int cod;
     private String descricao;
 
-
-    private SituacaoPedido(int cod, String descricao) {
+    private TipoUsuario(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
-    
+
     public int getCod() {
         return cod;
     }
 
-    public String getdescricao() {
+    public String getDescricao() {
         return descricao;
-    }  
-
-    public static SituacaoPedido toEnum (Integer cod) {
+    }
+    
+    public static TipoUsuario toEnum (Integer cod) {
         if (cod  == null) {
             return null;
         }
-        for (SituacaoPedido x: SituacaoPedido.values()) {
+        for (TipoUsuario x: TipoUsuario.values()) {
             if (cod.equals(x.getCod())) {
                 return x;
             }
         }
         throw new IllegalArgumentException("Id invalido: " + cod);
     }
-
-}
-    
+}  

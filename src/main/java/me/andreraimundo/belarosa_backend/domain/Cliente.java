@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,6 +28,12 @@ public class Cliente implements Serializable {
     private String dateNasc;
     private String phone;
 
+    @OneToOne
+    @JoinTable(name = "REGISTRO_CLIENTE",
+    joinColumns = @JoinColumn(name = "cliente_id"),
+    inverseJoinColumns = @JoinColumn(name = "registro_id"))
+    private Registro  registro;
+    
     @OneToMany(mappedBy = "cliente")
     private List <Endereco> enderecos = new ArrayList<>();
 
@@ -36,8 +45,9 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente(Integer id, String name, String cpf, String dateNasc, String phone) {
+    public Cliente( Registro registro, Integer id, String name, String cpf, String dateNasc, String phone) {
         super();
+        this.registro = registro;
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -90,6 +100,14 @@ public class Cliente implements Serializable {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+
+    public Registro getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(Registro registro) {
+        this.registro = registro;
+    }
     
     @Override
     public int hashCode() {
@@ -115,5 +133,7 @@ public class Cliente implements Serializable {
             return false;
         return true;
     }
+
+ 
     
 }

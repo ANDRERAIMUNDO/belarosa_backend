@@ -1,11 +1,21 @@
 package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import me.andreraimundo.belarosa_backend.domain.enums.TipoUsuario;
 
 @Entity
 public class Registro  implements Serializable{
@@ -17,16 +27,23 @@ public class Registro  implements Serializable{
     private Integer id;
     private String email;
     private String password;
+    private Integer tipoUsuario;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "registro")
+    private Cliente cliente;
     
     public Registro (){
         
     }
 
-    public Registro(Integer id, String email, String password) {
+    public Registro(Integer id, String email, String password,
+    TipoUsuario tipoUsuario) {
         super();
         this.id = id;
         this.email = email;
         this.password = password;
+        this.tipoUsuario = tipoUsuario.getCod();
     }
 
     public Integer getId() {
@@ -52,6 +69,14 @@ public class Registro  implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public TipoUsuario getTipoUsuario() {
+       return TipoUsuario.toEnum(tipoUsuario);
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario.getCod();
+    }
 
     @Override
     public int hashCode() {
@@ -61,6 +86,14 @@ public class Registro  implements Serializable{
         return result;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -78,5 +111,5 @@ public class Registro  implements Serializable{
         return true;
     }
 
-    
+
 }
