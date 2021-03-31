@@ -51,30 +51,37 @@ public class DBInitialService {
 
     public void instantiateTestDataBase () throws ParseException {
 
-        Categoria cat1 = new Categoria(null, "Bolsas");
-		Categoria cat2 = new Categoria(null, "Maquiagem");
+        Categoria cat1 = new Categoria(null, "Adulto"); 
+		Categoria cat2 = new Categoria(null, "Acessorios"); 
+		Categoria cat3 = new Categoria(null, "Calçados");
+		Categoria cat4 = new Categoria(null, "Bolsas");
+		Categoria cat5 = new Categoria(null, "Maquiagens");
+		Categoria cat6 = new Categoria(null, "Oculos");
+		Categoria cat7 = new Categoria(null, "Roupas");
+		Categoria cat8 = new Categoria(null, "Utensilios");
 		
 		Produto prod1 = new Produto(null, "CARTEIRA VICTORINE", 279.99);
 		Produto prod2 = new Produto(null, "Bolsa Santa Lolla Baú Marrom", 279.99);
 		Produto prod3 = new Produto(null, "LES 4 OMBRES QUARTETO DE SOMBRAS MULTIEFEITOS", 199.90);
 		Produto prod4 = new Produto(null, "Bolsa Feminina Grande Tote Transversal Couro Ecológico", 89.65);
 
-		cat1.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4));
-		cat2.getProdutos().addAll(Arrays.asList(prod3));
+		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4));
+		cat5.getProdutos().addAll(Arrays.asList(prod3));
 
-		prod1.getCategorias().addAll(Arrays.asList(cat1));
-		prod2.getCategorias().addAll(Arrays.asList(cat1));
-		prod3.getCategorias().addAll(Arrays.asList(cat2));
-		prod4.getCategorias().addAll(Arrays.asList(cat1));
+		prod1.getCategorias().addAll(Arrays.asList(cat4));
+		prod2.getCategorias().addAll(Arrays.asList(cat4));
+		prod3.getCategorias().addAll(Arrays.asList(cat5));
+		prod4.getCategorias().addAll(Arrays.asList(cat4));
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4));
 
-		Registro reg1 = new Registro(null, "lararamos@email.com", "admin", TipoUsuario.ADMIN);
+		Registro reg1 = new Registro(null, "lararamos@email.com", "1234", TipoUsuario.COMUM);
 		Registro reg2 = new Registro(null, "luanalobato@email.com", "1234", TipoUsuario.COMUM);
 		Registro reg3 = new Registro(null, "pamelalorema@email.com", "1234", TipoUsuario.COMUM);
+		Registro reg4 = new Registro(null, "9000andre@gmail.com", "admin", TipoUsuario.ADMIN); 
 
-		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3));
+		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4));
 
 		Cliente cl1 = new Cliente(reg1, null, "Lara Ramos", "630.792.070-09", "13/12/1991", "(91)9 88220467");
 		Cliente cl2 = new Cliente(reg2, null, "Luana Lobato", "867.738.940-77", "24/06/1998", "(91)9 84001327");
