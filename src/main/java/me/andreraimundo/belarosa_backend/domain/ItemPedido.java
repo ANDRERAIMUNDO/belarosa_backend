@@ -1,6 +1,8 @@
 package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -31,6 +33,10 @@ public class ItemPedido  implements Serializable{
         this.quantidade = quantidade;
         this.price = price;
     }
+
+    public double getSubTotal() {
+		return (price - desconto) * quantidade;
+	}
 
     @JsonIgnore
     public Pedido getPedido() {
@@ -96,6 +102,19 @@ public class ItemPedido  implements Serializable{
             return false;
         return true;
     }
-
+    @Override
+    public String toString() {
+		NumberFormat numberFormaf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		StringBuilder stringbuilder = new StringBuilder();
+		stringbuilder.append(getProduto().getName());
+		stringbuilder.append(", Qte: ");
+		stringbuilder.append(getQuantidade());
+		stringbuilder.append(", Preço unitário: ");
+		stringbuilder.append(numberFormaf.format(getPrice()));
+		stringbuilder.append(", SubTotal: ");
+		stringbuilder.append(numberFormaf.format(getSubTotal()));
+		stringbuilder.append("\n");
+		return stringbuilder.toString();
+	}
     
 }

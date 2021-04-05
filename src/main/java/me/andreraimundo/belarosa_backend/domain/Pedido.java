@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Locale;
+
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -54,6 +58,14 @@ public class Pedido implements Serializable{
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
+
+    public double getValorTotal() {
+		double soma = 0.0;
+		for (ItemPedido ip : itens) {
+			soma = soma  + ip.getSubTotal();
+		}
+		return soma;
+	}
 
     public Integer getId() {
         return id;
@@ -127,4 +139,25 @@ public class Pedido implements Serializable{
         return true;
     }
     
+    @Override
+    public String toString() {
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		StringBuilder stringbuilder = new StringBuilder();
+		stringbuilder.append("Pedido número: ");
+		stringbuilder.append(getId());
+		stringbuilder.append(", Instante: ");
+		stringbuilder.append(sdf.format(getInstante()));
+		stringbuilder.append(", Cliente: ");
+		stringbuilder.append(getCliente().getName());
+		stringbuilder.append(" Situação do pagamento: ");
+		stringbuilder.append(getPagamento().getSituacaoPedido().getdescricao());
+		stringbuilder.append("\nDetalhes: \n");
+		for (ItemPedido ip : getItens()) {
+			stringbuilder.append(ip.toString());
+		}
+		stringbuilder.append("Valor total: ");
+		stringbuilder.append(numberFormat.format(getValorTotal()));
+		return stringbuilder.toString();
+	}
 }
