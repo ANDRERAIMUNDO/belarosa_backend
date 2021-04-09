@@ -7,13 +7,22 @@ import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
+import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
+import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
+
 
 @Service
 public class ClienteService {
 
     @Autowired  
     private ClienteRepository clienteRepository;
+
+    @Autowired 
+    EnderecoRepository enderecoRepository;
+
+    @Autowired
+    RegistroRepository registroRepository;
     
     public Cliente find (Integer id){
         Optional <Cliente> obj = clienteRepository.findById(id);
@@ -21,5 +30,4 @@ public class ClienteService {
         ObjectNotFoundException("Objeto não encontrado Id: "+ id + " Tipo: "
          + Cliente.class.getName()));
     }
-    
 }

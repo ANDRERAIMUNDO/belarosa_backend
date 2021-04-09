@@ -28,10 +28,10 @@ public class Cliente implements Serializable {
     private String dateNasc;
     private String phone;
 
+    @JsonIgnore
     @OneToOne
-    @JoinTable(name = "REGISTRO_CLIENTE",
-    joinColumns = @JoinColumn(name = "cliente_id"),
-    inverseJoinColumns = @JoinColumn(name = "registro_id"))
+    @JoinTable(name = "REGISTRO_CLIENTE")
+    @JoinColumn(name = "registro_id")
     private Registro  registro;
     
     @OneToMany(mappedBy = "cliente")
@@ -45,7 +45,7 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente( Registro registro, Integer id, String name, String cpf, String dateNasc, String phone) {
+    public Cliente(Registro registro, Integer id, String name, String cpf, String dateNasc, String phone) {
         super();
         this.registro = registro;
         this.id = id;
@@ -54,6 +54,15 @@ public class Cliente implements Serializable {
         this.dateNasc = dateNasc;
         this.phone = phone;
     }
+
+    public Registro getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(Registro registro) {
+        this.registro = registro;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -100,14 +109,6 @@ public class Cliente implements Serializable {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-
-    public Registro getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(Registro registro) {
-        this.registro = registro;
-    }
     
     @Override
     public int hashCode() {

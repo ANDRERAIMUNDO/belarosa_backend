@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,25 +79,25 @@ public class DBInitialService {
 
 		Registro reg1 = new Registro(null, "lararamos@email.com", "1234", TipoUsuario.COMUM);
 		Registro reg2 = new Registro(null, "luanalobato@email.com", "1234", TipoUsuario.COMUM);
-		Registro reg3 = new Registro(null, "pamelalorema@email.com", "1234", TipoUsuario.COMUM);
-		Registro reg4 = new Registro(null, "9000andre@gmail.com", "admin", TipoUsuario.ADMIN); 
-
-		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4));
+		Registro reg3 = new Registro(null, "pamelalorema@email.com", "1234", TipoUsuario.COMUM); 
 
 		Cliente cl1 = new Cliente(reg1, null, "Lara Ramos", "630.792.070-09", "13/12/1991", "(91)9 88220467");
-		Cliente cl2 = new Cliente(reg2, null, "Luana Lobato", "867.738.940-77", "24/06/1998", "(91)9 84001327");
+		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/1998", "(91)9 84001327");
 		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "291.672.410-93", "10/03/1993", "(91)9 99001422");
 
-		Endereco end1 = new Endereco(null, "66123-120", "Passagem Vila Nova", "368", "Sacramenta", "Belém", "PA", cl1);
-		Endereco end2 = new Endereco(null, "68655-000", "Rua Coronel Jose Vieira", "38", "Vila Nova", "Irituia", "PA", cl2);
-		Endereco end3 = new Endereco(null, "68655-000", "Rua Bom Sossego", "34", "Vila Nova", "Irituia", "PA", cl3);
+
+		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3));
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3));
+
+		Endereco end1 = new Endereco(null, "66123-120", "Passagem Vila Nova","368", "Casa F", "Sacramenta", "Belém", "PA", cl1);
+		Endereco end2 = new Endereco(null, "68655-000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA", cl2);
+		Endereco end3 = new Endereco(null, "68655-000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA", cl3);
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));
-		cl3.getEnderecos().addAll(Arrays.asList(end3));
+		cl3.getEnderecos().addAll(Arrays.asList(end3));		
 
 		
-		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2,end3));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");

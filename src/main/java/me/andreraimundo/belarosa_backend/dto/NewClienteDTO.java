@@ -12,6 +12,15 @@ public class NewClienteDTO implements Serializable {
     private Integer id;
 
     @NotEmpty(message = "Campo obrigatorio. ")
+    @Email(message = "Email em formato invalido. ")
+    private String email;
+
+    @NotEmpty(message = "Campo obrigatorio. ")
+    private String password;
+
+    private Integer tipoUsuario;
+
+    @NotEmpty(message = "Campo obrigatorio. ")
     @Size(min = 10, message = "Minimo 10 caracteres. ")
     @Size(max = 40, message = "Maximo 40 caracteres. ")
     private String name;
@@ -26,14 +35,13 @@ public class NewClienteDTO implements Serializable {
     private String phone;
 
     @NotEmpty(message = "Campo obrigatorio. ")
-    @Email(message = "Email em formato invalido. ")
-    private String email;
-
-    @NotEmpty(message = "Campo obrigatorio. ")
     private String cep;
 
     @NotEmpty(message = "Campo obrigatorio. ")
     private String logradouro;
+
+    @NotEmpty(message = "Campo obrigatorio. ")
+    private String numero;
 
     @NotEmpty(message = "Campo obrigatorio. ")
     private String complemento;
@@ -57,6 +65,30 @@ public class NewClienteDTO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(Integer tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public String getName() {
@@ -91,14 +123,6 @@ public class NewClienteDTO implements Serializable {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getCep() {
         return cep;
     }
@@ -109,6 +133,14 @@ public class NewClienteDTO implements Serializable {
 
     public String getLogradouro() {
         return logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public void setLogradouro(String logradouro) {
@@ -146,5 +178,5 @@ public class NewClienteDTO implements Serializable {
     public void setUf(String uf) {
         this.uf = uf;
     }
-    
+        
 }

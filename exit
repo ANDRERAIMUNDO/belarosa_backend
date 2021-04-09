@@ -1,0 +1,137 @@
+[33mcommit d5c3ff94234d92a5ccad3fd909e488c89833d0e0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Wed Apr 7 11:01:37 2021 -0300
+
+    GET ALL, POST, PUT, DELETE e Mapeamento Categoria
+
+[33mcommit 757f6fc874c1382208be07f134b57bc20d835b86[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Mon Apr 5 15:40:54 2021 -0300
+
+    Post Pedido
+
+[33mcommit 0661a172160885d81753ffcad0befb2801f9dbca[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Mon Apr 5 14:27:43 2021 -0300
+
+    Criando StringBuilder para Pedido e ItenPedido
+
+[33mcommit 5fbc0fb88488ef5b520e24d03adc355f6e914841[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Mon Apr 5 14:09:44 2021 -0300
+
+    Criando ClienteDTO e NewClienteDTO
+
+[33mcommit fd482745902ec15aabcb1cbf0bdef16743461580[m[33m ([m[1;31mheroku/master[m[33m)[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Wed Mar 31 22:00:20 2021 -0300
+
+    Heroku initial create
+
+[33mcommit 7ba77e7484483cafe6d4b09b54d039c3e372dbca[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Wed Mar 31 14:21:20 2021 -0300
+
+    Criação Class DevConfig
+
+[33mcommit f33cd0a60101e1217c6270df1d3bf1c0c499683a[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 30 22:51:39 2021 -0300
+
+    Atualização Class DBInitialService
+
+[33mcommit 7b9d59ce974f2fa654d4bc084243512e51808dd0[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 30 21:54:46 2021 -0300
+
+    Criação DBInitialService e TestConfig
+
+[33mcommit efeb1ba37bded602289f5c5e277c766d2b60ac4f[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 30 20:29:38 2021 -0300
+
+    Criação properties tes, dev e prod
+
+[33mcommit 501df0dcbf39a948f97935723eb9b63d5492a443[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 30 19:40:17 2021 -0300
+
+    Criação system.properties e Procfile
+
+[33mcommit a1889506ccc8495033b259e98e384217e5795978[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 30 12:16:31 2021 -0300
+
+    Criação TipoUsuario, ProdutoResource, RegistroResouce, ProdutoService, RegistroService
+
+[33mcommit 5eafd8fdc8360d21bb1506a10b0876b8cc75dcd3[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Wed Mar 24 16:35:01 2021 -0300
+
+    # Adicionando metodo de pagamento
+
+[33mcommit 905b2e440c760c355113981d4022053492391466[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 23 17:28:46 2021 -0300
+
+    dicionando exeção Objeto não econtrado em ClienteService, RegistroService e ProdutoService
+
+[33mcommit 4a1088474fce5425a258dec6f833c8c296f512e9[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 23 17:22:10 2021 -0300
+
+    #Adicionando exeção Objeto não econtrado em Endereço
+
+[33mcommit f75e07d1946b77738ba9df76298340c47c21909d[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 23 17:13:28 2021 -0300
+
+    Criando Class Endereco, EnderecoRepository, EnderecoResource, EnderecoService
+
+[33mcommit 8c964ee926adf83cdd1a1c0fd2042b47e552bd5d[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 23 11:51:56 2021 -0300
+
+    Adicionando exeção Objeto não econtrado me Categoria
+
+[33mcommit 6bf5cb0f30d1a7a8aeb2604bc9a474225b7d78e1[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 23 10:47:19 2021 -0300
+
+    criação de exeções ObjectNotFoundException, StandardError e ResourceExceptionHandler
+
+[33mcommit 0fbdc5ff439c22490821a87c51bf053ca277e82f[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Tue Mar 23 10:21:19 2021 -0300
+
+    Associação Produto Categoria
+
+[33mcommit ff710d78bb98839c9fe5aae2a33fb4eab115f004[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Mon Mar 22 13:48:38 2021 -0300
+
+    Criando Services(Categoria, Cliente, Produto e Registro)
+
+[33mcommit 90b151913a76b9cf00a85806e13c239aec8a98bf[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Mon Mar 22 09:55:36 2021 -0300
+
+    Configunrando Banco H2 no projeto
+
+[33mcommit 2ee95c2cbf083715035be5be71d134452322281b[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Sun Mar 21 14:33:10 2021 -0300
+
+    RequestMethod GET CategoriaResource, ClienteResource, ProdutoResource e RegistroResource
+
+[33mcommit 3f4630155de3eba8be0d6a3226eca5c8113ae4fd[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Sun Mar 21 14:00:45 2021 -0300
+
+    Criação classe Categoria, Cliente, Produto e Registro
+
+[33mcommit a85ea6d91e8b7bd78d99576ddf57620e8e900917[m
+Author: ANDRERAIMUNDO <9000andre@gmail.com>
+Date:   Sun Mar 21 13:33:19 2021 -0300
+
+    Criando projeto
