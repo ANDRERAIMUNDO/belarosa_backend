@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,5 +72,16 @@ public class RegistroResouce {
       registroService.delete(id);
       return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity <Page<RegistroDTO>> findPage (
+      @RequestParam(value="page", defaultValue = "0")Integer page, 
+			@RequestParam(value="linesPerPages", defaultValue = "10")Integer linesPerPages, 
+			@RequestParam(value="orderBy", defaultValue = "nome")String orderBy, 
+			@RequestParam(value="direction", defaultValue = "ASC")String direction){
+        Page <Registro> list = registroService.findPage(page, linesPerPages, orderBy, direction);
+        Page<RegistroDTO> listDto = list.map(obj -> new RegistroDTO(obj));
+        return ResponseEntity.ok().body(listDto); 
+      }
 
 }

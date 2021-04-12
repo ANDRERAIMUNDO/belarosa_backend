@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,6 +67,11 @@ public class RegistroService {
         }
         return obj;
     }
+
+    public Page<Registro> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
+		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
+		return registroRepository.findAll(pageResquest);
+	}
 
     public Registro fromDTO (RegistroDTO objDto) {
         return new Registro(objDto.getId(), objDto.getEmail(), null, null);
