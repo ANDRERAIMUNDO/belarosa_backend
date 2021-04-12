@@ -1,11 +1,14 @@
 package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,11 +27,14 @@ public class Registro  implements Serializable{
     private String password;
     private Integer tipoUsuario;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "registro")
     private Cliente cliente;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "registro")
+    private List <Endereco> enderecos = new ArrayList<>();
     
-    public Registro (){
+    public Registro () {
         
     }
 
@@ -38,7 +44,7 @@ public class Registro  implements Serializable{
         this.id = id;
         this.email = email;
         this.password = password;
-        this.tipoUsuario = tipoUsuario.getCod();
+        this.tipoUsuario = (tipoUsuario == null) ? null: tipoUsuario.getCod();
     }
 
     public Integer getId() {
@@ -73,12 +79,20 @@ public class Registro  implements Serializable{
         this.tipoUsuario = tipoUsuario.getCod();
     }
 
-    public Cliente getClientes() {
-       return cliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClientes(Cliente cliente) {
-      this.cliente = cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
 

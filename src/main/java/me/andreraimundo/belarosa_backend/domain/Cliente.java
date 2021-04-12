@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -30,8 +29,7 @@ public class Cliente implements Serializable {
 
     @JsonIgnore
     @OneToOne
-    @JoinTable(name = "REGISTRO_CLIENTE")
-    @JoinColumn(name = "registro_id")
+    @JoinColumn(name="registro_id")
     private Registro  registro;
     
     @OneToMany(mappedBy = "cliente")

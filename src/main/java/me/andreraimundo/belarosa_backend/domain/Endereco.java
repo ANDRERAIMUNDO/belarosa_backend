@@ -32,12 +32,17 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="registro_id")
+    private Registro registro;
+
     public Endereco () {
 
     }  
 
     public Endereco(Integer id, String cep, String logradouro, String numero, String complemento, String bairro, String localidade,
-            String uf, Cliente cliente) {
+            String uf, Registro registro, Cliente cliente) {
         super();
         this.id = id;
         this.cep = cep;
@@ -47,6 +52,7 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
         this.localidade = localidade;
         this.uf = uf;
+        this.registro = registro;
         this.cliente = cliente;
     }
 
@@ -114,6 +120,13 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    public Registro getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(Registro registro) {
+        this.registro = registro;
+    }
     public Cliente getCliente() {
         return cliente;
     }

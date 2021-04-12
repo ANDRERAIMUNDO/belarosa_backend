@@ -89,9 +89,9 @@ public class DBInitialService {
 		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3));
 		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3));
 
-		Endereco end1 = new Endereco(null, "66123-120", "Passagem Vila Nova","368", "Casa F", "Sacramenta", "Belém", "PA", cl1);
-		Endereco end2 = new Endereco(null, "68655-000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA", cl2);
-		Endereco end3 = new Endereco(null, "68655-000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA", cl3);
+		Endereco end1 = new Endereco(null, "66123-120", "Passagem Vila Nova","368", "Casa F", "Sacramenta", "Belém", "PA",reg1, cl1);
+		Endereco end2 = new Endereco(null, "68655-000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
+		Endereco end3 = new Endereco(null, "68655-000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));
