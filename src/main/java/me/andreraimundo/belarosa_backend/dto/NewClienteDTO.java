@@ -8,6 +8,9 @@ import javax.validation.constraints.Size;
 public class NewClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Campo obrigatorio. ")
+    private Integer registroId;
+
     private Integer id;
 
     @NotEmpty(message = "Campo obrigatorio. ")
@@ -49,6 +52,14 @@ public class NewClienteDTO implements Serializable {
 
     }
 
+    public Integer getRegistroId() {
+        return registroId;
+    }
+
+    public void setRegistroId(Integer registroId) {
+        this.registroId = registroId;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -58,11 +69,9 @@ public class NewClienteDTO implements Serializable {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;

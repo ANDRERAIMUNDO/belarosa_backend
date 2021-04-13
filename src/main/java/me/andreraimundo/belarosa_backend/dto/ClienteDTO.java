@@ -2,7 +2,6 @@ package me.andreraimundo.belarosa_backend.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -20,8 +19,7 @@ public class ClienteDTO  implements Serializable {
     private String name;
 
     @NotEmpty(message = "Campo obrigatorio. ")
-    @Email(message = "Email em formato invalido. ")
-    private String email;
+    private String phone;
 
     public ClienteDTO () {
 
@@ -30,7 +28,7 @@ public class ClienteDTO  implements Serializable {
     public ClienteDTO ( Cliente obj) {
         id = obj.getId();
         name = obj.getName();
-        email = obj.getRegistro().getEmail();
+        phone = obj.getPhone();
     }
 
     public Integer getId() {
@@ -49,12 +47,12 @@ public class ClienteDTO  implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 }

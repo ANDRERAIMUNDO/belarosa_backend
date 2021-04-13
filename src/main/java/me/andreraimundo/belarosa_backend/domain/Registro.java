@@ -42,7 +42,7 @@ public class Registro  implements Serializable{
     TipoUsuario tipoUsuario) {
         super();
         this.id = id;
-        this.email = email;
+        this.email = email; 
         this.password = password;
         this.tipoUsuario = (tipoUsuario == null) ? null: tipoUsuario.getCod();
     }
