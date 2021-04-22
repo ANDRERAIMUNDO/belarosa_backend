@@ -2,7 +2,7 @@ package me.andreraimundo.belarosa_backend.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+	import java.util.Arrays;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,17 +65,63 @@ public class DBInitialService {
 		Produto prod2 = new Produto(null, "Bolsa Santa Lolla Baú Marrom", 279.99);
 		Produto prod3 = new Produto(null, "LES 4 OMBRES QUARTETO DE SOMBRAS MULTIEFEITOS", 199.90);
 		Produto prod4 = new Produto(null, "Bolsa Feminina Grande Tote Transversal Couro Ecológico", 89.65);
+		Produto prod5 = new Produto(null, "Bolsa + Sapato Feminino Coleção Verão", 99.99);
+		Produto prod6 = new Produto(null, "Produto 1", 99.99);
+		Produto prod7 = new Produto(null, "Produto 2", 99.99);
+		Produto prod8 = new Produto(null, "Produto 3", 99.99);
+		Produto prod9 = new Produto(null, "Produto 4", 99.99);
+		Produto prod10 = new Produto(null, "Produto 5", 99.99);
+		Produto prod11 = new Produto(null, "Produto 6", 99.99);
+		Produto prod12 = new Produto(null, "Produto 7", 99.99);
+		Produto prod13 = new Produto(null, "Produto 8", 99.99);
+		Produto prod14 = new Produto(null, "Produto 9", 99.99);
+		Produto prod15 = new Produto(null, "Produto 10", 99.99);
+		Produto prod16 = new Produto(null, "Produto 11", 99.99);
+		Produto prod17 = new Produto(null, "Produto 12", 99.99);
+		Produto prod18 = new Produto(null, "Produto 13", 99.99);
+		Produto prod19 = new Produto(null, "Produto 14", 99.99);
+		Produto prod20 = new Produto(null, "Produto 15", 99.99);
+		Produto prod21 = new Produto(null, "Produto 16", 99.99);
+		Produto prod22 = new Produto(null, "Produto 17", 99.99);		
+		Produto prod23 = new Produto(null, "Produto 18", 99.99);
+		Produto prod24 = new Produto(null, "Produto 19", 99.99);
+		Produto prod25 = new Produto(null, "Produto 20", 99.99);
+		Produto prod26 = new Produto(null, "Produto 21", 99.99);
 
-		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4));
-		cat5.getProdutos().addAll(Arrays.asList(prod3));
+
+		cat3.getProdutos().addAll(Arrays.asList(prod5));
+		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4, prod5));
+		cat5.getProdutos().addAll(Arrays.asList(prod3, prod5, prod6, prod7, prod8, prod9,prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23, prod24, prod25, prod26));
 
 		prod1.getCategorias().addAll(Arrays.asList(cat4));
 		prod2.getCategorias().addAll(Arrays.asList(cat4));
 		prod3.getCategorias().addAll(Arrays.asList(cat5));
 		prod4.getCategorias().addAll(Arrays.asList(cat4));
-		
+		prod5.getCategorias().addAll(Arrays.asList(cat3, cat4));
+		prod6.getCategorias().addAll(Arrays.asList(cat5));
+		prod7.getCategorias().addAll(Arrays.asList(cat5));
+		prod8.getCategorias().addAll(Arrays.asList(cat5));
+		prod9.getCategorias().addAll(Arrays.asList(cat5));
+		prod10.getCategorias().addAll(Arrays.asList(cat5));
+		prod11.getCategorias().addAll(Arrays.asList(cat5));
+		prod12.getCategorias().addAll(Arrays.asList(cat5));
+		prod13.getCategorias().addAll(Arrays.asList(cat5));
+		prod14.getCategorias().addAll(Arrays.asList(cat5));
+		prod15.getCategorias().addAll(Arrays.asList(cat5));
+		prod16.getCategorias().addAll(Arrays.asList(cat5));
+		prod17.getCategorias().addAll(Arrays.asList(cat5));
+		prod18.getCategorias().addAll(Arrays.asList(cat5));
+		prod19.getCategorias().addAll(Arrays.asList(cat5));
+		prod20.getCategorias().addAll(Arrays.asList(cat5));
+		prod21.getCategorias().addAll(Arrays.asList(cat5));
+		prod22.getCategorias().addAll(Arrays.asList(cat5));
+		prod23.getCategorias().addAll(Arrays.asList(cat5));
+		prod24.getCategorias().addAll(Arrays.asList(cat5));
+		prod25.getCategorias().addAll(Arrays.asList(cat5));
+		prod26.getCategorias().addAll(Arrays.asList(cat5));
+
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
-		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4));
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24,prod25, prod26));
 
 		Registro reg1 = new Registro(null, "lararamos@email.com", "1234", TipoUsuario.COMUM);
 		Registro reg2 = new Registro(null, "luanalobato@email.com", "1234", TipoUsuario.COMUM);

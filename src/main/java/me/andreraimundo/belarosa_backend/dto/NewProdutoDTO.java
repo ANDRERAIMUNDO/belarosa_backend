@@ -1,0 +1,62 @@
+package me.andreraimundo.belarosa_backend.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
+
+import me.andreraimundo.belarosa_backend.domain.Categoria;
+
+public class NewProdutoDTO implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
+
+    @NotEmpty(message = "Campo Obrigatorio. ")
+    private String name;
+
+    @NotEmpty(message = "Campo Obrigatorio. ")
+    private Double price;
+
+    @NotEmpty(message = "Campo Obrigatorio. ")
+    List <Categoria> categorias = new ArrayList<>();
+
+    public NewProdutoDTO () {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+}
