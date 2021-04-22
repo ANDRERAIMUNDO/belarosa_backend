@@ -36,6 +36,10 @@ public class Pedido implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
+    @ManyToOne 
+    @JoinColumn(name = "registro_id")
+    private Registro registro;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -51,10 +55,11 @@ public class Pedido implements Serializable{
 
     }
 
-    public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
+    public Pedido(Integer id, Date instante, Registro registro, Cliente cliente, Endereco enderecoDeEntrega) {
         super();
         this.id = id;
         this.instante = instante;
+        this.registro= registro;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
@@ -89,6 +94,14 @@ public class Pedido implements Serializable{
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public Registro getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(Registro registro) {
+        this.registro = registro;
     }
 
     public Cliente getCliente() {
@@ -150,6 +163,8 @@ public class Pedido implements Serializable{
 		stringbuilder.append(sdf.format(getInstante()));
 		stringbuilder.append(", Cliente: ");
 		stringbuilder.append(getCliente().getName());
+    //    stringbuilder.append(", Email: ");
+    //    stringbuilder.append(getRegistro().getEmail());
 		stringbuilder.append(" Situação do pagamento: ");
 		stringbuilder.append(getPagamento().getSituacaoPedido().getdescricao());
 		stringbuilder.append("\nDetalhes: \n");

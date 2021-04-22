@@ -148,19 +148,19 @@ public class DBInitialService {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 
-		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), cl1, end1);
-		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), cl2, end2);
-		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), cl3, end3);
+		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg1, cl1, end1);
+		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg2, cl2, end2);
+		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg3, cl3, end3);
 		
 		Pagamento pgt1 = new PagamentoCartao(null, SituacaoPedido.PENDENTE, pedido1, 10);
 		pedido1.setPagamento(pgt1);
 		Pagamento pgt2 = new PagamentoBoleto(null, SituacaoPedido.PENDENTE, pedido2, sdf.parse("10/04/2021 23:59"), null);
 		pedido2.setPagamento(pgt2);
-		Pagamento pgt3 = new PagamentoDinheiro(null,SituacaoPedido.QUITADO, pedido3, 100.00);
+		Pagamento pgt3 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido3, sdf.parse("21/03/2021 20:00"));
 		pedido3.setPagamento(pgt3);
 
 		cl1.getPedidos().addAll(Arrays.asList(pedido1));
-		cl2.getPedidos().addAll(Arrays.asList(pedido2));
+		cl2.getPedidos().addAll(Arrays.asList(pedido2));	
 		cl3.getPedidos().addAll(Arrays.asList(pedido3));
 
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));

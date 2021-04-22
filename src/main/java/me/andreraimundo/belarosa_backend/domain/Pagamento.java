@@ -11,11 +11,13 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,7 +27,7 @@ public abstract class Pagamento implements Serializable {
     private Integer situacaoPedido;
     
     @JsonBackReference
-    @OneToOne
+    @OneToOne   
     @JoinColumn(name = "pedido_id")
     @MapsId
     private Pedido pedido;
