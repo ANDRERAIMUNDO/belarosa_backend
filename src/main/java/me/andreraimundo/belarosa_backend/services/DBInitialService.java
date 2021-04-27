@@ -123,7 +123,7 @@ public class DBInitialService {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24,prod25, prod26));
 
-		Registro reg1 = new Registro(null, "lararamos@email.com", "1234", TipoUsuario.COMUM);
+		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", "1234", TipoUsuario.COMUM);
 		Registro reg2 = new Registro(null, "luanalobato@email.com", "1234", TipoUsuario.COMUM);
 		Registro reg3 = new Registro(null, "pamelalorema@email.com", "1234", TipoUsuario.COMUM); 
 

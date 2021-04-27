@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import me.andreraimundo.belarosa_backend.services.DBInitialService;
+import me.andreraimundo.belarosa_backend.services.EmailService;
+import me.andreraimundo.belarosa_backend.services.MockEmailService;
 
 @Configuration
 @Profile("test")
@@ -17,8 +19,14 @@ public class TestConfig {
     private DBInitialService dbInitialService;
 
     @Bean
-    public boolean instantiateDataBase () throws ParseException {
+    public boolean instantianteDataBase () throws ParseException {
         dbInitialService.instantiateTestDataBase();
         return true;
     }
+
+    @Bean
+	public EmailService emailService() {
+		return new MockEmailService();
+	}
+
 }
