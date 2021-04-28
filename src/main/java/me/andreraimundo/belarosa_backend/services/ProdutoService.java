@@ -17,6 +17,7 @@ import me.andreraimundo.belarosa_backend.dto.NewProdutoDTO;
 import me.andreraimundo.belarosa_backend.dto.ProdutoDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
 import me.andreraimundo.belarosa_backend.repositories.ProdutoRepository;
+import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
 @Service
@@ -54,7 +55,7 @@ public class ProdutoService {
         try {
             produtoRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Não é possivel excluir produto associado a pedido");
+            throw new DataIntegrityException("Não é possivel excluir produto associado a pedido");
         }
     }
 

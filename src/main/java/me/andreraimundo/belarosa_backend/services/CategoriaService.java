@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.dto.CategoriaDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
+import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
 @Service
@@ -42,7 +43,7 @@ public class CategoriaService {
         try {
             categoriaRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Não é possivel excluir categoria associada a um produto");
+            throw new DataIntegrityException("Não é possivel excluir categoria associada a um produto");
         }
     }
 

@@ -19,6 +19,7 @@ import me.andreraimundo.belarosa_backend.dto.NewClienteDTO;
 import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
 import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
+import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
 
@@ -61,7 +62,7 @@ public class ClienteService {
         try {
             registroRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException ("Não é possivel excluir cliente associado a um pedido");
+            throw new DataIntegrityException ("Não é possivel excluir cliente associado a um pedido");
         }
     }
 
