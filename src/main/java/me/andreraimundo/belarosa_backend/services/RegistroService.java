@@ -27,7 +27,7 @@ public class RegistroService {
     public Registro find (Integer id){
         Optional <Registro> obj = registroRepository.findById(id);
         return obj.orElseThrow(()-> new 
-        ObjectNotFoundException("Objeto não encontrado Id: "+ id + " Tipo: "
+        ObjectNotFoundException("Registro não encontrado Id: "+ id + " Tipo: "
          + Registro.class.getName()));
     }
 

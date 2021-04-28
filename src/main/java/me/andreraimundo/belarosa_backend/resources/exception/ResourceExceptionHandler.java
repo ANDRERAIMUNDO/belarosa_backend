@@ -13,9 +13,9 @@ import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundExcept
 public class ResourceExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<StandardError> objectNotFound ( ObjectNotFoundException e,
-    HttpServletRequest request) {
-        StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(),System.currentTimeMillis());
+    public ResponseEntity<StandardError> objectNotFound ( ObjectNotFoundException e, HttpServletRequest request) {
+        StandardError err = new StandardError(System.currentTimeMillis(),HttpStatus.NOT_FOUND.value(), "Objeto não encontrado", 
+        e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
 }

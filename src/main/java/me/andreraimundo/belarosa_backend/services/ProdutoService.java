@@ -34,7 +34,7 @@ public class ProdutoService {
     public Produto find (Integer id){
         Optional <Produto> obj = produtoRepository.findById(id);
         return obj.orElseThrow(()-> new 
-        ObjectNotFoundException("Objeto não encontrado Id: "+ id + " Tipo: "
+        ObjectNotFoundException("Produto não encontrado Id: "+ id + " Tipo: "
          + Produto.class.getName()));
     }
 
@@ -61,11 +61,6 @@ public class ProdutoService {
     public List <Produto> findAll () {
         return produtoRepository.findAll();
     }
-
-	//public Page<Produto> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-	//	PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
-	//	return produtoRepository.findAll(pageRequest);
-	//}
 
     public Page<Produto> search(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
