@@ -31,7 +31,7 @@ public class DevConfig {
         dbInitialService.instantiateTestDataBase();
         return true;
     }
-    
+
 	@Bean
 	public EmailService emailService() {
 		return new SmtpEmailService();
