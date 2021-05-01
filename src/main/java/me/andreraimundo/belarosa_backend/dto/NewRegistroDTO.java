@@ -11,6 +11,7 @@ public class NewRegistroDTO  implements Serializable {
 
     private Integer id;
 
+  
     @NotEmpty(message = "Campo obrigatorio. ")
     @Email(message = "Email em formato invalido. ")
     private String email;

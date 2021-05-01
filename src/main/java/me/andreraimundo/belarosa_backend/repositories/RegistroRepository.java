@@ -9,6 +9,6 @@ import me.andreraimundo.belarosa_backend.domain.Registro;
 @Repository
 public interface RegistroRepository  extends JpaRepository <Registro, Integer>{
     
-    @Transactional(readOnly= true)
-    Registro findByEmail (String email);
+    @Transactional(readOnly=true)
+	Registro findByEmail(String email);
 }

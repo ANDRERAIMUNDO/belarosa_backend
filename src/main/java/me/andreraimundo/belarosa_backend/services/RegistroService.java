@@ -34,6 +34,11 @@ public class RegistroService {
 
     @Transactional
     public Registro insert (Registro obj) {
+
+        Registro aux = registroRepository.findByEmail(obj.getEmail());
+        if (aux != null) {
+            throw new DataIntegrityException("Email já existe! ");
+        }
         obj.setId(null);
         obj = registroRepository.save(obj);
         return obj;
