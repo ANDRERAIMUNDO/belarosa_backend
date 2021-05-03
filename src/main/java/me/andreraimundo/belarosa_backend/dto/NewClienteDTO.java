@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 public class NewClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotEmpty(message = "Campo obrigatorio. ")
     private Integer registroId;
 
     private Integer id;

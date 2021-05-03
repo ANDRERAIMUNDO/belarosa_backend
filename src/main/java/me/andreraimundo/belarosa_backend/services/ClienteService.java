@@ -21,7 +21,7 @@ import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
-
+import me.andreraimundo.belarosa_backend.services.utils.CPFBR;
 
 @Service
 public class ClienteService {
@@ -44,6 +44,13 @@ public class ClienteService {
     
     @Transactional
     public Cliente insert (Cliente obj) {
+        Cliente aux = clienteRepository.findBycpf(obj.getCpf());
+        if (aux !=null) {
+            throw new DataIntegrityException("Já existe uma conta vinculada a este CPF ! ");
+        }
+        if (!CPFBR.isValidCPF(obj.getCpf())) {
+            throw new DataIntegrityException("CPF invalido! ");
+        }
         obj.setId(null);
         obj = clienteRepository.save(obj);
         enderecoRepository.saveAll(obj.getEnderecos());
@@ -51,6 +58,13 @@ public class ClienteService {
     }
 
     public Cliente update (Cliente obj) {
+        Cliente aux = clienteRepository.findBycpf(obj.getCpf());
+        if (aux !=null) {
+            throw new DataIntegrityException("Já existe uma conta vinculada a este CPF ! ");
+        }
+        if (!CPFBR.isValidCPF(obj.getCpf())) {
+            throw new DataIntegrityException("CPF invalido! ");
+        }
         Cliente newObj = find(obj.getId());
             updateData(newObj, obj);
             return clienteRepository.save(newObj);
@@ -80,6 +94,15 @@ public class ClienteService {
         return obj;
     }
 
+    public Cliente findByCPF (String cpf) {
+        Cliente obj = clienteRepository.findBycpf(cpf);
+        if (obj ==null) {
+            throw new ObjectNotFoundException("CPF não encontrado! "
+            + "Tipo: " + Cliente.class.getName());
+        }
+        return obj;
+    }
+
     public Page<Cliente> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
 		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
 		return clienteRepository.findAll(pageResquest);
@@ -99,7 +122,7 @@ public class ClienteService {
         
         Cliente cli = new Cliente(
             reg, 
-            null,
+            null,   
             objDto.getName(), 
             objDto.getCpf(), 
             objDto.getDateNasc(),
@@ -116,7 +139,6 @@ public class ClienteService {
             objDto.getUf(), 
             reg, 
             cli);
-
             cli.getEnderecos().add(end);
             return cli;
     }

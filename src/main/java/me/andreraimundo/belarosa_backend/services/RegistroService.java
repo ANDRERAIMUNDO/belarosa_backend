@@ -54,10 +54,7 @@ public class RegistroService {
         return registroRepository.save(newObj);
         
     }
-   // Registro aux = registroRepository.findByEmail(obj.getEmail());
-   //if (aux != null) {
-    //throw new DataIntegrityException("Email já existe! ");
-
+   
     public void delete (Integer id) {
         find(id);
         try {
@@ -104,8 +101,5 @@ public class RegistroService {
     private void updateData (Registro newObj, Registro obj) {
         newObj.setEmail(obj.getEmail());
     }
-  // Registro aux = registroRepository.findByEmail(obj.getEmail());
-   //if (aux != null) {
-    //throw new DataIntegrityException("Email já existe! ");
 }
 
