@@ -1,14 +1,14 @@
 package me.andreraimundo.belarosa_backend.domain.enums;
 
-public enum TipoUsuario {
+public enum Perfil {
 
-    COMUM(1, "Comum"),
-	ADMIN(2, "Admin");
+    CLIENTE(1, "ROLE_CLIENTE"),
+	ADMIN(2, "ROLE_ADMIN");
 
     private int cod;
     private String descricao;
 
-    private TipoUsuario(int cod, String descricao) {
+    private Perfil(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -21,11 +21,11 @@ public enum TipoUsuario {
         return descricao;
     }
     
-    public static TipoUsuario toEnum (Integer cod) {
+    public static Perfil toEnum (Integer cod) {
         if (cod  == null) {
             return null;
         }
-        for (TipoUsuario x: TipoUsuario.values()) {
+        for (Perfil x: Perfil.values()) {
             if (cod.equals(x.getCod())) {
                 return x;
             }

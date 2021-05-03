@@ -117,7 +117,6 @@ public class ClienteService {
         Registro reg = new Registro(
             objDto.getRegistroId(),
             null,
-            null,
             null);
         
         Cliente cli = new Cliente(

@@ -2,10 +2,16 @@ package me.andreraimundo.belarosa_backend.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +20,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import me.andreraimundo.belarosa_backend.domain.enums.TipoUsuario;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 
 @Entity
 public class Registro  implements Serializable{
@@ -28,7 +34,10 @@ public class Registro  implements Serializable{
     @Column(unique=true)
     private String email;
     private String password;
-    private Integer tipoUsuario;
+
+    @ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 
     @OneToOne(mappedBy = "registro")
     private Cliente cliente;
@@ -38,16 +47,15 @@ public class Registro  implements Serializable{
     private List <Endereco> enderecos = new ArrayList<>();
     
     public Registro () {
-        
+        addPerfil(Perfil.CLIENTE);
     }
 
-    public Registro(Integer id, String email, String password,
-    TipoUsuario tipoUsuario) {
+        public Registro(Integer id, String email, String password) {
         super();
         this.id = id;
         this.email = email; 
         this.password = password;
-        this.tipoUsuario = (tipoUsuario == null) ? null: tipoUsuario.getCod();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {
@@ -74,13 +82,13 @@ public class Registro  implements Serializable{
         this.password = password;
     }
     
-    public TipoUsuario getTipoUsuario() {
-       return TipoUsuario.toEnum(tipoUsuario);
-    }
+    public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario.getCod();
-    }
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
 
     public Cliente getCliente() {
         return cliente;

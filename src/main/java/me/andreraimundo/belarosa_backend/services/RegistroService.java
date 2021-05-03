@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import me.andreraimundo.belarosa_backend.domain.Registro;
-import me.andreraimundo.belarosa_backend.domain.enums.TipoUsuario;
 import me.andreraimundo.belarosa_backend.dto.NewRegistroDTO;
 import me.andreraimundo.belarosa_backend.dto.RegistroDTO;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
@@ -35,7 +34,7 @@ public class RegistroService {
         ObjectNotFoundException("Registro não encontrado Id: "+ id + " Tipo: "
          + Registro.class.getName()));
     }
-
+    
     @Transactional
     public Registro insert (Registro obj) {
 
@@ -88,7 +87,7 @@ public class RegistroService {
 	}
 
     public Registro fromDTO (RegistroDTO objDto) {
-        return new Registro(objDto.getId(), objDto.getEmail(), null, null);
+        return new Registro(objDto.getId(), objDto.getEmail(), null);
     }
 
     public Registro fromDTO (NewRegistroDTO objDto) {
@@ -96,8 +95,7 @@ public class RegistroService {
         Registro reg = new Registro(
             null,
             objDto.getEmail(),
-            pe.encode(objDto.getPassword()),
-            TipoUsuario.toEnum(objDto.getTipoUsuario())
+            pe.encode(objDto.getPassword())
         );
             return reg;
     }
