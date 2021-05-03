@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
@@ -49,6 +50,8 @@ public class DBInitialService {
 	PedidoRepository pedidoRepository;
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+    private BCryptPasswordEncoder pe;
 
     public void instantiateTestDataBase () throws ParseException {
 
@@ -123,9 +126,9 @@ public class DBInitialService {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24,prod25, prod26));
 
-		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", "1234", TipoUsuario.COMUM);
-		Registro reg2 = new Registro(null, "luanalobato@email.com", "1234", TipoUsuario.COMUM);
-		Registro reg3 = new Registro(null, "pamelalorema@email.com", "1234", TipoUsuario.COMUM); 
+		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1234"), TipoUsuario.COMUM);
+		Registro reg2 = new Registro(null, "luanalobato@email.com", pe.encode("1234"), TipoUsuario.COMUM);
+		Registro reg3 = new Registro(null, "pamelalorema@email.com", pe.encode("1234"), TipoUsuario.COMUM); 
 
 		Cliente cl1 = new Cliente(reg1, null, "Lara Ramos", "630.792.070-09", "13/12/1991", "(91)9 88220467");
 		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/1998", "(91)9 84001327");

@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,9 @@ public class RegistroService {
 
     @Autowired  
     private RegistroRepository registroRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     public Registro find (Integer id){
         Optional <Registro> obj = registroRepository.findById(id);
@@ -92,7 +96,7 @@ public class RegistroService {
         Registro reg = new Registro(
             null,
             objDto.getEmail(),
-            objDto.getPassword(),
+            pe.encode(objDto.getPassword()),
             TipoUsuario.toEnum(objDto.getTipoUsuario())
         );
             return reg;
