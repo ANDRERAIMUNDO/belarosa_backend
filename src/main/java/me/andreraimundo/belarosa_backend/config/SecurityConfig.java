@@ -20,6 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import me.andreraimundo.belarosa_backend.security.JWTUtil;
 import me.andreraimundo.belarosa_backend.security.JWTAuthenticationFilter;
+import me.andreraimundo.belarosa_backend.security.JWTAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS_GET = {
         "/produtos/**",
-        "/categorias/**"
+        "/categorias/**",
+        "/registros/**",
+        "/clientes/**"
     };
 
     @Override
@@ -56,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
             .antMatchers(PUBLIC_MATCHERS).permitAll()
             .anyRequest().authenticated();
-        httpSecurity.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil))   ;
+        httpSecurity.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        httpSecurity.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

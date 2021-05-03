@@ -5,9 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import me.andreraimundo.belarosa_backend.config.UserSS;
 import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
+import me.andreraimundo.belarosa_backend.security.UserSS;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 

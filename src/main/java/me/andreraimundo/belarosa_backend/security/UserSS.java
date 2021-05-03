@@ -1,4 +1,4 @@
-package me.andreraimundo.belarosa_backend.config;
+package me.andreraimundo.belarosa_backend.security;
 
 import java.util.Collection;
 import java.util.Set;
