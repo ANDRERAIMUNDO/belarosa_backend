@@ -128,7 +128,7 @@ public class DBInitialService {
 
 		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1234"));
 		Registro reg2 = new Registro(null, "luanalobato@email.com", pe.encode("1234"));
-		Registro reg3 = new Registro(null, "pamelalorema@email.com", pe.encode("1234"));
+		Registro reg3 = new Registro(null, "pamelalorena@gmail.com", pe.encode("1234"));
 		reg3.addPerfil(Perfil.ADMIN); 
 
 		Cliente cl1 = new Cliente(reg1, null, "Lara Ramos", "630.792.070-09", "13/12/1991", "(91)9 88220467");
