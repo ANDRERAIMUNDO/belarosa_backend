@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 
 import me.andreraimundo.belarosa_backend.domain.Pedido;
+import me.andreraimundo.belarosa_backend.domain.Registro;
 
 public abstract class AbstractEmailService implements EmailService {
 
@@ -28,4 +29,19 @@ public abstract class AbstractEmailService implements EmailService {
     return sm;
    }
     
+   @Override
+	public void sendNewPasswordEmail(Registro registro, String newPassword) {
+		SimpleMailMessage sm = prepareNewPasswordEmail(registro, newPassword);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage prepareNewPasswordEmail(Registro registro, String newPassword) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(registro.getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Solicitação de nova senha");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Nova senha: " + newPassword);
+		return sm;
+	}
 }   

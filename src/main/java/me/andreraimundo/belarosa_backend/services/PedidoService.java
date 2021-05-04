@@ -15,6 +15,7 @@ import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
 import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
@@ -54,6 +55,11 @@ public class PedidoService {
     EmailService emailService;
 
     public Pedido find (Integer id) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado! .");
+        }
+        
         Optional <Pedido> obj = pedidoRepository.findById(id);
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Pedido não encontrado Id: "+ id + " Tipo: "
