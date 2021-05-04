@@ -10,15 +10,17 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.domain.ItemPedido;
 import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
+import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PedidoRepository;
+import me.andreraimundo.belarosa_backend.security.UserSS;
+import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
 @Service
@@ -91,10 +93,14 @@ public class PedidoService {
         return obj;
     }
 
-    public Page<Pedido> findPage(String name, Integer page, Integer linesPerPage, String orderBy, String direction) {
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado! ");
+        }
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Cliente cliente =  clienteService.findByName(name);
-		return pedidoRepository.findByCliente(cliente, pageRequest);
+		Registro registro =  registroService.find(user.getId());
+		return pedidoRepository.findByRegistro(registro, pageRequest);
 	}
 
 }
