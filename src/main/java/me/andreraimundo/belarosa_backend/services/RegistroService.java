@@ -13,11 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.NewRegistroDTO;
 import me.andreraimundo.belarosa_backend.dto.RegistroDTO;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
+import me.andreraimundo.belarosa_backend.security.UserSS;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
+import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 
 @Service
 public class RegistroService {
@@ -29,6 +32,10 @@ public class RegistroService {
     private BCryptPasswordEncoder pe;
 
     public Registro find (Integer id){
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado! .");
+        }
         Optional <Registro> obj = registroRepository.findById(id);
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Registro não encontrado Id: "+ id + " Tipo: "
