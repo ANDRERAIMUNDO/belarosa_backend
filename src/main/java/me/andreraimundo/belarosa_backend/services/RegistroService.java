@@ -16,6 +16,7 @@ import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.NewRegistroDTO;
 import me.andreraimundo.belarosa_backend.dto.RegistroDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdatePassowordDTO;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
@@ -61,8 +62,13 @@ public class RegistroService {
             throw new DataIntegrityException("Email já existe! ");
         }        
         updateData(newObj, obj);
+        return registroRepository.save(newObj);   
+    }
+
+    public Registro updatePassword (Registro obj) {
+        Registro newObj = find (obj.getId());
+        updateDataPassword(newObj, obj);
         return registroRepository.save(newObj);
-        
     }
    
     public void delete (Integer id) {
@@ -97,6 +103,10 @@ public class RegistroService {
         return new Registro(objDto.getId(), objDto.getEmail(), null);
     }
 
+    public Registro fromDTO (UpdatePassowordDTO objDto) {
+        return new Registro(objDto.getId(), null, pe.encode(objDto.getPassword()));
+    }
+
     public Registro fromDTO (NewRegistroDTO objDto) {
 
         Registro reg = new Registro(
@@ -109,6 +119,10 @@ public class RegistroService {
 
     private void updateData (Registro newObj, Registro obj) {
         newObj.setEmail(obj.getEmail());
+    }
+
+    private void updateDataPassword (Registro newObj, Registro obj) {
+        newObj.setPassword(obj.getPassword());
     }
 }
 

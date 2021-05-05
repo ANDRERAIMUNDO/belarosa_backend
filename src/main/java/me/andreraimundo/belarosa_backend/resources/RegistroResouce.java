@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.dto.NewRegistroDTO;
 import me.andreraimundo.belarosa_backend.dto.RegistroDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdatePassowordDTO;
 import me.andreraimundo.belarosa_backend.services.RegistroService;
 
 @RestController
@@ -59,7 +60,15 @@ public class RegistroResouce {
       obj = registroService.update(obj);
       return ResponseEntity.noContent().build();
     }
-
+//atualizando senha
+    @RequestMapping(value = "newpass/{id}", method = RequestMethod.PUT)
+    public ResponseEntity <Void> updatePassword (@Valid @RequestBody UpdatePassowordDTO objDto, @PathVariable Integer id) {
+      Registro obj = registroService.fromDTO(objDto);
+      obj.setId(id);
+      obj = registroService.updatePassword(obj);
+      return ResponseEntity.noContent().build();
+    }
+//atualizando senha
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<RegistroDTO>> findAll () {
