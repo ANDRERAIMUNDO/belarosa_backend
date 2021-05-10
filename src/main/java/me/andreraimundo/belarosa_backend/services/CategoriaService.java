@@ -11,8 +11,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.CategoriaDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
+import me.andreraimundo.belarosa_backend.security.UserSS;
+import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
@@ -21,8 +24,14 @@ public class CategoriaService {
 
     @Autowired  
     private CategoriaRepository categoriaRepository;
-    
-    public Categoria find (Integer id){
+
+    public Categoria find (Integer id) {
+        if (id == 1) {
+            UserSS user = UserService.authenticated();
+            if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+                throw new AuthorizationException("Acesso negado! .");
+            }
+        } 
         Optional <Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(()-> new ObjectNotFoundException("Categorias inexistente! Id; " + id +"Tipo: "+ Categoria.class.getName()));
     }
@@ -61,4 +70,5 @@ public class CategoriaService {
     private void updateData (Categoria newObj, Categoria obj) {
         newObj.setName(obj.getName());
     }
+
 }

@@ -10,7 +10,6 @@ import me.andreraimundo.belarosa_backend.domain.Cliente;
 public interface ClienteRepository  extends JpaRepository <Cliente, Integer>{
     @Transactional(readOnly= true)
     Cliente findByName (String name);
-    
-   // @Transactional(readOnly=true)
-	Cliente findBycpf(String cpf);
+
+    Cliente findBycpf(String cpf);
 }

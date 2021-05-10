@@ -102,7 +102,7 @@ public class ClienteService {
         }
         return obj;
     }
-
+    
     public Page<Cliente> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
 		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
 		return clienteRepository.findAll(pageResquest);
@@ -146,5 +146,4 @@ public class ClienteService {
         newObj.setName(obj.getName());
         newObj.setPhone(obj.getPhone());
     }
-
 }
