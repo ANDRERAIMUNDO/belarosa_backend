@@ -127,12 +127,12 @@ public class DBInitialService {
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24,prod25, prod26));
 
 		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1234"));
-		Registro reg2 = new Registro(null, "luanalobato@email.com", pe.encode("1234"));
+		Registro reg2 = new Registro(null, "luanalobato@gmail.com", pe.encode("1234"));
 		Registro reg3 = new Registro(null, "pamelalorena@gmail.com", pe.encode("1234"));
 		reg3.addPerfil(Perfil.ADMIN); 
 
 		Cliente cl1 = new Cliente(reg1, null, "Lara Ramos", "630.792.070-09", "13/12/1991", "(91)9 88220467");
-		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/1998", "(91)9 84001327");
+		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/2006", "(91)9 84001327");
 		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "291.672.410-93", "10/03/1993", "(91)9 99001422");
 
 
