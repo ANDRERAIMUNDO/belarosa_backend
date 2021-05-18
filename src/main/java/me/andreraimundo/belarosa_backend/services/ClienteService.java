@@ -1,15 +1,20 @@
 package me.andreraimundo.belarosa_backend.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import java.awt.image.BufferedImage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.domain.Endereco;
@@ -19,6 +24,8 @@ import me.andreraimundo.belarosa_backend.dto.NewClienteDTO;
 import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
 import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
+import me.andreraimundo.belarosa_backend.security.UserSS;
+import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 import me.andreraimundo.belarosa_backend.services.utils.CPFBR;
@@ -34,7 +41,19 @@ public class ClienteService {
 
     @Autowired
     RegistroRepository registroRepository;
-    
+
+    @Autowired
+	private S3Service s3Service;
+
+    @Autowired
+    private ImagesService imagesService;
+	
+	@Value("${img.prefix.client.profile}")
+	private String prefix;
+	
+	@Value("${img.profile.size}")
+	private Integer size;
+
     public Cliente find (Integer id){
         Optional <Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(()-> new 
@@ -146,4 +165,20 @@ public class ClienteService {
         newObj.setName(obj.getName());
         newObj.setPhone(obj.getPhone());
     }
+    //enviar imagem para o buckt aws s3
+        public URI uploadCliente(MultipartFile multipartFile) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Você precisa está logado! ");
+		}
+		
+		BufferedImage jpgImage = imagesService.getJpgImageFromFile(multipartFile);
+		jpgImage = imagesService.cropSquare(jpgImage);
+		jpgImage = imagesService.resize(jpgImage, size);
+		
+		String fileName = prefix + user.getId() + ".jpg";
+		
+		return s3Service.uploadFile(imagesService.getInputStream(jpgImage, "jpg"), fileName, "image");
+    }
 }
+
