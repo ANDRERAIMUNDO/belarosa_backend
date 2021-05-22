@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.domain.Produto;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.NewProdutoDTO;
 import me.andreraimundo.belarosa_backend.dto.ProdutoDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
 import me.andreraimundo.belarosa_backend.repositories.ProdutoRepository;
+import me.andreraimundo.belarosa_backend.security.UserSS;
+import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
+import me.andreraimundo.belarosa_backend.services.exception.NotAcceptable;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
+import me.andreraimundo.belarosa_backend.services.utils.CalcularIdade;
 
 @Service
 public class ProdutoService {
@@ -30,9 +35,22 @@ public class ProdutoService {
     private CategoriaRepository categoriaRepository;
 
     @Autowired
+    private CalcularIdade calcularIdade;
+
+    @Autowired
     CategoriaService categoriaService;
-    
-    public Produto find (Integer id){
+
+    public Produto find (Integer id){//conserta
+
+        if (id == 1) {
+            UserSS user = UserService.authenticated();
+            if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+                throw new AuthorizationException("Acesso negado! .");
+            }
+            if (calcularIdade.getAge() > 18) {
+                throw new NotAcceptable ("Você precisa ter 18 anos ou mais! .");
+            }
+        } 
         Optional <Produto> obj = produtoRepository.findById(id);
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Produto não encontrado Id: "+ id + " Tipo: "
@@ -59,9 +77,19 @@ public class ProdutoService {
         }
     }
 
-    public List <Produto> findAll () {
-        return produtoRepository.findAll();
-    }
+    public Page<Produto> searchAll (String name, Integer page, Integer linesPerPage) {//conserta
+
+        UserSS user = UserService.authenticated();
+            if (user == null) {
+                throw new AuthorizationException("Você deve esta logado! .");
+            }
+            if (calcularIdade.getAge() > 18) {
+                throw new NotAcceptable ("Você precisa ter 18 anos ou mais! .");
+            }
+
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage);
+        return produtoRepository.findByFirstname(name, pageRequest);
+	 }
 
     public Page<Produto> search(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);

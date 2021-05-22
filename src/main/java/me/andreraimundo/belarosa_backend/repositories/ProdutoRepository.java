@@ -16,10 +16,13 @@ import me.andreraimundo.belarosa_backend.domain.Produto;
 @Repository
 @Transactional(readOnly=true)
 public interface ProdutoRepository  extends JpaRepository <Produto, Integer> {
-
+    //busca produto dentro de uma categoria 
     @Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.name LIKE %:name% AND cat IN :categorias")
     Page<Produto> findDistinctByNameContainingAndCategoriasIn(
     @Param("name") String name,
     @Param("categorias") List<Categoria> categorias,
     Pageable pageRequest);
+
+    @Query("SELECT DISTINCT obj FROM Produto obj WHERE obj.name LIKE %:name%")
+    Page<Produto> findByFirstname( @Param("name") String name,Pageable pageRequest);
 }

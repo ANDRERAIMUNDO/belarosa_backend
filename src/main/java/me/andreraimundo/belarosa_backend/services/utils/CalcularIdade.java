@@ -11,6 +11,7 @@ import me.andreraimundo.belarosa_backend.domain.Cliente;
 
 @Service
 public class CalcularIdade {
+
     private int age;
     private Date dateNasc;
     Calendar dateOfBirth = new GregorianCalendar();
@@ -24,7 +25,7 @@ public class CalcularIdade {
         SimpleDateFormat sdf = new  SimpleDateFormat("dd/MM/yyyy");
         this.age = age;
         try {
-            dateNasc = sdf.parse(obj.getDateNasc());
+           dateNasc = sdf.parse(obj.getDateNasc());
             } catch (Exception e) 
             {
 

@@ -11,15 +11,12 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
-import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.CategoriaDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
-import me.andreraimundo.belarosa_backend.services.exception.NotAcceptable;
-import me.andreraimundo.belarosa_backend.services.utils.CalcularIdade;
 
 @Service
 public class CategoriaService {
@@ -27,19 +24,12 @@ public class CategoriaService {
     @Autowired  
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private CalcularIdade calcularIdade;
-
     public Categoria find (Integer id) {
-        if (id == 1) {
-            UserSS user = UserService.authenticated();
-            if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-                throw new AuthorizationException("Acesso negado! .");
-            }
-            if (calcularIdade.getAge() > 18) {
-                throw new NotAcceptable ("Você precisa ter 18 anos ou mais! .");
-            }
-        } 
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Você precisa está logado! .");
+        }
+
         Optional <Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(()-> new ObjectNotFoundException("Categorias inexistente! Id; " + id +"Tipo: "+ Categoria.class.getName()));
     }

@@ -90,8 +90,11 @@ public class DBInitialService {
 		Produto prod24 = new Produto(null, "Produto 19", 99.99);
 		Produto prod25 = new Produto(null, "Produto 20", 99.99);
 		Produto prod26 = new Produto(null, "Produto 21", 99.99);
+		Produto prod27 = new Produto(null, "Fantazia Noturna Dracula", 129.90);
+		Produto prod28 = new Produto(null, "Rabo de gato", 9.90);
+		Produto prod29 = new Produto(null, "Tapa olho do pirata", 7.00);
 
-
+		cat1.getProdutos().addAll(Arrays.asList(prod27, prod28, prod29));
 		cat3.getProdutos().addAll(Arrays.asList(prod5));
 		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4, prod5));
 		cat5.getProdutos().addAll(Arrays.asList(prod3, prod5, prod6, prod7, prod8, prod9,prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23, prod24, prod25, prod26));
@@ -122,9 +125,12 @@ public class DBInitialService {
 		prod24.getCategorias().addAll(Arrays.asList(cat5));
 		prod25.getCategorias().addAll(Arrays.asList(cat5));
 		prod26.getCategorias().addAll(Arrays.asList(cat5));
+		prod27.getCategorias().addAll(Arrays.asList(cat1));
+		prod28.getCategorias().addAll(Arrays.asList(cat1));
+		prod29.getCategorias().addAll(Arrays.asList(cat1));
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
-		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24,prod25, prod26));
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29));
 
 		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1234"));
 		Registro reg2 = new Registro(null, "luanalobato@gmail.com", pe.encode("1234"));

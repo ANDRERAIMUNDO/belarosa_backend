@@ -2,7 +2,6 @@ package me.andreraimundo.belarosa_backend.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -63,25 +62,19 @@ public class ProdutoResource {
       return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<ProdutoDTO>> findAll() {
-      List <Produto> list = produtoService.findAll();
-      List<ProdutoDTO>listDto = list.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
-      return ResponseEntity.ok().body(listDto);
-    }	
-
-//  @RequestMapping(value = "/page", method = RequestMethod.GET)
-//	public ResponseEntity<Page<ProdutoDTO>> findPage(
-//			@RequestParam(value="page", defaultValue = "0")Integer page, 
-//			@RequestParam(value="linesPerPage", defaultValue = "24")Integer linesPerPage, 
-//			@RequestParam(value="orderBy", defaultValue = "name")String orderBy, 
-//			@RequestParam(value="direction", defaultValue = "ASC")String direction) {
-//		Page <Produto> list = produtoService.findPage(page, linesPerPage, orderBy, direction);
-//		Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
-//		return ResponseEntity.ok().body(listDto);
-//	}
-@RequestMapping(method = RequestMethod.GET)
+   //busca todo os produtos
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+   public ResponseEntity<Page<ProdutoDTO>> findPage(
+          @RequestParam(value="name", defaultValue = "")String name,
+          @RequestParam(value="page", defaultValue = "0")Integer page, 
+          @RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPage) {
+        String nomeDecoded = URL.decodeParam(name);
+        Page <Produto> list = produtoService.searchAll(nomeDecoded, page, linesPerPage);
+        Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
+        return ResponseEntity.ok().body(listDto);
+  	}
+    //busca de produtos por 'categorias'
+    @RequestMapping(method = RequestMethod.GET)
 		public ResponseEntity<Page<ProdutoDTO>> findPage(
 				@RequestParam(value="name", defaultValue = "")String name, 
 				@RequestParam(value="categorias", defaultValue = "")String categorias, 
