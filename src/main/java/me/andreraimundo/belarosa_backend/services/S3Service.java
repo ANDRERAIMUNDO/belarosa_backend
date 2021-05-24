@@ -27,6 +27,9 @@ public class S3Service {
 	@Value("${s3.bucket}")
 	private String bucketName;
 
+	@Value("${s3.bucket.prod}")
+	private String bucketNameProd;
+
 	public URI uploadFile(MultipartFile multipartFile) {
 		try {
 
@@ -54,6 +57,22 @@ public class S3Service {
 		} catch (URISyntaxException e) {
 			throw new FileException("Erro de conversão URL para URI");
 		}
+	}
+
+		public URI uploadFileProdutc(InputStream is, String fileName, String contentType) {
+			try {
+	
+				ObjectMetadata meta = new ObjectMetadata();
+				meta.setContentType(contentType);
+				LOG.info("Iniciando upload");
+				amazonS3Conect.putObject(bucketNameProd, fileName, is, meta);
+				LOG.info("Upload finalizado");
+	
+				return amazonS3Conect.getUrl(bucketNameProd, fileName).toURI();
+	
+			} catch (URISyntaxException e) {
+				throw new FileException("Erro de conversão URL para URI");
+			}
 	}
 }
 

@@ -44,7 +44,7 @@ public class ImagesService {
 		jpgImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
 		return jpgImage;
 	}
-    //entrada de omagem padrao arquivo + extensao
+    //entrada de imagem padrao arquivo + extensao
 	public InputStream getInputStream(BufferedImage img, String extension) {
 		try {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();

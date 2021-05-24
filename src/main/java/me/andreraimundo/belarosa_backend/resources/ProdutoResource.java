@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import me.andreraimundo.belarosa_backend.domain.Produto;
@@ -88,6 +89,13 @@ public class ProdutoResource {
 			Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
 			return ResponseEntity.ok().body(listDto);
 		}	
+    //post imagem 
+    @PreAuthorize("hasRole('ADMIN')")
+  	@RequestMapping(value="/imageproduto", method=RequestMethod.POST)
+	  public ResponseEntity<Void>uploadProfilePicture(@RequestParam(name="file") MultipartFile file){ 
+		URI uri = produtoService.uploadpProduto(file);
+		return ResponseEntity.created(uri).build();
+	}
 
   }
 

@@ -1,15 +1,20 @@
 package me.andreraimundo.belarosa_backend.services;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import java.awt.image.BufferedImage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.domain.Produto;
@@ -39,6 +44,18 @@ public class ProdutoService {
 
     @Autowired
     CategoriaService categoriaService;
+    
+    @Autowired
+	private S3Service s3Service;
+
+    @Autowired
+    private ImagesService imagesService;
+	
+	@Value("${img.prefix.produto.prod}")
+	private String prefix;
+	
+	@Value("${img.prod.size}")
+	private Integer size;
 
     public Produto find (Integer id){//conserta
 
@@ -106,6 +123,23 @@ public class ProdutoService {
         Produto prod = new Produto(null,objDto.getName(),objDto.getPrice());
         prod.getCategorias().addAll(categorias);
         return prod;
+    }
+    //enviar imagem para o buckt aws s3
+    public URI uploadpProduto(MultipartFile multipartFile) {
+
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Você precisa está logado! ");
+		}
+
+		//BufferedImage jpgImage = imagesService.getJpgImageFromFile(multipartFile);
+		BufferedImage jpgImage = imagesService.getJpgImageFromFile(multipartFile);
+        jpgImage = imagesService.cropSquare(jpgImage);
+		jpgImage = imagesService.resize(jpgImage, size);
+		
+		String fileName = prefix + ".jpg";
+		
+		return s3Service.uploadFileProdutc(imagesService.getInputStream(jpgImage, "jpg"), fileName, "image");
     }
 
     private void updateData (Produto newObj, Produto obj) {

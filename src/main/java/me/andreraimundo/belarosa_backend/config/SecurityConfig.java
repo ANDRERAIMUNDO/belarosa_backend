@@ -42,8 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-        "/produtos/**",
-        "/categorias/**"
+   
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
@@ -76,12 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-    //@Bean
-    //CorsConfigurationSource corsConfigurationSource () {
-      //  final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        //source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        //return source;
-    //}
     @Bean
 	CorsConfigurationSource corsConfigurationSource() {
 
