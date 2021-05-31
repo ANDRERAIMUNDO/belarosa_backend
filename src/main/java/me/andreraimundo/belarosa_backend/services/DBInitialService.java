@@ -2,7 +2,7 @@ package me.andreraimundo.belarosa_backend.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-	import java.util.Arrays;
+import java.util.Arrays;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,9 +137,9 @@ public class DBInitialService {
 		Registro reg3 = new Registro(null, "pamelalorena@gmail.com", pe.encode("1234"));
 		reg3.addPerfil(Perfil.ADMIN); 
 
-		Cliente cl1 = new Cliente(reg1, null, "Lara Ramos", "630.792.070-09", "13/12/1991", "(91)9 88220467");
-		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/2006", "(91)9 84001327");
-		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "291.672.410-93", "10/03/1993", "(91)9 99001422");
+		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo", "630.792.070-09", "13/12/2009", "(91)9 88220467");
+		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/1993", "(91)9 84001327");
+		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "291.672.410-93", "10/03/1991", "(91)9 99001422");
 
 
 		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3));

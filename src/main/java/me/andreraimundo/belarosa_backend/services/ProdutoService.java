@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.domain.Produto;
-import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.NewProdutoDTO;
 import me.andreraimundo.belarosa_backend.dto.ProdutoDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
@@ -26,9 +25,7 @@ import me.andreraimundo.belarosa_backend.repositories.ProdutoRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
-import me.andreraimundo.belarosa_backend.services.exception.NotAcceptable;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
-import me.andreraimundo.belarosa_backend.services.utils.CalcularIdade;
 
 @Service
 public class ProdutoService {
@@ -38,9 +35,6 @@ public class ProdutoService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
-
-    @Autowired
-    private CalcularIdade calcularIdade;
 
     @Autowired
     CategoriaService categoriaService;
@@ -57,17 +51,13 @@ public class ProdutoService {
 	@Value("${img.prod.size}")
 	private Integer size;
 
-    public Produto find (Integer id){//conserta
-
-        if (id == 1) {
+    public Produto find (Integer id){
+       
             UserSS user = UserService.authenticated();
-            if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-                throw new AuthorizationException("Acesso negado! .");
+            if (user == null) {
+                throw new AuthorizationException("Você precisa está logado! ");
             }
-            if (calcularIdade.getAge() > 18) {
-                throw new NotAcceptable ("Você precisa ter 18 anos ou mais! .");
-            }
-        } 
+
         Optional <Produto> obj = produtoRepository.findById(id);
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Produto não encontrado Id: "+ id + " Tipo: "
@@ -97,16 +87,24 @@ public class ProdutoService {
     public Page<Produto> searchAll (String name, Integer page, Integer linesPerPage) {//conserta
 
         UserSS user = UserService.authenticated();
-            if (user == null) {
-                throw new AuthorizationException("Você deve esta logado! .");
-            }
-            if (calcularIdade.getAge() > 18) {
-                throw new NotAcceptable ("Você precisa ter 18 anos ou mais! .");
-            }
+        if (user == null) {
+            throw new AuthorizationException("Você deve esta logado! .");
+        }   
+       PageRequest pageRequest = PageRequest.of(page, linesPerPage);
+       return produtoRepository.findByFirstNameIgnoreCase (name, pageRequest);
+	 } 
 
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage);
-        return produtoRepository.findByFirstname(name, pageRequest);
-	 }
+     public Page<Produto> searchAllProdutosAdultos(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
+       
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Você deve esta logado! .");   
+        }
+
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+        List<Categoria> categorias = categoriaRepository.findAllById(ids);
+		return produtoRepository.findDistinctByNameContainingAndCategoriasIn(name, categorias, pageRequest);
+    }
 
     public Page<Produto> search(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);

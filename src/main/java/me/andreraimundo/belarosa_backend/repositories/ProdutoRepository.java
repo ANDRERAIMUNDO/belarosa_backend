@@ -23,6 +23,12 @@ public interface ProdutoRepository  extends JpaRepository <Produto, Integer> {
     @Param("categorias") List<Categoria> categorias,
     Pageable pageRequest);
 
+    @Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.name LIKE %:name% AND cat IN :categorias")
+    Page <Produto> findDistinctByNameContainingAndCategoriasInAdulto (
+    @Param("name") String name,
+    @Param("categorias") List<Categoria> categorias,
+    Pageable pageRequest);
+
     @Query("SELECT DISTINCT obj FROM Produto obj WHERE obj.name LIKE %:name%")
-    Page<Produto> findByFirstname( @Param("name") String name,Pageable pageRequest);
+    Page<Produto> findByFirstNameIgnoreCase ( @Param("name") String name,Pageable pageRequest);
 }

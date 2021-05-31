@@ -16,7 +16,6 @@ import com.amazonaws.services.s3.model.AmazonS3Exception;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
-import me.andreraimundo.belarosa_backend.services.exception.NotAcceptable;
 import me.andreraimundo.belarosa_backend.services.exception.FileException;
 
 @ControllerAdvice
@@ -51,12 +50,6 @@ public class ResourceExceptionHandler {
 
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),"Acesso não autorizado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
-	}
-	@ExceptionHandler(NotAcceptable.class)
-	public ResponseEntity<StandardError> notAcceptable(NotAcceptable e, HttpServletRequest request) {
-
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_ACCEPTABLE.value(),"Acesso bloqueado para menores de 18 anos", e.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(err);
 	}
 	 
     @ExceptionHandler(FileException.class)
