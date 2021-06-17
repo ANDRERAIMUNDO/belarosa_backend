@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.dto.CategoriaDTO;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
-import me.andreraimundo.belarosa_backend.security.UserSS;
-import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
@@ -25,11 +23,7 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     public Categoria find (Integer id) {
-        UserSS user = UserService.authenticated();
-        if (user == null) {
-            throw new AuthorizationException("Você precisa está logado! .");
-        }
-
+       
         Optional <Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(()-> new ObjectNotFoundException("Categorias inexistente! Id; " + id +"Tipo: "+ Categoria.class.getName()));
     }

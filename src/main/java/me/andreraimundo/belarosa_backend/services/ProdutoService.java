@@ -53,11 +53,6 @@ public class ProdutoService {
 
     public Produto find (Integer id){
        
-            UserSS user = UserService.authenticated();
-            if (user == null) {
-                throw new AuthorizationException("Você precisa está logado! ");
-            }
-
         Optional <Produto> obj = produtoRepository.findById(id);
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Produto não encontrado Id: "+ id + " Tipo: "
