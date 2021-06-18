@@ -36,8 +36,7 @@ public class RegistroResouce {
        Registro obj = registroService.find(id);
      return ResponseEntity.ok().body(obj); 
     }
-
-    @PreAuthorize("hasRole('ADMIN')")
+    
     @RequestMapping(value = "/email", method = RequestMethod.GET)
     public ResponseEntity <Registro> find (@RequestParam(value = "value") String email) {
       Registro obj = registroService.findByEmail(email);  
