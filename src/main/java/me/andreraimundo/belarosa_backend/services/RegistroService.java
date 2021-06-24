@@ -46,7 +46,7 @@ public class RegistroService {
     @Transactional
     public Registro insert (Registro obj) {
 
-        Registro aux = registroRepository.findByEmailAddress(obj.getEmail());
+        Registro aux = registroRepository.findByEmail(obj.getEmail());
         if (aux != null) {
             throw new DataIntegrityException("Email já existe! ");
         }
@@ -57,7 +57,7 @@ public class RegistroService {
 
     public Registro update (Registro obj) {
         Registro newObj = find(obj.getId());
-        Registro aux = registroRepository.findByEmailAddress(obj.getEmail());
+        Registro aux = registroRepository.findByEmail(obj.getEmail());
         if (aux != null) {
             throw new DataIntegrityException("Email já existe! ");
         }        
@@ -90,7 +90,7 @@ public class RegistroService {
         if (user == null || !user.hasRole(Perfil.ADMIN) &&  !email.equals(user.getUsername())) {
             throw new AuthorizationException("Acesso negado! .");
         }
-        Registro obj = registroRepository.findByEmailAddress(email);
+        Registro obj = registroRepository.findByEmail(email);
 
         if (obj == null) {
             throw new ObjectNotFoundException("Email não encontrado! "
