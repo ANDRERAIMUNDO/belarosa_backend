@@ -37,6 +37,7 @@ public class AuthService {
         emailService.sendNewPasswordEmail(registro, newPassword);
 
     }
+
     private String newPassword() {
 		char[] vet = new char[10];
 		for (int i=0; i<10; i++) {

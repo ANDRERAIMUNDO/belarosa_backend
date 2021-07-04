@@ -52,6 +52,7 @@ public class RegistroService {
         }
         obj.setId(null);
         obj = registroRepository.save(obj);
+       
         return obj;
     }
 
