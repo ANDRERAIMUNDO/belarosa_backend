@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.domain.Endereco;
 import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.ClienteDTO;
 import me.andreraimundo.belarosa_backend.dto.NewClienteDTO;
 import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
@@ -55,9 +56,13 @@ public class ClienteService {
 	private Integer size;
 
     public Cliente find (Integer id){
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado! .");
+        }
         Optional <Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(()-> new 
-        ObjectNotFoundException("Cliente inexistente: "+ id + " Tipo: "
+        ObjectNotFoundException("Cliente não encontrado Id: "+ id + " Tipo: "
          + Cliente.class.getName()));
     }
     
@@ -154,8 +159,8 @@ public class ClienteService {
             objDto.getComplemento(), 
             objDto.getBairro(), 
             objDto.getLocalidade(), 
-            objDto.getUf(), 
-            reg, 
+            objDto.getUf(),
+            reg,
             cli);
             cli.getEnderecos().add(end);
             return cli;

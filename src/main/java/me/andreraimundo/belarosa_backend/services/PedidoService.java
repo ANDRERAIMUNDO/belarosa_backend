@@ -94,7 +94,7 @@ public class PedidoService {
         }   
         itemPedidoRepository.saveAll(obj.getItens());
         //System.out.println(obj);
-        emailService.sendOrderConfirmationEmail(obj);
+         emailService.sendOrderConfirmationEmail(obj);//alterando em 18 de agosto de 2021
         
         return obj;
     }

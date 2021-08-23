@@ -42,7 +42,7 @@ public class Endereco implements Serializable {
     }  
 
     public Endereco(Integer id, String cep, String logradouro, String numero, String complemento, String bairro, String localidade,
-            String uf, Registro registro, Cliente cliente) {
+            String uf, Registro registro, Cliente cliente) { 
         super();
         this.id = id;
         this.cep = cep;
@@ -120,7 +120,7 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
-    public Registro getRegistro() {
+   public Registro getRegistro() {
         return registro;
     }
 

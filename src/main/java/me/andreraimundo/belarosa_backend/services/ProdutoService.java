@@ -81,10 +81,10 @@ public class ProdutoService {
 
     public Page<Produto> searchAll (String name, Integer page, Integer linesPerPage) {//conserta
 
-        UserSS user = UserService.authenticated();
-        if (user == null) {
-            throw new AuthorizationException("Você deve esta logado! .");
-        }   
+       // UserSS user = UserService.authenticated();
+        //if (user == null) {
+         //   throw new AuthorizationException("Você deve esta logado! .");
+        //}   
        PageRequest pageRequest = PageRequest.of(page, linesPerPage);
        return produtoRepository.findByFirstNameIgnoreCase (name, pageRequest);
 	 } 

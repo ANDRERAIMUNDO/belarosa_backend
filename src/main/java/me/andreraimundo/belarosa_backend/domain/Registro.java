@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -43,7 +44,7 @@ public class Registro  implements Serializable{
     private Cliente cliente;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "registro")
+    @OneToMany(mappedBy = "registro", cascade = CascadeType.ALL)
     private List <Endereco> enderecos = new ArrayList<>();
     
     public Registro () {
