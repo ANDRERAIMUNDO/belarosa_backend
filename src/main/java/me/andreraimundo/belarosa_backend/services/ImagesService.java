@@ -29,8 +29,8 @@ public class ImagesService {
 		}
 		try {
 			BufferedImage img = ImageIO.read(uplodaFile.getInputStream());
-			if ("png".equals(extensao)) {
-				img = pngToJpg(img);
+			if ("jpg".equals(extensao)) {
+				img = JpgToPng(img);
 			}
 			return img;
 		} catch (IOException e) {
@@ -43,6 +43,13 @@ public class ImagesService {
 		BufferedImage jpgImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 		jpgImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
 		return jpgImage;
+	}
+
+	//Converte png para jpg
+	public BufferedImage JpgToPng(BufferedImage img) {
+		BufferedImage pngImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+		pngImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
+		return pngImage;
 	}
     //entrada de imagem padrao arquivo + extensao
 	public InputStream getInputStream(BufferedImage img, String extension) {
@@ -67,3 +74,4 @@ public class ImagesService {
 	}
 }
 
+//osb: por padrão o sistema suporte PNG E JPG, nesta classe está padrão PNG. 24/08/2021 

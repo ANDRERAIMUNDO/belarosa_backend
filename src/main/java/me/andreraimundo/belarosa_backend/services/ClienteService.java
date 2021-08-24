@@ -177,13 +177,13 @@ public class ClienteService {
 			throw new AuthorizationException("Você precisa está logado! ");
 		}
 		
-		BufferedImage jpgImage = imagesService.getJpgImageFromFile(multipartFile);
-		jpgImage = imagesService.cropSquare(jpgImage);
-		jpgImage = imagesService.resize(jpgImage, size);
+		BufferedImage pngImage = imagesService.getJpgImageFromFile(multipartFile);
+		pngImage = imagesService.cropSquare(pngImage);
+		pngImage = imagesService.resize(pngImage, size);
 		
-		String fileName = prefix + user.getId() + ".jpg";
+		String fileName = prefix + user.getId() + ".png";
 		
-		return s3Service.uploadFile(imagesService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		return s3Service.uploadFile(imagesService.getInputStream(pngImage, "jpg"), fileName, "image");
     }
 }
 
