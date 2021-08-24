@@ -114,13 +114,13 @@ public class ProdutoService {
 		}
 
 		//BufferedImage jpgImage = imagesService.getJpgImageFromFile(multipartFile);
-		BufferedImage jpgImage = imagesService.getJpgImageFromFile(multipartFile);
-        jpgImage = imagesService.cropSquare(jpgImage);
-		jpgImage = imagesService.resize(jpgImage, size);
+		BufferedImage pngImage = imagesService.getJpgImageFromFile(multipartFile);
+        pngImage = imagesService.cropSquare(pngImage);
+		pngImage = imagesService.resize(pngImage, size);
 		
-		String fileName = prefix + ".jpg";
+		String fileName = prefix + ".png";
 		
-		return s3Service.uploadFileProdutc(imagesService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		return s3Service.uploadFileProdutc(imagesService.getInputStream(pngImage, "png"), fileName, "image");
     }
 
     private void updateData (Produto newObj, Produto obj) {
