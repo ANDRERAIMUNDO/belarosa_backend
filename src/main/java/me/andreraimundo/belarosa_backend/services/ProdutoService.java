@@ -89,22 +89,10 @@ public class ProdutoService {
        return produtoRepository.findByFirstNameIgnoreCase (name, pageRequest);
 	 } 
 
-     public Page<Produto> searchAllProdutosAdultos(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
-       
-        UserSS user = UserService.authenticated();
-        if (user == null) {
-            throw new AuthorizationException("Você deve esta logado! .");   
-        }
-
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+    public Page<Produto> findDistinctByNomeContainingAndCategoriasIn(String name, List<Integer> ids, Integer page, Integer linesPerPages, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
         List<Categoria> categorias = categoriaRepository.findAllById(ids);
-		return produtoRepository.findDistinctByNameContainingAndCategoriasIn(name, categorias, pageRequest);
-    }
-
-    public Page<Produto> search(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
-        List<Categoria> categorias = categoriaRepository.findAllById(ids);
-		return produtoRepository.findDistinctByNameContainingAndCategoriasIn(name, categorias, pageRequest);
+		return produtoRepository.findDistinctByNomeContainingAndCategoriasIn(name, categorias, pageRequest);
 	}
 
     public Produto fromDTO (ProdutoDTO objDto ) {

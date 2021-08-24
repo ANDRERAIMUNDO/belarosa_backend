@@ -74,33 +74,18 @@ public class ProdutoResource {
         Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
         return ResponseEntity.ok().body(listDto);
   	}
-
-    @RequestMapping(value = "/adultos", method = RequestMethod.GET)
-    public ResponseEntity<Page<ProdutoDTO>> findPageAdulto(
-      @RequestParam(value="name", defaultValue = "")String name, 
-      @RequestParam(value="categorias", defaultValue = "1")String categorias, 
-      @RequestParam(value="page", defaultValue = "0")Integer page, 
-      @RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPage, 
-      @RequestParam(value="orderBy", defaultValue = "name")String orderBy, 
-      @RequestParam(value="direction", defaultValue = "ASC")String direction) {
-      String nomeDecoded = URL.decodeParam(name);
-      List <Integer> ids = URL.decodeIntList(categorias);
-      Page <Produto> list = produtoService.searchAllProdutosAdultos(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
-      Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
-        return ResponseEntity.ok().body(listDto);
-     }
     
     @RequestMapping(method = RequestMethod.GET)
 		public ResponseEntity<Page<ProdutoDTO>> findPage(
 				@RequestParam(value="name", defaultValue = "")String name, 
 				@RequestParam(value="categorias", defaultValue = "")String categorias, 
 				@RequestParam(value="page", defaultValue = "0")Integer page, 
-				@RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPage, 
+				@RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPages, 
 				@RequestParam(value="orderBy", defaultValue = "name")String orderBy, 
 				@RequestParam(value="direction", defaultValue = "ASC")String direction) {
 			String nomeDecoded = URL.decodeParam(name);
-			List <Integer> ids = URL.decodeIntList(categorias);
-			Page <Produto> list = produtoService.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
+      List <Integer> ids = URL.decodeIntList(categorias);
+			Page <Produto> list = produtoService.findDistinctByNomeContainingAndCategoriasIn(nomeDecoded, ids, page, linesPerPages, orderBy, direction);
 			Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
 			return ResponseEntity.ok().body(listDto);
 		}	

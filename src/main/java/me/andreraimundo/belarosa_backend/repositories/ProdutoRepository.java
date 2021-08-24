@@ -14,21 +14,22 @@ import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.domain.Produto;
 
 @Repository
-@Transactional(readOnly=true)
+//@Transactional(readOnly=true)
 public interface ProdutoRepository  extends JpaRepository <Produto, Integer> {
-    //busca produto dentro de uma categoria 
-    @Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.name LIKE %:name% AND cat IN :categorias")
-    Page<Produto> findDistinctByNameContainingAndCategoriasIn(
-    @Param("name") String name,
-    @Param("categorias") List<Categoria> categorias,
-    Pageable pageRequest);
 
-    @Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.name LIKE %:name% AND cat IN :categorias")
-    Page <Produto> findDistinctByNameContainingAndCategoriasInAdulto (
-    @Param("name") String name,
-    @Param("categorias") List<Categoria> categorias,
-    Pageable pageRequest);
+	@Transactional(readOnly = true)
+	@Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.name LIKE %:name% AND cat IN :categorias")
+	Page <Produto>search(@Param("name") String name,@Param("categorias") List<Categoria> categorias,Pageable pageRequest);
 
     @Query("SELECT DISTINCT obj FROM Produto obj WHERE obj.name LIKE %:name%")
     Page<Produto> findByFirstNameIgnoreCase ( @Param("name") String name,Pageable pageRequest);
+
+	@Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.name LIKE %:name% AND cat IN :categorias")
+	Page<Produto> findDistinctByNomeContainingAndCategoriasIn(
+	@Param("name") String name,
+	@Param("categorias") List<Categoria> categorias,
+	Pageable pageRequest);
 }
+
+
+////findDistinctByModeloMarcaNomeIgnoreCaseAndOpcionaisNomeIn
