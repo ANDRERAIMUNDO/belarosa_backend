@@ -137,17 +137,17 @@ public class DBInitialService {
 		Registro reg3 = new Registro(null, "pamelalorena@gmail.com", pe.encode("1234"));
 		reg3.addPerfil(Perfil.ADMIN); 
 
-		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo", "630.792.070-09", "13/12/2009", "(91)9 88220467");
-		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "867.738.940-77", "24/06/1993", "(91)9 84001327");
-		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "291.672.410-93", "10/03/1991", "(91)9 99001422");
+		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo", "63079207009", "13122009", "91988220467");
+		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "86773894077", "24061993", "91984001327");
+		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "29167241093", "10031991", "91999001422");
 
 
 		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3));
 		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3));
 
-		Endereco end1 = new Endereco(null, "68655-000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg1, cl1);
-		Endereco end2 = new Endereco(null, "68655-000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
-		Endereco end3 = new Endereco(null, "68655-000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
+		Endereco end1 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg1, cl1);
+		Endereco end2 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
+		Endereco end3 = new Endereco(null, "68655000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));

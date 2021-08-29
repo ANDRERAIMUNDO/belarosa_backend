@@ -32,7 +32,7 @@ public class RegistroResouce {
     RegistroService registroService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity <?> find (@PathVariable Integer id){
+    public ResponseEntity <Registro> find (@PathVariable Integer id){
        Registro obj = registroService.find(id);
      return ResponseEntity.ok().body(obj); 
     }
