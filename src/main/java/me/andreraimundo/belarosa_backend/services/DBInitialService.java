@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
 import me.andreraimundo.belarosa_backend.domain.Cliente;
+import me.andreraimundo.belarosa_backend.domain.Descricao;
 import me.andreraimundo.belarosa_backend.domain.Endereco;
 import me.andreraimundo.belarosa_backend.domain.ItemPedido;
 import me.andreraimundo.belarosa_backend.domain.Pagamento;
@@ -24,6 +25,7 @@ import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
 import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
 import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
+import me.andreraimundo.belarosa_backend.repositories.DescricaoRepository;
 import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
@@ -41,6 +43,8 @@ public class DBInitialService {
 	@Autowired
 	ProdutoRepository produtoRepository;
 	@Autowired
+	DescricaoRepository descricaoRepository;
+	@Autowired
 	RegistroRepository registroRepository;
 	@Autowired
 	EnderecoRepository enderecoRepository;
@@ -55,7 +59,38 @@ public class DBInitialService {
 
     public void instantiateTestDataBase () throws ParseException {
 
-        Categoria cat1 = new Categoria(null, "Adulto"); 
+		Descricao descr1 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr2 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr3 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr4 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr5 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr6 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr7 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr8 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr9 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr10 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr11 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr12 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr13 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr14 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr15 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr16 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr17 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr18 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr19 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr20 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr21 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr22 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr23 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr24 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr25 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr26 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr27 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr28 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr29 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		Descricao descr30 = new Descricao(null, "Essa é uma descrição deste produto, poder ser detalhado ou ate mesmo resumo, desde que atenda o mínimo de de setecentos e cinquenta caracteres ");
+		
+		Categoria cat1 = new Categoria(null, "Adulto"); 
 		Categoria cat2 = new Categoria(null, "Acessorios"); 
 		Categoria cat3 = new Categoria(null, "Calçados");
 		Categoria cat4 = new Categoria(null, "Bolsas");
@@ -63,10 +98,10 @@ public class DBInitialService {
 		Categoria cat6 = new Categoria(null, "Oculos");
 		Categoria cat7 = new Categoria(null, "Roupas");
 		Categoria cat8 = new Categoria(null, "Utensilios");
-		
-		Produto prod1 = new Produto(null, "CARTEIRA VICTORINE", 279.99);
+
+		Produto prod1 = new Produto(null, "Carteita victorino em couro", 279.99);
 		Produto prod2 = new Produto(null, "Bolsa Santa Lolla Baú Marrom", 279.99);
-		Produto prod3 = new Produto(null, "LES 4 OMBRES QUARTETO DE SOMBRAS MULTIEFEITOS", 199.90);
+		Produto prod3 = new Produto(null, "Les Sombra quarteto multiefeitos", 199.90);
 		Produto prod4 = new Produto(null, "Bolsa Feminina Grande Tote Transversal Couro Ecológico", 89.65);
 		Produto prod5 = new Produto(null, "Bolsa + Sapato Feminino Coleção Verão", 99.99);
 		Produto prod6 = new Produto(null, "Produto 1", 99.99);
@@ -93,11 +128,38 @@ public class DBInitialService {
 		Produto prod27 = new Produto(null, "Fantazia Noturna Dracula", 129.90);
 		Produto prod28 = new Produto(null, "Rabo de gato", 9.90);
 		Produto prod29 = new Produto(null, "Tapa olho do pirata", 7.00);
+		Produto prod30 = new Produto(null, "Oculos bifocal dia", 90.00);
 
-		cat1.getProdutos().addAll(Arrays.asList(prod27, prod28, prod29));
-		cat3.getProdutos().addAll(Arrays.asList(prod5));
-		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4, prod5));
-		cat5.getProdutos().addAll(Arrays.asList(prod3, prod5, prod6, prod7, prod8, prod9,prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23, prod24, prod25, prod26));
+		prod1.getDescricoes().addAll(Arrays.asList(descr1));
+		prod2.getDescricoes().addAll(Arrays.asList(descr2));
+		prod3.getDescricoes().addAll(Arrays.asList(descr3));
+		prod4.getDescricoes().addAll(Arrays.asList(descr4));
+		prod5.getDescricoes().addAll(Arrays.asList(descr5));
+		prod6.getDescricoes().addAll(Arrays.asList(descr6));
+		prod7.getDescricoes().addAll(Arrays.asList(descr7));
+		prod8.getDescricoes().addAll(Arrays.asList(descr8));
+		prod9.getDescricoes().addAll(Arrays.asList(descr9));
+		prod10.getDescricoes().addAll(Arrays.asList(descr10));
+		prod11.getDescricoes().addAll(Arrays.asList(descr11));
+		prod12.getDescricoes().addAll(Arrays.asList(descr12));
+		prod13.getDescricoes().addAll(Arrays.asList(descr13));
+		prod14.getDescricoes().addAll(Arrays.asList(descr14));
+		prod15.getDescricoes().addAll(Arrays.asList(descr15));
+		prod16.getDescricoes().addAll(Arrays.asList(descr16));
+		prod17.getDescricoes().addAll(Arrays.asList(descr17));
+		prod18.getDescricoes().addAll(Arrays.asList(descr18));
+		prod19.getDescricoes().addAll(Arrays.asList(descr19));
+		prod20.getDescricoes().addAll(Arrays.asList(descr20));
+		prod21.getDescricoes().addAll(Arrays.asList(descr21));
+		prod22.getDescricoes().addAll(Arrays.asList(descr22));
+		prod23.getDescricoes().addAll(Arrays.asList(descr23));
+		prod24.getDescricoes().addAll(Arrays.asList(descr24));
+		prod25.getDescricoes().addAll(Arrays.asList(descr25));
+		prod26.getDescricoes().addAll(Arrays.asList(descr26));
+		prod27.getDescricoes().addAll(Arrays.asList(descr27));
+		prod28.getDescricoes().addAll(Arrays.asList(descr28));
+		prod29.getDescricoes().addAll(Arrays.asList(descr29));
+		prod30.getDescricoes().addAll(Arrays.asList(descr30));
 
 		prod1.getCategorias().addAll(Arrays.asList(cat4));
 		prod2.getCategorias().addAll(Arrays.asList(cat4));
@@ -128,39 +190,94 @@ public class DBInitialService {
 		prod27.getCategorias().addAll(Arrays.asList(cat1));
 		prod28.getCategorias().addAll(Arrays.asList(cat1));
 		prod29.getCategorias().addAll(Arrays.asList(cat1));
+		prod30.getCategorias().addAll(Arrays.asList(cat4));
 
+		descr1.getProdutos().addAll(Arrays.asList(prod1));
+		descr2.getProdutos().addAll(Arrays.asList(prod2));
+		descr3.getProdutos().addAll(Arrays.asList(prod3));
+		descr4.getProdutos().addAll(Arrays.asList(prod4));
+		descr5.getProdutos().addAll(Arrays.asList(prod5));
+		descr6.getProdutos().addAll(Arrays.asList(prod6));
+		descr7.getProdutos().addAll(Arrays.asList(prod7));
+		descr8.getProdutos().addAll(Arrays.asList(prod8));
+		descr9.getProdutos().addAll(Arrays.asList(prod9));
+		descr10.getProdutos().addAll(Arrays.asList(prod10));
+		descr11.getProdutos().addAll(Arrays.asList(prod11));
+		descr12.getProdutos().addAll(Arrays.asList(prod12));
+		descr13.getProdutos().addAll(Arrays.asList(prod13));
+		descr14.getProdutos().addAll(Arrays.asList(prod14));
+		descr15.getProdutos().addAll(Arrays.asList(prod15));
+		descr16.getProdutos().addAll(Arrays.asList(prod16));
+		descr17.getProdutos().addAll(Arrays.asList(prod17));
+		descr18.getProdutos().addAll(Arrays.asList(prod18));
+		descr19.getProdutos().addAll(Arrays.asList(prod19));
+		descr20.getProdutos().addAll(Arrays.asList(prod20));
+		descr21.getProdutos().addAll(Arrays.asList(prod21));
+		descr22.getProdutos().addAll(Arrays.asList(prod22));
+		descr23.getProdutos().addAll(Arrays.asList(prod23));
+		descr24.getProdutos().addAll(Arrays.asList(prod24));
+		descr25.getProdutos().addAll(Arrays.asList(prod25));
+		descr26.getProdutos().addAll(Arrays.asList(prod26));
+		descr27.getProdutos().addAll(Arrays.asList(prod27));
+		descr28.getProdutos().addAll(Arrays.asList(prod28));
+		descr29.getProdutos().addAll(Arrays.asList(prod29));
+		descr30.getProdutos().addAll(Arrays.asList(prod30));
+
+		cat1.getProdutos().addAll(Arrays.asList(prod27, prod28, prod29));
+		cat3.getProdutos().addAll(Arrays.asList(prod5));
+		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod4, prod5));
+		cat5.getProdutos().addAll(Arrays.asList(prod3, prod5, prod6, prod7, prod8, prod9,prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23, prod24, prod25, prod26));
+		cat6.getProdutos().addAll(Arrays.asList(prod30));
+		
+		descricaoRepository.saveAll(Arrays.asList(descr1, descr2, descr3, descr4, descr5, descr6, descr7, descr8, descr9, descr10, descr11, descr12, descr13, descr14, descr15, descr16, descr17, descr18, descr19, descr20, descr21, descr22, descr23, descr24, descr25, descr26, descr27, descr28, descr29, descr30));
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
-		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29));
-
-		Registro reg1 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1234"));
-		Registro reg2 = new Registro(null, "luanalobato@gmail.com", pe.encode("1234"));
-		Registro reg3 = new Registro(null, "pamelalorena@gmail.com", pe.encode("1234"));
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29, prod30));
+	
+		Registro reg1 = new Registro(null, "9000andre@gmail.com", pe.encode("gica1402"));
+		Registro reg2 = new Registro(null, "luanalobatofake@gmail.com", pe.encode("1234"));
+		Registro reg3 = new Registro(null, "pamelalorenafake@gmail.com", pe.encode("1234"));
 		reg3.addPerfil(Perfil.ADMIN); 
+		Registro reg4 = new Registro (null, "terezinhajro@gmail.com", pe.encode("gica1402"));
+		reg4.addPerfil(Perfil.ADMIN);
 
-		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo", "63079207009", "13122009", "91988220467");
-		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato", "86773894077", "24061993", "91984001327");
-		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena", "29167241093", "10031991", "91999001422");
+		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "63079207009", "13122009", "91988220467");
+		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato Fake User", "86773894077", "24061993", "91984001327");
+		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena Fake User", "29167241093", "10031991", "91999001422");
+		Cliente cl4 = new Cliente(reg4, null, "Terezinha de Jesus de Oliveira Moraes", "01011990","82640149253", "91988006179");
 
 
-		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3));
-		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3));
+		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4));
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4));
 
 		Endereco end1 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg1, cl1);
 		Endereco end2 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
 		Endereco end3 = new Endereco(null, "68655000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
+		Endereco end4 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro","Vila Nova", "Irituia", "PA",reg4, cl4);
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));
-		cl3.getEnderecos().addAll(Arrays.asList(end3));		
+		cl3.getEnderecos().addAll(Arrays.asList(end3));	
+		cl4.getEnderecos().addAll(Arrays.asList(end4));		
 
-		
-		enderecoRepository.saveAll(Arrays.asList(end1, end2,end3));
+		enderecoRepository.saveAll(Arrays.asList(end1, end2,end3,end4));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 
 		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg1, cl1, end1);
 		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg2, cl2, end2);
 		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg3, cl3, end3);
+		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg1, cl1, end1);
+		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg1, cl1, end1);
+		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg1, cl1, end1);
+		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg1, cl1, end1);
+		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg1, cl1, end1);
+		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg1, cl1, end1);
+		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg1, cl1, end1);
+		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg1, cl1, end1);
+		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg1, cl1, end1);
+		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg1, cl1, end1);
+		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg1, cl1, end1);
+		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg1, cl1, end1);
 		
 		Pagamento pgt1 = new PagamentoCartao(null, SituacaoPedido.PENDENTE, pedido1, 10);
 		pedido1.setPagamento(pgt1);
@@ -168,29 +285,87 @@ public class DBInitialService {
 		pedido2.setPagamento(pgt2);
 		Pagamento pgt3 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido3, sdf.parse("21/03/2021 20:00"));
 		pedido3.setPagamento(pgt3);
+		Pagamento pgt4 = new PagamentoCartao(null, SituacaoPedido.QUITADO, pedido4, 4);
+		pedido4.setPagamento(pgt4);
+		Pagamento pgt5 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido5, sdf.parse("22/01/2021 21:00"));
+		pedido5.setPagamento(pgt5);
+		Pagamento pgt6 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido6, sdf.parse("21/03/2021 20:00"));
+		pedido6.setPagamento(pgt6);
+		Pagamento pgt7 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido7, sdf.parse("12/03/2021 22:00"));
+		pedido7.setPagamento(pgt7);
+		Pagamento pgt8 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido8, sdf.parse("20/06/2021 21:00"));
+		pedido8.setPagamento(pgt8);
+		Pagamento pgt9 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido9, sdf.parse("14/07/2021 20:00"));
+		pedido9.setPagamento(pgt9);
+		Pagamento pgt10 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido10, sdf.parse("23/07/2021 22:00"));
+		pedido10.setPagamento(pgt10);
+		Pagamento pgt11 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido11, sdf.parse("30/07/2021 21:00"));
+		pedido11.setPagamento(pgt11);
+		Pagamento pgt12 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido12, sdf.parse("01/08/2021 20:00"));
+		pedido12.setPagamento(pgt12);
+		Pagamento pgt13 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido13, sdf.parse("06/08/2021 22:00"));
+		pedido13.setPagamento(pgt13);
+		Pagamento pgt14 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido14, sdf.parse("12/08/2021 21:00"));
+		pedido14.setPagamento(pgt14);
+		Pagamento pgt15 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido15, sdf.parse("27/08/2021 20:00"));
+		pedido15.setPagamento(pgt15);
+		
 
-		cl1.getPedidos().addAll(Arrays.asList(pedido1));
+		cl1.getPedidos().addAll(Arrays.asList(pedido1, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 		cl2.getPedidos().addAll(Arrays.asList(pedido2));	
 		cl3.getPedidos().addAll(Arrays.asList(pedido3));
 
-		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));
+		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 		pagamentoRepository.saveAll(Arrays.asList(pgt1, pgt2, pgt3));
 
 		ItemPedido itemPedido1 = new ItemPedido(pedido1, prod1, 0.00 , 1, 279.99);
 		ItemPedido itemPedido2 = new ItemPedido(pedido2, prod2, 0.00 , 2, 559.98);
 		ItemPedido itemPedido3 = new ItemPedido(pedido3, prod3, 0.00 , 3, 387.80);
-		ItemPedido itemPedido4 = new ItemPedido(pedido3, prod4, 0.00 , 3, 358.60);
+		ItemPedido itemPedido4 = new ItemPedido(pedido4, prod4, 0.00 , 3, 358.60);
+		ItemPedido itemPedido5 = new ItemPedido(pedido5, prod5, 0.00 , 1, 99.99);
+		ItemPedido itemPedido6 = new ItemPedido(pedido6, prod6, 0.00 , 1, 99.99);
+		ItemPedido itemPedido7 = new ItemPedido(pedido7, prod7, 0.00 , 1, 99.99);
+		ItemPedido itemPedido8 = new ItemPedido(pedido8, prod8, 0.00 , 1, 99.99);
+		ItemPedido itemPedido9 = new ItemPedido(pedido9, prod9, 0.00 , 1, 99.99);
+		ItemPedido itemPedido10 = new ItemPedido(pedido10, prod10, 0.00 , 1, 99.99);
+		ItemPedido itemPedido11 = new ItemPedido(pedido11, prod11, 0.00 , 1, 99.99);
+		ItemPedido itemPedido12 = new ItemPedido(pedido12, prod12, 0.00 , 1, 99.99);
+		ItemPedido itemPedido13 = new ItemPedido(pedido13, prod13, 0.00 , 1, 99.99);
+		ItemPedido itemPedido14 = new ItemPedido(pedido14, prod14, 0.00 , 1, 99.99);
+		ItemPedido itemPedido15 = new ItemPedido(pedido15, prod15, 0.00 , 1, 99.99);
 
 		pedido1.getItens().addAll(Arrays.asList(itemPedido1));
 		pedido2.getItens().addAll(Arrays.asList(itemPedido2));
 		pedido2.getItens().addAll(Arrays.asList(itemPedido3, itemPedido4));
+		pedido5.getItens().addAll(Arrays.asList(itemPedido5));
+		pedido6.getItens().addAll(Arrays.asList(itemPedido6));
+		pedido7.getItens().addAll(Arrays.asList(itemPedido7));
+		pedido8.getItens().addAll(Arrays.asList(itemPedido8));
+		pedido9.getItens().addAll(Arrays.asList(itemPedido9));
+		pedido10.getItens().addAll(Arrays.asList(itemPedido10));
+		pedido11.getItens().addAll(Arrays.asList(itemPedido11));
+		pedido12.getItens().addAll(Arrays.asList(itemPedido12));
+		pedido13.getItens().addAll(Arrays.asList(itemPedido13));
+		pedido14.getItens().addAll(Arrays.asList(itemPedido14));
+		pedido15.getItens().addAll(Arrays.asList(itemPedido15));
 
 		prod1.getItens().addAll(Arrays.asList(itemPedido1));
 		prod2.getItens().addAll(Arrays.asList(itemPedido2));
 		prod3.getItens().addAll(Arrays.asList(itemPedido3));
 		prod4.getItens().addAll(Arrays.asList(itemPedido4));
+		prod5.getItens().addAll(Arrays.asList(itemPedido5));
+		prod6.getItens().addAll(Arrays.asList(itemPedido6));
+		prod7.getItens().addAll(Arrays.asList(itemPedido7));
+		prod8.getItens().addAll(Arrays.asList(itemPedido8));
+		prod9.getItens().addAll(Arrays.asList(itemPedido9));
+		prod10.getItens().addAll(Arrays.asList(itemPedido10));
+		prod11.getItens().addAll(Arrays.asList(itemPedido11));
+		prod12.getItens().addAll(Arrays.asList(itemPedido12));
+		prod13.getItens().addAll(Arrays.asList(itemPedido13));
+		prod14.getItens().addAll(Arrays.asList(itemPedido14));
+		prod15.getItens().addAll(Arrays.asList(itemPedido15));
 
-		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4));
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4, itemPedido5, itemPedido6, itemPedido7, itemPedido8, itemPedido9, itemPedido10, itemPedido11, itemPedido12, itemPedido13, itemPedido14, itemPedido15));
 
     }
     

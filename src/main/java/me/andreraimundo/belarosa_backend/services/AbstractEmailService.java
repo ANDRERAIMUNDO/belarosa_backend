@@ -44,4 +44,36 @@ public abstract class AbstractEmailService implements EmailService {
 		sm.setText("Nova senha: " + newPassword);
 		return sm;
 	}
+
+    @Override
+	public void sendNoticationChangerPasswordEmail(Registro registro) {
+		SimpleMailMessage sm = prepareNoticationChangerPasswordEmail(registro);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage prepareNoticationChangerPasswordEmail(Registro registro) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(registro.getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Alteração de configuração");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Um acesso foi realizado e sua senha alterada, caso não seja você entre com contato com agente");
+		return sm;
+	}
+
+    @Override
+	public void newAccount(Registro registro) {
+		SimpleMailMessage sm = preparenewAccount(registro);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage preparenewAccount(Registro registro) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(registro.getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Bem vindo(a) ao BelaRosa");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Seu cadastro foi feito com sucessso !, acesse nosso site e confira as novidades");
+		return sm;
+	}
 }   

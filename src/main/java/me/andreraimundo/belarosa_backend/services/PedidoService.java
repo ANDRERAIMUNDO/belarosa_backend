@@ -53,7 +53,7 @@ public class PedidoService {
 
     @Autowired
     EmailService emailService;
-
+//find produto
     public Pedido find (Integer id) {
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
@@ -65,7 +65,7 @@ public class PedidoService {
         ObjectNotFoundException("Pedido não encontrado Id: "+ id + " Tipo: "
          + Pedido.class.getName()));
     }
-
+//insert pedido
     @Transactional
     public Pedido insert (Pedido obj) {
         obj.setId(null);
@@ -93,12 +93,11 @@ public class PedidoService {
             itemPedido.setPedido(obj);
         }   
         itemPedidoRepository.saveAll(obj.getItens());
-        //System.out.println(obj);
          emailService.sendOrderConfirmationEmail(obj);//alterando em 18 de agosto de 2021
         
         return obj;
     }
-
+//find page pedido
     public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         UserSS user = UserService.authenticated();
         if (user == null) {

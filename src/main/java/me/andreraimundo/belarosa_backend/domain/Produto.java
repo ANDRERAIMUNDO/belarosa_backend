@@ -30,6 +30,13 @@ public class Produto implements Serializable {
 
     @JsonIgnore
     @ManyToMany
+    @JoinTable(name = "PRODUTO_DESCRICAO",
+    joinColumns = @JoinColumn(name = "produto_id"),
+    inverseJoinColumns = @JoinColumn(name= "descricao_id"))
+    private List<Descricao> descricoes = new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
     joinColumns = @JoinColumn(name = "produto_id"),
     inverseJoinColumns = @JoinColumn(name="categoria_id"))
@@ -83,6 +90,14 @@ public class Produto implements Serializable {
         this.price = price;
     }
 
+    public List<Descricao> getDescricoes() {
+        return descricoes;
+    }
+
+    public void setDescricoes(List<Descricao> descricoes) {
+        this.descricoes = descricoes;
+    }
+    
     public List<Categoria> getCategorias() {
         return categorias;
     }

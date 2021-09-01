@@ -23,7 +23,7 @@ public class PedidoResource {
     
     @Autowired
     PedidoService pedidoService;
-
+//get pedido por id somente admin
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity <?> find (@PathVariable Integer id) {
@@ -31,7 +31,7 @@ public class PedidoResource {
         Pedido obj = pedidoService.find(id);
         return ResponseEntity.ok().body(obj);
     }
-
+// post pedido
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity <Void> insert (@RequestBody Pedido obj) {
         obj = pedidoService.insert(obj);
@@ -39,7 +39,7 @@ public class PedidoResource {
         .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-
+//get pedido por paginas
     @RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<Pedido>> findPage(
           //  @RequestParam(value="name", defaultValue = "")String name,

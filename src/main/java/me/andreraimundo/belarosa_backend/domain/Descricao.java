@@ -11,24 +11,24 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Categoria implements Serializable {
+public class Descricao implements Serializable {
     
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     private String name;
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany(mappedBy = "descricoes")
     private List <Produto> produtos = new ArrayList<>();
-    
-    public Categoria(){
+
+    public Descricao() {
 
     }
 
-    public Categoria(Integer id, String name) {
+    public Descricao(Integer id, String name) {
         super();
         this.id = id;
         this.name = name;
@@ -50,6 +50,7 @@ public class Categoria implements Serializable {
         this.name = name;
     }
 
+
     public List<Produto> getProdutos() {
         return produtos;
     }
@@ -57,7 +58,6 @@ public class Categoria implements Serializable {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-    
 
     @Override
     public int hashCode() {
@@ -75,7 +75,7 @@ public class Categoria implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Categoria other = (Categoria) obj;
+        Descricao other = (Descricao) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -83,5 +83,7 @@ public class Categoria implements Serializable {
             return false;
         return true;
     }
+
     
 }
+    

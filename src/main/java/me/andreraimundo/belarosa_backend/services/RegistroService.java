@@ -32,6 +32,10 @@ public class RegistroService {
     @Autowired
     private BCryptPasswordEncoder pe;
 
+    @Autowired
+    EmailService emailService;
+
+//busca por id 
     public Registro find (Integer id){
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
@@ -42,20 +46,19 @@ public class RegistroService {
         ObjectNotFoundException("Registro não encontrado Id: "+ id + " Tipo: "
          + Registro.class.getName()));
     }
-    
+//inserir registro
     @Transactional
     public Registro insert (Registro obj) {
-
         Registro aux = registroRepository.findByEmail(obj.getEmail());
         if (aux != null) {
             throw new DataIntegrityException("Email já existe! ");
         }
         obj.setId(null);
         obj = registroRepository.save(obj);
-       
+       emailService.newAccount(obj);
         return obj;
     }
-
+//atualizar registro    
     public Registro update (Registro obj) {
         Registro newObj = find(obj.getId());
         Registro aux = registroRepository.findByEmail(obj.getEmail());
@@ -63,15 +66,16 @@ public class RegistroService {
             throw new DataIntegrityException("Email já existe! ");
         }        
         updateData(newObj, obj);
-        return registroRepository.save(newObj);   
-    }
-
+        emailService.sendNoticationChangerPasswordEmail(obj);
+        return registroRepository.save(newObj);
+}
+//atualizar senha
     public Registro updatePassword (Registro obj) {
         Registro newObj = find (obj.getId());
         updateDataPassword(newObj, obj);
         return registroRepository.save(newObj);
     }
-   
+//deleta senha
     public void delete (Integer id) {
         find(id);
         try {
@@ -80,17 +84,12 @@ public class RegistroService {
             throw new DataIntegrityException ("Não é possivel excluir um registro associado a um pedido");
         }
     }
-
+//busca todos os registro
     public List <Registro> findAll () {
         return registroRepository.findAll();
     }
-
+//busca email padrao spring
     public Registro findByEmail (String email) {
-
-        UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Perfil.ADMIN) &&  !email.equals(user.getUsername())) {
-            throw new AuthorizationException("Acesso negado! .");
-        }
         Registro obj = registroRepository.findByEmail(email);
 
         if (obj == null) {
@@ -100,19 +99,25 @@ public class RegistroService {
         return obj;
     }
 
+//busca registro com paginas
+    public Page<Registro> search(String email, Integer page, Integer linesPerPages, String orderBy, String direction) {
+		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
+		return registroRepository.search(email, pageResquest);
+	}
+//busca lista de emails com paginas
     public Page<Registro> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
 		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
 		return registroRepository.findAll(pageResquest);
 	}
-
-    public Registro fromDTO (RegistroDTO objDto) {
+//registo dto
+    public Registro fromDTOO (RegistroDTO objDto) {
         return new Registro(objDto.getId(), objDto.getEmail(), null);
     }
-
+// registro dto atualização de senha
     public Registro fromDTO (UpdatePassowordDTO objDto) {
         return new Registro(objDto.getId(), null, pe.encode(objDto.getPassword()));
     }
-
+// registro dto novo registro
     public Registro fromDTO (NewRegistroDTO objDto) {
 
         Registro reg = new Registro(
@@ -122,11 +127,11 @@ public class RegistroService {
         );
             return reg;
     }
-
+// void atualização email
     private void updateData (Registro newObj, Registro obj) {
         newObj.setEmail(obj.getEmail());
     }
-
+// void atualização senha
     private void updateDataPassword (Registro newObj, Registro obj) {
         newObj.setPassword(obj.getPassword());
     }

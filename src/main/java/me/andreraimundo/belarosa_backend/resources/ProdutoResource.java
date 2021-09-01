@@ -30,13 +30,13 @@ public class ProdutoResource {
 
     @Autowired
     ProdutoService produtoService;
-
+//get produto por id
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity <?> find(@PathVariable Integer id){
         Produto obj = produtoService.find(id);
         return ResponseEntity.ok().body(obj);
     }
-
+//post produto
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity <Void> insert ( @Valid @RequestBody NewProdutoDTO objDto) {
@@ -46,7 +46,7 @@ public class ProdutoResource {
       .path("/{id}").buildAndExpand(obj.getId()).toUri();
       return ResponseEntity.created(uri).build();
     }
-
+//put produto somente admin
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update (@Valid @RequestBody ProdutoDTO objDto,@PathVariable Integer id) {
@@ -74,7 +74,7 @@ public class ProdutoResource {
         Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
         return ResponseEntity.ok().body(listDto);
   	}
-    
+//get produtos por categorias   
     @RequestMapping(method = RequestMethod.GET)
 		public ResponseEntity<Page<ProdutoDTO>> findPage(
 				@RequestParam(value="name", defaultValue = "")String name, 
@@ -89,7 +89,7 @@ public class ProdutoResource {
 			Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
 			return ResponseEntity.ok().body(listDto);
 		}	
-    //post imagem 
+//post imagem s3 
     @PreAuthorize("hasRole('ADMIN')")
   	@RequestMapping(value="/imageproduto", method=RequestMethod.POST)
 	  public ResponseEntity<Void>uploadProfilePicture(@RequestParam(name="file") MultipartFile file){ 

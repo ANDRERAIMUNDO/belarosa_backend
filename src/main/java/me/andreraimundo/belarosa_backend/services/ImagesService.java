@@ -19,7 +19,7 @@ import me.andreraimundo.belarosa_backend.services.exception.FileException;
 
 @Service
 public class ImagesService {
-    //permitindo somente arquivo PNG ou JPG no Bucket
+//permitindo somente arquivo PNG ou JPG no Bucket
     public BufferedImage getJpgImageFromFile(MultipartFile uplodaFile) {
 
 		String extensao = FilenameUtils.getExtension(uplodaFile.getOriginalFilename());
@@ -38,20 +38,20 @@ public class ImagesService {
 		}
 
 	}
-    //Converte png para jpg
+//Converte png para jpg
 	public BufferedImage pngToJpg(BufferedImage img) {
 		BufferedImage jpgImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 		jpgImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
 		return jpgImage;
 	}
 
-	//Converte png para jpg
+//Converte png para jpg
 	public BufferedImage JpgToPng(BufferedImage img) {
 		BufferedImage pngImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 		pngImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
 		return pngImage;
 	}
-    //entrada de imagem padrao arquivo + extensao
+//entrada de imagem padrao arquivo + extensao
 	public InputStream getInputStream(BufferedImage img, String extension) {
 		try {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -62,13 +62,13 @@ public class ImagesService {
 		}
 	}
 
-	// redimensionar imagem
+// redimensionar imagem
 	public BufferedImage cropSquare(BufferedImage sourceImg) {
 		int min = (sourceImg.getHeight() <= sourceImg.getWidth()) ? sourceImg.getHeight() : sourceImg.getWidth();
 		return Scalr.crop(sourceImg, (sourceImg.getWidth() / 2) - (min / 2), (sourceImg.getHeight() / 2) - (min / 2),
 				min, min);
 	}	
-    //opcional melhorando a quaide
+//opcional melhorando a quaide
 	public BufferedImage resize(BufferedImage sourceImg, int size) {
 		return Scalr.resize(sourceImg, Scalr.Method.ULTRA_QUALITY, size);
 	}

@@ -21,24 +21,24 @@ public class CategoriaService {
 
     @Autowired  
     private CategoriaRepository categoriaRepository;
-
+//find categoria
     public Categoria find (Integer id) {
        
         Optional <Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(()-> new ObjectNotFoundException("Categorias inexistente! Id; " + id +"Tipo: "+ Categoria.class.getName()));
     }
-    
+//insert categoria
     public Categoria insert (Categoria obj) {
         obj.setId(null);
         return categoriaRepository.save(obj);
     }
-
+//update categoria
     public Categoria update (Categoria obj) {
         Categoria newObj = find(obj.getId());
         updateData(newObj, obj);
         return categoriaRepository.save(newObj);
     }
-
+// delete categoria
     public void delete (Integer id){
         find(id);
         try {
@@ -47,15 +47,16 @@ public class CategoriaService {
             throw new DataIntegrityException("Não é possivel excluir categoria associada a um produto");
         }
     }
-
+// findall categoria
     public List <Categoria> findAll () {
         return categoriaRepository.findAll();
     }
-
+// find page categoria
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
 	}
+    //updateDTO
     public Categoria fromDTO (CategoriaDTO objDto) {
         return new Categoria(objDto.getId(), objDto.getName());
     }

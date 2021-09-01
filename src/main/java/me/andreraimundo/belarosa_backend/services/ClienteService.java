@@ -54,7 +54,7 @@ public class ClienteService {
 	
 	@Value("${img.profile.size}")
 	private Integer size;
-
+// find
     public Cliente find (Integer id){
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
@@ -65,7 +65,7 @@ public class ClienteService {
         ObjectNotFoundException("Cliente não encontrado Id: "+ id + " Tipo: "
          + Cliente.class.getName()));
     }
-    
+// insert
     @Transactional
     public Cliente insert (Cliente obj) {
         Cliente aux = clienteRepository.findBycpf(obj.getCpf());
@@ -80,21 +80,14 @@ public class ClienteService {
         enderecoRepository.saveAll(obj.getEnderecos());
         return obj;
     }
-
+// update
     public Cliente update (Cliente obj) {
-        Cliente aux = clienteRepository.findBycpf(obj.getCpf());
-        if (aux !=null) {
-            throw new DataIntegrityException("Já existe uma conta vinculada a este CPF ! ");
-        }
-        if (!CPFBR.isValidCPF(obj.getCpf())) {
-            throw new DataIntegrityException("CPF invalido! ");
-        }
         Cliente newObj = find(obj.getId());
             updateData(newObj, obj);
             return clienteRepository.save(newObj);
         
     }
-
+//delete
     public void delete (Integer id) {
         find(id);
         try {
@@ -107,7 +100,7 @@ public class ClienteService {
     public List <Cliente> findAll () {
         return clienteRepository.findAll();
     }
-
+//findBuName
     public Cliente findByName (String name) {
         Cliente obj = clienteRepository.findByName(name);
 
@@ -117,7 +110,7 @@ public class ClienteService {
         }
         return obj;
     }
-
+//findByCPF
     public Cliente findByCPF (String cpf) {
         Cliente obj = clienteRepository.findBycpf(cpf);
         if (obj ==null) {
@@ -126,16 +119,16 @@ public class ClienteService {
         }
         return obj;
     }
-    
+//findPage
     public Page<Cliente> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
 		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
 		return clienteRepository.findAll(pageResquest);
 	}
 
     public Cliente fromDTO (ClienteDTO objDto) {
-        return new Cliente(null, null, objDto.getName(), null, null, objDto.getPhone());
+        return new Cliente(null, null, null, null, null, objDto.getPhone());
     }
-
+// insert cliente newClienteDTO
     public Cliente fromDTO (NewClienteDTO objDto) {
 
         Registro reg = new Registro(
@@ -165,9 +158,8 @@ public class ClienteService {
             cli.getEnderecos().add(end);
             return cli;
     }
-
+//atualizando cliente atraves de ClienteDTO
     private void updateData (Cliente newObj, Cliente obj) {
-        newObj.setName(obj.getName());
         newObj.setPhone(obj.getPhone());
     }
     //enviar imagem para o buckt aws s3
@@ -176,7 +168,7 @@ public class ClienteService {
 		if (user == null) {
 			throw new AuthorizationException("Você precisa está logado! ");
 		}
-		
+//carrega imagem do cliente
 		BufferedImage pngImage = imagesService.getJpgImageFromFile(multipartFile);
 		pngImage = imagesService.cropSquare(pngImage);
 		pngImage = imagesService.resize(pngImage, size);

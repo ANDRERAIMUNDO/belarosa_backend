@@ -31,13 +31,13 @@ public class ClienteResource {
 
     @Autowired
     ClienteService clienteService;
-
+//get clientes
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity <Cliente> find (@PathVariable Integer id){
         Cliente obj = clienteService.find(id);
         return ResponseEntity.ok().body(obj);
     }
-
+//post clientes
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity <Void> insert ( @Valid @RequestBody NewClienteDTO objDto) {
       Cliente obj = clienteService.fromDTO(objDto);
@@ -46,7 +46,7 @@ public class ClienteResource {
       .path("/{id}").buildAndExpand(obj.getId()).toUri();
       return ResponseEntity.created(uri).build();
     }
-
+//put clientes
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update (@Valid @RequestBody ClienteDTO objDto,@PathVariable Integer id) {
       Cliente obj  = clienteService.fromDTO(objDto);
@@ -54,20 +54,21 @@ public class ClienteResource {
       obj = clienteService.update(obj);
       return ResponseEntity.noContent().build();
     }
-
+//delete clientes somente admin
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete (@PathVariable Integer id) {
       clienteService.delete(id);
       return ResponseEntity.noContent().build();
     }
-
+//get clientes por nomes somente admin
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/name", method = RequestMethod.GET)
     public ResponseEntity <Cliente> find (@RequestParam(value = "value") String name) {
       Cliente obj = clienteService.findByName(name);  
       return ResponseEntity.ok().body(obj);
     }
-
+//get findall clientes somente admin
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method=RequestMethod.GET)
     public ResponseEntity <List<ClienteDTO>> findALl () {
@@ -77,7 +78,7 @@ public class ClienteResource {
       .collect(Collectors.toList());
       return ResponseEntity.ok().body(listDto);
     }
-
+//get cliente por paginas somente admn
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<ClienteDTO>> findPage(
@@ -90,7 +91,7 @@ public class ClienteResource {
       return ResponseEntity.ok().body(listDto);
     }
 
-    //post imagem 
+//post imagem 
   	@RequestMapping(value="/imageprofile", method=RequestMethod.POST)
 	  public ResponseEntity<Void>uploadProfilePicture(@RequestParam(name="file") MultipartFile file){
 		URI uri = clienteService.uploadCliente(file);

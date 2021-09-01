@@ -9,4 +9,6 @@ public interface EmailService {
 	void sendOrderConfirmationEmail (Pedido obj);
 	void sendEmail(SimpleMailMessage msg);
 	void sendNewPasswordEmail(Registro registro, String newPassword);
+	void sendNoticationChangerPasswordEmail(Registro registro);
+	void newAccount(Registro registro);
 }

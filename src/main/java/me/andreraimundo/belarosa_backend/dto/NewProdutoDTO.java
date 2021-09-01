@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 
 import me.andreraimundo.belarosa_backend.domain.Categoria;
+import me.andreraimundo.belarosa_backend.domain.Descricao;
 
 public class NewProdutoDTO implements Serializable {
     
@@ -19,6 +20,9 @@ public class NewProdutoDTO implements Serializable {
 
     @NotEmpty(message = "Campo Obrigatorio. ")
     private Double price;
+
+    @NotEmpty(message = "Campo Obrigatorio. ")
+    List <Descricao> descricoes = new ArrayList<>();
 
     @NotEmpty(message = "Campo Obrigatorio. ")
     List <Categoria> categorias = new ArrayList<>();
@@ -49,6 +53,14 @@ public class NewProdutoDTO implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+    
+    public List<Descricao> getDescricoes() {
+        return descricoes;
+    }
+
+    public void setDescricoes(List<Descricao> descricoes) {
+        this.descricoes = descricoes;
     }
 
     public List<Categoria> getCategorias() {

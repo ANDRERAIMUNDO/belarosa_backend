@@ -12,13 +12,9 @@ public class ClienteDTO  implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Integer id;
-    
-    @NotEmpty(message = "Campo obrigatorio. ")
-    @Size(min = 10, message = "Minimo 10 caracteres. ")
-    @Size(max = 40, message = "Maximo 40 caracteres. ")
-    private String name;
 
     @NotEmpty(message = "Campo obrigatorio. ")
+    @Size(max = 11, message = "Maximo 11 caracteres. ")
     private String phone;
 
     public ClienteDTO () {
@@ -27,7 +23,6 @@ public class ClienteDTO  implements Serializable {
 
     public ClienteDTO ( Cliente obj) {
         id = obj.getId();
-        name = obj.getName();
         phone = obj.getPhone();
     }
 
@@ -37,14 +32,6 @@ public class ClienteDTO  implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhone() {

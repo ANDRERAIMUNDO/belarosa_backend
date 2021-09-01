@@ -28,13 +28,13 @@ public class CategoriaResource {
     
     @Autowired
     CategoriaService categoriaService;
-    
+// get categorias
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Categoria> find (@PathVariable Integer id) {
         Categoria obj = categoriaService.find(id);
         return ResponseEntity.ok().body(obj);
     }
-
+//post categorias
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity <Void> insert (@Valid @RequestBody CategoriaDTO objDto) {
@@ -44,7 +44,7 @@ public class CategoriaResource {
         .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-
+//put categorias
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity <Void> update (@Valid @RequestBody CategoriaDTO objDto,@PathVariable Integer id) {
@@ -53,21 +53,21 @@ public class CategoriaResource {
         obj = categoriaService.update(obj);
         return ResponseEntity.noContent().build();
     }
-
+//delete categorias
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{id}", method =  RequestMethod.DELETE)
     public ResponseEntity <Void> delete (@PathVariable Integer id) {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+//get findall todas as categorias
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		List <Categoria> list = categoriaService.findAll();
 		List<CategoriaDTO>listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}	
-
+//get categorias por paginas
    @RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page", defaultValue = "0")Integer page, 
