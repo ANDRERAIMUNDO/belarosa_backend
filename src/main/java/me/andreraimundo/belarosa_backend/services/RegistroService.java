@@ -65,7 +65,7 @@ public class RegistroService {
         if (aux != null) {
             throw new DataIntegrityException("Email já existe! ");
         }        
-        updateData(newObj, obj);
+        updateDataEmail(newObj, obj);
         emailService.sendNoticationChangerPasswordEmail(obj);
         return registroRepository.save(newObj);
 }
@@ -128,7 +128,7 @@ public class RegistroService {
             return reg;
     }
 // void atualização email
-    private void updateData (Registro newObj, Registro obj) {
+    private void updateDataEmail (Registro newObj, Registro obj) {
         newObj.setEmail(obj.getEmail());
     }
 // void atualização senha

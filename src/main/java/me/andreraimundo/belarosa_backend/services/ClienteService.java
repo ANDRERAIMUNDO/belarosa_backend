@@ -85,7 +85,6 @@ public class ClienteService {
         Cliente newObj = find(obj.getId());
             updateData(newObj, obj);
             return clienteRepository.save(newObj);
-        
     }
 //delete
     public void delete (Integer id) {
@@ -111,7 +110,7 @@ public class ClienteService {
         return obj;
     }
 //findByCPF
-    public Cliente findByCPF (String cpf) {
+    public Cliente findByCPF (String cpf) { 
         Cliente obj = clienteRepository.findBycpf(cpf);
         if (obj ==null) {
             throw new ObjectNotFoundException("CPF não encontrado! "
