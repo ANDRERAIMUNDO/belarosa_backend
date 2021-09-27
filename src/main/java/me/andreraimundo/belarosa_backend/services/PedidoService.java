@@ -56,8 +56,11 @@ public class PedidoService {
 //find pedido
     public Pedido find (Integer id) {
         UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado! .");
+        //if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            //throw new AuthorizationException("Acesso negado! .");
+        //}
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado! ");
         }
         Optional <Pedido> obj = pedidoRepository.findById(id);
         return obj.orElseThrow(()-> new 
