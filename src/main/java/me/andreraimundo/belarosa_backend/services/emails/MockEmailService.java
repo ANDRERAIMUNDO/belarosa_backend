@@ -1,10 +1,18 @@
-package me.andreraimundo.belarosa_backend.services;
+package me.andreraimundo.belarosa_backend.services.emails;
+
+import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 public class MockEmailService extends AbstractEmailService {
+
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
 	private static final Logger LOG = LoggerFactory.getLogger(MockEmailService.class);
 
 	@Override
@@ -12,5 +20,12 @@ public class MockEmailService extends AbstractEmailService {
 		LOG.info("Simulação de envio de email ... ");
 		LOG.info(msg.toString());
 		LOG.info("Email enviado. ");
+	}
+	
+	@Override
+	public void sendHtmlEmail(MimeMessage msg) {
+		LOG.info("Enviando email...");
+		javaMailSender.send(msg);
+		LOG.info("Email enviado");
 	}
 }

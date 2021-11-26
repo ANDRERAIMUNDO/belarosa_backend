@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import me.andreraimundo.belarosa_backend.services.DBInitialService;
-import me.andreraimundo.belarosa_backend.services.EmailService;
-import me.andreraimundo.belarosa_backend.services.SmtpEmailService;
+import me.andreraimundo.belarosa_backend.services.emails.EmailService;
+import me.andreraimundo.belarosa_backend.services.emails.SmtpEmailService;
 
 @Configuration
 @Profile("dev")

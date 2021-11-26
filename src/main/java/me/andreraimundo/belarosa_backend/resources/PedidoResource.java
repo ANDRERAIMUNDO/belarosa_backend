@@ -5,7 +5,6 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +22,7 @@ public class PedidoResource {
     
     @Autowired
     PedidoService pedidoService;
-//get pedido por id somente admin
-    //@PreAuthorize("hasRole('ADMIN')")
+//get pedido
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity <Pedido> find (@PathVariable Integer id) {
         Pedido obj = pedidoService.find(id);

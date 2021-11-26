@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Bela Rosa</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <img src="https://thumbs2.imgbox.com/77/05/7jtneUmg_t.png" style="width:400px;height:160px;">
+		<br>
+		<h5> Sr(a)<span th:text="${obj.cliente.name}"> </span> sua nova senha chegou.  </h5>
+        <p> Sua nova senha foi alterada. </p>
+        <p> Para sua segurança recomendamos enviamos este e-mail para confirma sua solicitação. </p>
+        <p> Nova senha: </p>
+        <br>
+        <h1><span th:text="${password}"> </span></h1>
+        <br>
+        <a>@BelaRosa 2022 - todos os direitos reservados </a>
+</body>
+</html>
+
+
+

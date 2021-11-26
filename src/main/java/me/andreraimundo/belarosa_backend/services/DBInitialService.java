@@ -54,6 +54,7 @@ public class DBInitialService {
 	PedidoRepository pedidoRepository;
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
+
 	@Autowired
     private BCryptPasswordEncoder pe;
 
@@ -234,32 +235,42 @@ public class DBInitialService {
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29, prod30));
 	
 		Registro reg1 = new Registro(null, "9000andre@gmail.com", pe.encode("gica1402"));
-		Registro reg2 = new Registro(null, "luanalobatofake@gmail.com", pe.encode("1234"));
+		reg1.addPerfil(Perfil.ADMIN); 
+		Registro reg2 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1402"));
 		Registro reg3 = new Registro(null, "pamelalorenafake@gmail.com", pe.encode("1234"));
-		reg3.addPerfil(Perfil.ADMIN); 
-		Registro reg4 = new Registro (null, "terezinhajro@gmail.com", pe.encode("gica1402"));
+		Registro reg4 = new Registro (null, "gizelamgro@gmail.com", pe.encode("1402"));
 		reg4.addPerfil(Perfil.ADMIN);
+		Registro reg5 = new Registro(null, "robertolcm92@gmail.com", pe.encode("1402"));
+		reg5.addPerfil(Perfil.ADMIN);
+		Registro reg6 = new Registro(null, "terezinhajro@gmail.com", pe.encode("1402"));
+		reg6.addPerfil(Perfil.ADMIN);
 
-		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "63079207009", "13122009", "91988220467");
+		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "63079207009", "30111991", "91987567180");
 		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato Fake User", "86773894077", "24061993", "91984001327");
 		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena Fake User", "29167241093", "10031991", "91999001422");
-		Cliente cl4 = new Cliente(reg4, null, "Terezinha de Jesus de Oliveira Moraes", "01011990","82640149253", "91988006179");
+		Cliente cl4 = new Cliente(reg4, null, "Gizela Rodrigues de Oliveira", "01011990","82640149253", "91999132862");
+		Cliente cl5 = new Cliente(reg5, null, "Roberto Luiz Cabral Moraes", "63079207009", "13122009", "91988646337");
+		Cliente cl6 = new Cliente(reg6,null, "Terezinha de Jesus de Oliveira Moraes", "86773894077", "24061993", "91988006179");
 
-
-		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4));
-		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4));
+		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4, reg5, reg6));
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4, cl5, cl6));
 
 		Endereco end1 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg1, cl1);
 		Endereco end2 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
 		Endereco end3 = new Endereco(null, "68655000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
-		Endereco end4 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro","Vila Nova", "Irituia", "PA",reg4, cl4);
+		Endereco end4 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro","Vila Nova", "Irituia", "PA",reg4, cl5);
+		Endereco end5 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg5, cl5);
+		Endereco end6 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg6, cl6);
+	
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));
 		cl3.getEnderecos().addAll(Arrays.asList(end3));	
-		cl4.getEnderecos().addAll(Arrays.asList(end4));		
+		cl4.getEnderecos().addAll(Arrays.asList(end4));
+		cl5.getEnderecos().addAll(Arrays.asList(end5));	
+		cl6.getEnderecos().addAll(Arrays.asList(end6));			
 
-		enderecoRepository.saveAll(Arrays.asList(end1, end2,end3,end4));
+		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5, end6));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 
@@ -366,7 +377,5 @@ public class DBInitialService {
 		prod15.getItens().addAll(Arrays.asList(itemPedido15));
 
 		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4, itemPedido5, itemPedido6, itemPedido7, itemPedido8, itemPedido9, itemPedido10, itemPedido11, itemPedido12, itemPedido13, itemPedido14, itemPedido15));
-
     }
-    
 }

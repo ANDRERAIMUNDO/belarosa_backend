@@ -15,12 +15,12 @@ import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
 import me.andreraimundo.belarosa_backend.domain.Registro;
-import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PedidoRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
+import me.andreraimundo.belarosa_backend.services.emails.EmailService;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
@@ -95,7 +95,7 @@ public class PedidoService {
             itemPedido.setPedido(obj);
         }   
         itemPedidoRepository.saveAll(obj.getItens());
-         emailService.sendOrderConfirmationEmail(obj);//alterando em 18 de agosto de 2021
+         emailService.sendOrderConfirmationHtmlPedido(obj);//alterando em 18 de agosto de 2021
         
         return obj;
     }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
+import me.andreraimundo.belarosa_backend.services.emails.EmailService;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 //classe de geraçao de nova senha aleatoria
 @Service
@@ -34,8 +35,7 @@ public class AuthService {
         registro.setPassword(encoderPassword.encode(newPassword));
 
         registroRepository.save(registro);
-        emailService.sendNewPasswordEmail(registro, newPassword);
-
+        emailService.sendNewPasswordHtmlEmail(registro, newPassword);
     }
 
     private String newPassword() {

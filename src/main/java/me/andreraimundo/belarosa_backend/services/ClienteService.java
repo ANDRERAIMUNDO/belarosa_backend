@@ -26,6 +26,7 @@ import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
 import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
+import me.andreraimundo.belarosa_backend.services.emails.EmailService;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
@@ -48,6 +49,9 @@ public class ClienteService {
 
     @Autowired
     private ImagesService imagesService;
+
+    @Autowired
+    EmailService emailService;
 	
 	@Value("${img.prefix.client.profile}")
 	private String prefix;

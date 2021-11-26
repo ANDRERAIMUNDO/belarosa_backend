@@ -21,6 +21,7 @@ import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
 import me.andreraimundo.belarosa_backend.services.exception.DataIntegrityException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
+import me.andreraimundo.belarosa_backend.services.emails.EmailService;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 
 @Service
@@ -55,7 +56,7 @@ public class RegistroService {
         }
         obj.setId(null);
         obj = registroRepository.save(obj);
-       emailService.newAccount(obj);
+       emailService.newAccountHtml(obj);
         return obj;
     }
 //atualizar registro    
@@ -66,13 +67,14 @@ public class RegistroService {
             throw new DataIntegrityException("Email já existe! ");
         }        
         updateDataEmail(newObj, obj);
-        emailService.sendNoticationChangerPasswordEmail(obj);
+        emailService.sendNoticationChangerHtmlRegistro(obj);
         return registroRepository.save(newObj);
 }
 //atualizar senha
     public Registro updatePassword (Registro obj) {
         Registro newObj = find (obj.getId());
         updateDataPassword(newObj, obj);
+        emailService.sendNoticationChangerHtmlRegistro(obj);
         return registroRepository.save(newObj);
     }
 //deleta senha
