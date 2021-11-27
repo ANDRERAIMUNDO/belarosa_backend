@@ -233,50 +233,45 @@ public class DBInitialService {
 		descricaoRepository.saveAll(Arrays.asList(descr1, descr2, descr3, descr4, descr5, descr6, descr7, descr8, descr9, descr10, descr11, descr12, descr13, descr14, descr15, descr16, descr17, descr18, descr19, descr20, descr21, descr22, descr23, descr24, descr25, descr26, descr27, descr28, descr29, descr30));
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29, prod30));
-	
-		Registro reg1 = new Registro(null, "9000andre@gmail.com", pe.encode("gica1402"));
-		reg1.addPerfil(Perfil.ADMIN); 
-		Registro reg2 = new Registro(null, "andreraimundoo@hotmail.com", pe.encode("1402"));
-		Registro reg3 = new Registro(null, "pamelalorenafake@gmail.com", pe.encode("1234"));
-		Registro reg4 = new Registro (null, "gizelamgro@gmail.com", pe.encode("1402"));
+		
+		Registro reg1 = new Registro(null, "andrefake@gmail.com", pe.encode("1402"));
+		Registro reg2 = new Registro(null, "9000andre@gmail.com", pe.encode("1402"));
+		reg2.addPerfil(Perfil.ADMIN); 
+		Registro reg3 = new Registro (null, "gizelamgro@gmail.com", pe.encode("1402"));
+		reg3.addPerfil(Perfil.ADMIN);
+		Registro reg4 = new Registro(null, "robertolcm92@gmail.com", pe.encode("1402"));
 		reg4.addPerfil(Perfil.ADMIN);
-		Registro reg5 = new Registro(null, "robertolcm92@gmail.com", pe.encode("1402"));
+		Registro reg5 = new Registro(null, "terezinhajro@gmail.com", pe.encode("1402"));
 		reg5.addPerfil(Perfil.ADMIN);
-		Registro reg6 = new Registro(null, "terezinhajro@gmail.com", pe.encode("1402"));
-		reg6.addPerfil(Perfil.ADMIN);
 
 		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "63079207009", "30111991", "91987567180");
-		Cliente cl2 = new Cliente(reg2,null, "Luana Lobato Fake User", "86773894077", "24061993", "91984001327");
+		Cliente cl2 = new Cliente(reg2,null, "Andre Fake User", "86773894077", "24061993", "91984001327");
 		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena Fake User", "29167241093", "10031991", "91999001422");
 		Cliente cl4 = new Cliente(reg4, null, "Gizela Rodrigues de Oliveira", "01011990","82640149253", "91999132862");
 		Cliente cl5 = new Cliente(reg5, null, "Roberto Luiz Cabral Moraes", "63079207009", "13122009", "91988646337");
-		Cliente cl6 = new Cliente(reg6,null, "Terezinha de Jesus de Oliveira Moraes", "86773894077", "24061993", "91988006179");
 
-		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4, reg5, reg6));
-		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4, cl5, cl6));
+		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4, reg5));
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4, cl5));
 
 		Endereco end1 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg1, cl1);
 		Endereco end2 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
 		Endereco end3 = new Endereco(null, "68655000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
 		Endereco end4 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro","Vila Nova", "Irituia", "PA",reg4, cl5);
 		Endereco end5 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg5, cl5);
-		Endereco end6 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg6, cl6);
-	
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));
 		cl3.getEnderecos().addAll(Arrays.asList(end3));	
 		cl4.getEnderecos().addAll(Arrays.asList(end4));
-		cl5.getEnderecos().addAll(Arrays.asList(end5));	
-		cl6.getEnderecos().addAll(Arrays.asList(end6));			
+		cl5.getEnderecos().addAll(Arrays.asList(end5));		
 
-		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5, end6));
+		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 
 		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg1, cl1, end1);
-		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg2, cl2, end2);
-		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg3, cl3, end3);
+		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg1, cl1, end1);
+		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg1, cl1, end1);
 		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg1, cl1, end1);
 		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg1, cl1, end1);
 		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg1, cl1, end1);
@@ -322,9 +317,7 @@ public class DBInitialService {
 		pedido15.setPagamento(pgt15);
 		
 
-		cl1.getPedidos().addAll(Arrays.asList(pedido1, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
-		cl2.getPedidos().addAll(Arrays.asList(pedido2));	
-		cl3.getPedidos().addAll(Arrays.asList(pedido3));
+		cl1.getPedidos().addAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 		pagamentoRepository.saveAll(Arrays.asList(pgt1, pgt2, pgt3));

@@ -17,7 +17,7 @@ import me.andreraimundo.belarosa_backend.services.AuthService;
 import me.andreraimundo.belarosa_backend.services.UserService;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/0auth")
 public class AuthResource {
     
     @Autowired
