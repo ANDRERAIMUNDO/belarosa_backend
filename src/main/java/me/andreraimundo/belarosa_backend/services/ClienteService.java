@@ -53,6 +53,9 @@ public class ClienteService {
     @Autowired
     EmailService emailService;
 	
+    @Autowired
+    RegistroService registroService;
+	
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
 	

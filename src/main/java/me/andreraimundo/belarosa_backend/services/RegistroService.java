@@ -56,7 +56,7 @@ public class RegistroService {
         }
         obj.setId(null);
         obj = registroRepository.save(obj);
-       emailService.newAccountHtml(obj);
+     //   emailService.newAccountHtml(obj);
         return obj;
     }
 //atualizar registro    
@@ -74,7 +74,7 @@ public class RegistroService {
     public Registro updatePassword (Registro obj) {
         Registro newObj = find (obj.getId());
         updateDataPassword(newObj, obj);
-        emailService.sendNoticationChangerHtmlRegistro(obj);
+       // emailService.sendNoticationChangerHtmlRegistro(obj);
         return registroRepository.save(newObj);
     }
 //deleta senha
@@ -100,7 +100,28 @@ public class RegistroService {
         }
         return obj;
     }
+//busca email e enviar email de confirmacao da alteração de dados
+public Registro findByEmailSendEmailHtmlUpdateDates (String email) {
+    Registro obj = registroRepository.findByEmail(email);
 
+    if (obj == null) {
+        throw new ObjectNotFoundException("Email não encontrado! "
+        + "Tipo: " + Registro.class.getName());
+    }
+    emailService.sendNoticationChangerHtmlRegistro(obj);
+    return obj;
+}   
+//busca email e enviar email de confirmacao
+    public Registro findByEmailSendEmailHtml (String email) {
+        Registro obj = registroRepository.findByEmail(email);
+
+        if (obj == null) {
+            throw new ObjectNotFoundException("Email não encontrado! "
+            + "Tipo: " + Registro.class.getName());
+        }
+        emailService.newAccountHtml(obj);
+        return obj;
+    }   
 //busca registro com paginas
     public Page<Registro> search(String email, Integer page, Integer linesPerPages, String orderBy, String direction) {
 		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
@@ -118,6 +139,7 @@ public class RegistroService {
 // registro dto atualização de senha
     public Registro fromDTO (UpdatePassowordDTO objDto) {
         return new Registro(objDto.getId(), null, pe.encode(objDto.getPassword()));
+      // return new Registro(null, null, pe.encode(objDto.getPassword()));
     }
 // registro dto novo registro
     public Registro fromDTO (NewRegistroDTO objDto) {

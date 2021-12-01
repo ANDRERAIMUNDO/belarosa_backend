@@ -100,7 +100,7 @@ public class DBInitialService {
 		Categoria cat7 = new Categoria(null, "Roupas");
 		Categoria cat8 = new Categoria(null, "Utensilios");
 
-		Produto prod1 = new Produto(null, "Carteita victorino em couro", 279.99);
+		Produto prod1 = new Produto(null, "Carteita victorino em couro", 0.0);
 		Produto prod2 = new Produto(null, "Bolsa Santa Lolla Baú Marrom", 279.99);
 		Produto prod3 = new Produto(null, "Les Sombra quarteto multiefeitos", 199.90);
 		Produto prod4 = new Produto(null, "Bolsa Feminina Grande Tote Transversal Couro Ecológico", 89.65);
@@ -234,9 +234,9 @@ public class DBInitialService {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29, prod30));
 		
-		Registro reg1 = new Registro(null, "andrefake@gmail.com", pe.encode("1402"));
-		Registro reg2 = new Registro(null, "9000andre@gmail.com", pe.encode("1402"));
-		reg2.addPerfil(Perfil.ADMIN); 
+		Registro reg1 = new Registro(null, "9000andre@gmail.com", pe.encode("1402"));
+		reg1.addPerfil(Perfil.ADMIN); 
+		Registro reg2 = new Registro(null, "andrefake@gmail.com", pe.encode("1402"));
 		Registro reg3 = new Registro (null, "gizelamgro@gmail.com", pe.encode("1402"));
 		reg3.addPerfil(Perfil.ADMIN);
 		Registro reg4 = new Registro(null, "robertolcm92@gmail.com", pe.encode("1402"));
@@ -244,8 +244,8 @@ public class DBInitialService {
 		Registro reg5 = new Registro(null, "terezinhajro@gmail.com", pe.encode("1402"));
 		reg5.addPerfil(Perfil.ADMIN);
 
-		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "63079207009", "30111991", "91987567180");
-		Cliente cl2 = new Cliente(reg2,null, "Andre Fake User", "86773894077", "24061993", "91984001327");
+		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "86773894077", "24061993", "91984001327");
+		Cliente cl2 = new Cliente(reg2, null, "Andre Fake User", "63079207009", "30111991", "91987567180");
 		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena Fake User", "29167241093", "10031991", "91999001422");
 		Cliente cl4 = new Cliente(reg4, null, "Gizela Rodrigues de Oliveira", "01011990","82640149253", "91999132862");
 		Cliente cl5 = new Cliente(reg5, null, "Roberto Luiz Cabral Moraes", "63079207009", "13122009", "91988646337");
@@ -269,21 +269,21 @@ public class DBInitialService {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 
-		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg1, cl1, end1);
-		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg1, cl1, end1);
-		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg1, cl1, end1);
-		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg1, cl1, end1);
-		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg1, cl1, end1);
-		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg1, cl1, end1);
-		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg1, cl1, end1);
-		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg1, cl1, end1);
-		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg1, cl1, end1);
-		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg1, cl1, end1);
-		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg1, cl1, end1);
-		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg1, cl1, end1);
-		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg1, cl1, end1);
-		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg1, cl1, end1);
-		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg1, cl1, end1);
+		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg2, cl2, end2);
+		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg2, cl2, end2);
+		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg2, cl2, end2);
+		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg2, cl2, end2);
+		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg2, cl2, end2);
+		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg2, cl2, end2);
+		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg2, cl2, end2);
+		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg2, cl2, end2);
+		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg2, cl2, end2);
+		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg2, cl2, end2);
+		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg2, cl2, end2);
+		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg2, cl2, end2);
+		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg2, cl2, end2);
+		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg2, cl2, end2);
+		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg2, cl2, end2);
 		
 		Pagamento pgt1 = new PagamentoCartao(null, SituacaoPedido.PENDENTE, pedido1, 10);
 		pedido1.setPagamento(pgt1);
@@ -317,7 +317,7 @@ public class DBInitialService {
 		pedido15.setPagamento(pgt15);
 		
 
-		cl1.getPedidos().addAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
+		cl2.getPedidos().addAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 		pagamentoRepository.saveAll(Arrays.asList(pgt1, pgt2, pgt3));

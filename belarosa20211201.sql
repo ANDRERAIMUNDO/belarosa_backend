@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `categoria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -45,7 +45,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cpf` varchar(255) DEFAULT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'63079207009','30111991','Andre Raimundo Rodrigues de Oliveira','91987567180',1),(2,'86773894077','24061993','Andre Fake User','91984001327',2),(3,'29167241093','10031991','Pamela Lorena Fake User','91999001422',3),(4,'01011990','82640149253','Gizela Rodrigues de Oliveira','91999132862',4),(5,'63079207009','13122009','Roberto Luiz Cabral Moraes','91988646337',5);
+INSERT INTO `cliente` VALUES (1,'86773894077','24061993','Andre Raimundo Rodrigues de Oliveira','91984001327',1),(2,'63079207009','30111991','Andre Fake User','91987567180',2),(3,'29167241093','10031991','Pamela Lorena Fake User','91999001422',3),(4,'01011990','82640149253','Gizela Rodrigues de Oliveira','91999132862',4),(5,'63079207009','13122009','Roberto Luiz Cabral Moraes','91988646337',5);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +75,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `descricao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `descricao` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -99,7 +99,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `endereco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `endereco` (
   `id` int NOT NULL AUTO_INCREMENT,
   `bairro` varchar(255) DEFAULT NULL,
@@ -135,7 +135,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `item_pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `item_pedido` (
   `desconto` double DEFAULT NULL,
   `price` double DEFAULT NULL,
@@ -165,7 +165,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `category_id` varchar(255) DEFAULT NULL,
@@ -198,7 +198,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pagamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `pagamento` (
   `pedido_id` int NOT NULL,
   `situacao_pedido` int DEFAULT NULL,
@@ -223,7 +223,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pagamento_boleto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `pagamento_boleto` (
   `data_pagamento` datetime(6) DEFAULT NULL,
   `data_vencimento` datetime(6) DEFAULT NULL,
@@ -249,7 +249,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pagamento_cartao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `pagamento_cartao` (
   `numeros_de_parcelas` int DEFAULT NULL,
   `pedido_id` int NOT NULL,
@@ -274,7 +274,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pagamento_dinheiro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `pagamento_dinheiro` (
   `data_pagamento` datetime(6) DEFAULT NULL,
   `pedido_id` int NOT NULL,
@@ -299,7 +299,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `pedido` (
   `id` int NOT NULL AUTO_INCREMENT,
   `instante` datetime(6) DEFAULT NULL,
@@ -322,7 +322,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,'2021-01-23 22:00:00.000000',1,1,1),(2,'2021-01-22 21:00:00.000000',1,1,1),(3,'2021-01-21 20:00:00.000000',1,1,1),(4,'2021-01-03 22:00:00.000000',1,1,1),(5,'2021-01-22 21:00:00.000000',1,1,1),(6,'2021-01-27 20:00:00.000000',1,1,1),(7,'2021-01-12 22:00:00.000000',1,1,1),(8,'2021-01-20 21:00:00.000000',1,1,1),(9,'2021-01-14 20:00:00.000000',1,1,1),(10,'2021-01-23 22:00:00.000000',1,1,1),(11,'2021-01-30 21:00:00.000000',1,1,1),(12,'2021-01-01 20:00:00.000000',1,1,1),(13,'2021-01-06 22:00:00.000000',1,1,1),(14,'2021-01-12 21:00:00.000000',1,1,1),(15,'2021-01-27 20:00:00.000000',1,1,1);
+INSERT INTO `pedido` VALUES (1,'2021-01-23 22:00:00.000000',2,2,2),(2,'2021-01-22 21:00:00.000000',2,2,2),(3,'2021-01-21 20:00:00.000000',2,2,2),(4,'2021-01-03 22:00:00.000000',2,2,2),(5,'2021-01-22 21:00:00.000000',2,2,2),(6,'2021-01-27 20:00:00.000000',2,2,2),(7,'2021-01-12 22:00:00.000000',2,2,2),(8,'2021-01-20 21:00:00.000000',2,2,2),(9,'2021-01-14 20:00:00.000000',2,2,2),(10,'2021-01-23 22:00:00.000000',2,2,2),(11,'2021-01-30 21:00:00.000000',2,2,2),(12,'2021-01-01 20:00:00.000000',2,2,2),(13,'2021-01-06 22:00:00.000000',2,2,2),(14,'2021-01-12 21:00:00.000000',2,2,2),(15,'2021-01-27 20:00:00.000000',2,2,2);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +332,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `perfis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `perfis` (
   `registro_id` int NOT NULL,
   `perfis` int DEFAULT NULL,
@@ -347,7 +347,7 @@ CREATE TABLE `perfis` (
 
 LOCK TABLES `perfis` WRITE;
 /*!40000 ALTER TABLE `perfis` DISABLE KEYS */;
-INSERT INTO `perfis` VALUES (1,1),(2,1),(2,2),(3,1),(3,2),(4,1),(4,2),(5,1),(5,2);
+INSERT INTO `perfis` VALUES (1,1),(1,2),(2,1),(3,1),(3,2),(4,1),(4,2),(5,1),(5,2);
 /*!40000 ALTER TABLE `perfis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +357,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `produto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `produto` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -372,7 +372,7 @@ CREATE TABLE `produto` (
 
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (1,'Carteita victorino em couro',279.99),(2,'Bolsa Santa Lolla Baú Marrom',279.99),(3,'Les Sombra quarteto multiefeitos',199.9),(4,'Bolsa Feminina Grande Tote Transversal Couro Ecológico',89.65),(5,'Bolsa + Sapato Feminino Coleção Verão',99.99),(6,'Produto 1',99.99),(7,'Produto 2',99.99),(8,'Produto 3',99.99),(9,'Produto 4',99.99),(10,'Produto 5',99.99),(11,'Produto 6',99.99),(12,'Produto 7',99.99),(13,'Produto 8',99.99),(14,'Produto 9',99.99),(15,'Produto 10',99.99),(16,'Produto 11',99.99),(17,'Produto 12',99.99),(18,'Produto 13',99.99),(19,'Produto 14',99.99),(20,'Produto 15',99.99),(21,'Produto 16',99.99),(22,'Produto 17',99.99),(23,'Produto 18',99.99),(24,'Produto 19',99.99),(25,'Produto 20',99.99),(26,'Produto 21',99.99),(27,'Fantazia Noturna Dracula',129.9),(28,'Rabo de gato',9.9),(29,'Tapa olho do pirata',7),(30,'Oculos bifocal dia',90);
+INSERT INTO `produto` VALUES (1,'Carteita victorino em couro',0),(2,'Bolsa Santa Lolla Baú Marrom',279.99),(3,'Les Sombra quarteto multiefeitos',199.9),(4,'Bolsa Feminina Grande Tote Transversal Couro Ecológico',89.65),(5,'Bolsa + Sapato Feminino Coleção Verão',99.99),(6,'Produto 1',99.99),(7,'Produto 2',99.99),(8,'Produto 3',99.99),(9,'Produto 4',99.99),(10,'Produto 5',99.99),(11,'Produto 6',99.99),(12,'Produto 7',99.99),(13,'Produto 8',99.99),(14,'Produto 9',99.99),(15,'Produto 10',99.99),(16,'Produto 11',99.99),(17,'Produto 12',99.99),(18,'Produto 13',99.99),(19,'Produto 14',99.99),(20,'Produto 15',99.99),(21,'Produto 16',99.99),(22,'Produto 17',99.99),(23,'Produto 18',99.99),(24,'Produto 19',99.99),(25,'Produto 20',99.99),(26,'Produto 21',99.99),(27,'Fantazia Noturna Dracula',129.9),(28,'Rabo de gato',9.9),(29,'Tapa olho do pirata',7),(30,'Oculos bifocal dia',90);
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +382,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `produto_categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `produto_categoria` (
   `produto_id` int NOT NULL,
   `categoria_id` int NOT NULL,
@@ -409,7 +409,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `produto_descricao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `produto_descricao` (
   `produto_id` int NOT NULL,
   `descricao_id` int NOT NULL,
@@ -436,7 +436,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reference`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `reference` (
   `external_reference` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`external_reference`)
@@ -459,7 +459,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `registro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `registro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
@@ -475,7 +475,7 @@ CREATE TABLE `registro` (
 
 LOCK TABLES `registro` WRITE;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
-INSERT INTO `registro` VALUES (1,'andrefake@gmail.com','$2a$10$2ojUoLygOCVA2KQiojO0SeK6d7nlF/4t2181.GG.BHxgjvNvB5Joe'),(2,'9000andre@gmail.com','$2a$10$PV7Xi1lBcPQZVLlkWKvS2O9Y0cgCFk/bGlHa31PW8Kh7rcBhoIx42'),(3,'gizelamgro@gmail.com','$2a$10$3b/ucIlDGqw2Z/T72jO1vOohIrs7CBqQUQhO5JmwfgGZCT.bCauUG'),(4,'robertolcm92@gmail.com','$2a$10$wXvLh6WNFa0WiQlHdorFkOrZgd8iVqlZwJq8a65R1tGQEWj5xtX4C'),(5,'terezinhajro@gmail.com','$2a$10$I.UeXiBRyJOoZCXLLnScJ.yWBfmzhcw90mScpmARcq5lDS6SpnIx2');
+INSERT INTO `registro` VALUES (1,'9000andre@gmail.com','$2a$10$jiyNLsJote.Qb.9OtPVcueMvT423KdvThPDks0HDZMWQpSEIweCGy'),(2,'andrefake@gmail.com','$2a$10$UxrrHw6/S3Z3QxplCurh.uuTZUSasyMts2VWyxglvIAjw.Yb0KC2O'),(3,'gizelamgro@gmail.com','$2a$10$rdyg1uCxLnwJYe2oszz4Eu/g/r4752T7fuDNJ1yLaGMMc5Bs7UCa2'),(4,'robertolcm92@gmail.com','$2a$10$NuTSAYImO7vzfN.qJHtsquAKNldS79rdcsfn7EKuS6ccAYZvo0ImO'),(5,'terezinhajro@gmail.com','$2a$10$kDHcprd4oin6VwxkiiNaVeHz0SrlGaS1b2KIZBUjJ7OhzG/5FYhTK');
 /*!40000 ALTER TABLE `registro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -488,4 +488,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-27 14:12:31
+-- Dump completed on 2021-12-01 13:49:08

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
 
+import me.andreraimundo.belarosa_backend.domain.Registro;
+
 public class UpdatePassowordDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -14,6 +16,11 @@ public class UpdatePassowordDTO implements Serializable {
 
     public UpdatePassowordDTO () {
 
+    }
+
+    public UpdatePassowordDTO(Registro obj) {
+        id = obj.getId();
+        password = obj.getPassword();
     }
 
     public Integer getId() {

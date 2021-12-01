@@ -31,6 +31,7 @@ public class RegistroResouce {
 
     @Autowired
     RegistroService registroService;
+
 //busca registro por id
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity <Registro> find (@PathVariable Integer id){
@@ -41,6 +42,18 @@ public class RegistroResouce {
     @RequestMapping(value = "/email", method = RequestMethod.GET)
     public ResponseEntity <Registro> find (@RequestParam(value = "value") String email) {
       Registro obj = registroService.findByEmail(email);  
+      return ResponseEntity.ok().body(obj);
+    }
+//findByEmailSendEmailHtmlUpdateDates
+    @RequestMapping(value = "/emailsendemailupdatedates", method = RequestMethod.GET)
+    public ResponseEntity <Registro> findEmailUpdateDates (@RequestParam(value = "value") String email) {
+      Registro obj = registroService.findByEmailSendEmailHtmlUpdateDates(email);  
+      return ResponseEntity.ok().body(obj);
+    }
+//findByEmailSendEmailHtml
+    @RequestMapping(value = "/emailsendemail", method = RequestMethod.GET)
+    public ResponseEntity <Registro> findEmail (@RequestParam(value = "value") String email) {
+      Registro obj = registroService.findByEmailSendEmailHtml(email);  
       return ResponseEntity.ok().body(obj);
     }
 // inserir registro

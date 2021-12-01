@@ -173,7 +173,7 @@ protected String htmlFromTemplatesendNewPasswordHtmlEmail(Registro obj, String n
 		sm.setFrom(sender);
 		sm.setSubject("Bem vindo(a) ao BelaRosa");
 		sm.setSentDate(new Date(System.currentTimeMillis()));
-		sm.setText("Seu cadastro foi feito com sucessso !, acesse nosso site e confira as novidades");
+		sm.setText("Seu cadastro foi feito com sucessso. ");
 		return sm;
 	}
 //email html
@@ -190,7 +190,7 @@ protected String htmlFromTemplatesendNewPasswordHtmlEmail(Registro obj, String n
 		sendHtmlEmail(mm);
 	}
 	catch (MessagingException e) {
-		prepareNoticationChangerRegistro(obj);
+		preparenewAccount(obj);
 		}
 	}
 
@@ -199,7 +199,7 @@ protected String htmlFromTemplatesendNewPasswordHtmlEmail(Registro obj, String n
 	MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);
 	mmh.setTo(obj.getEmail());
 	mmh.setFrom(sender);
-	mmh.setSubject("sr(a) " + obj.getCliente().getName() + "Seus dados foram atualizados.");
+	mmh.setSubject("sr(a) " + obj.getCliente().getName() + "Bem vindo(a) ao BelaRosa");
 	mmh.setSentDate(new Date(System.currentTimeMillis()));
 	mmh.setText(htmlFromTemplatenewAccountHtml(obj), true);
 	return mimeMessage;
