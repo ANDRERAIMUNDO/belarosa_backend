@@ -181,7 +181,7 @@ public class ClienteService {
 		
 		String fileName = prefix + user.getId() + ".png";
 		
-		return s3Service.uploadFile(imagesService.getInputStream(pngImage, "jpg"), fileName, "image");
+		return s3Service.uploadFile(imagesService.getInputStream(pngImage, "png"), fileName, "image");
     }
 }
 
