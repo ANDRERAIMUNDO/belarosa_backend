@@ -39,7 +39,7 @@ public class PedidoResource {
 //get pedido por paginas
     @RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<Pedido>> findPage(
-          //  @RequestParam(value="name", defaultValue = "")String name,
+            @RequestParam(value="name", defaultValue = "")String name,
 			@RequestParam(value="page", defaultValue = "0")Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue = "24")Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue = "instante")String orderBy, 

@@ -29,7 +29,6 @@ public class EnderecoService {
         return enderecoRepository.save(newObj);
     
     }
-
     public Endereco fromDTO (EnderecoDTO objDto) {
         return new Endereco(null, objDto.getCep(), objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getLocalidade(), objDto.getUf(), null, null);
     }

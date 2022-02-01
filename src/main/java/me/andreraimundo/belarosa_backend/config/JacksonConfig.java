@@ -9,6 +9,8 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoCartao;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
+import me.andreraimundo.belarosa_backend.domain.PagamentoPix;
+import me.andreraimundo.belarosa_backend.domain.ReservaDePedido;
 
 @Configuration
 public class JacksonConfig {
@@ -20,6 +22,8 @@ public class JacksonConfig {
                 objectMapper.registerSubtypes(PagamentoBoleto.class);
                 objectMapper.registerSubtypes(PagamentoCartao.class);
                 objectMapper.registerSubtypes(PagamentoDinheiro.class);
+                objectMapper.registerSubtypes(ReservaDePedido.class);
+                objectMapper.registerSubtypes(PagamentoPix.class);
             super.configure(objectMapper);
             }
         };

@@ -64,8 +64,9 @@ public class ClienteService {
 // find
     public Cliente find (Integer id){
         UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado! .");
+        if (!user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
+        {
+            throw new AuthorizationException("Somente administrador! .");
         }
         Optional <Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(()-> new 
@@ -89,6 +90,11 @@ public class ClienteService {
     }
 // update
     public Cliente update (Cliente obj) {
+        UserSS user = UserService.authenticated();
+        if (!user.hasRole(Perfil.ADMIN) && !obj.getId().equals(user.getId()))
+        {
+            throw new AuthorizationException("Somente administrador! .");
+        }
         Cliente newObj = find(obj.getId());
             updateData(newObj, obj);
             return clienteRepository.save(newObj);
@@ -102,7 +108,7 @@ public class ClienteService {
             throw new DataIntegrityException ("Não é possivel excluir cliente associado a um pedido");
         }
     }
-
+//findAllCliente    
     public List <Cliente> findAll () {
         return clienteRepository.findAll();
     }
@@ -168,7 +174,7 @@ public class ClienteService {
     private void updateData (Cliente newObj, Cliente obj) {
         newObj.setPhone(obj.getPhone());
     }
-    //enviar imagem para o buckt aws s3
+//enviar imagem para o buckt aws s3
         public URI uploadCliente(MultipartFile multipartFile) {
 		UserSS user = UserService.authenticated();
 		if (user == null) {

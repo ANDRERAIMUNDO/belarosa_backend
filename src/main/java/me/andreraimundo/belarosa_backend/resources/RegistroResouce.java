@@ -44,18 +44,19 @@ public class RegistroResouce {
       Registro obj = registroService.findByEmail(email);  
       return ResponseEntity.ok().body(obj);
     }
-//findByEmailSendEmailHtmlUpdateDates
-    @RequestMapping(value = "/emailsendemailupdatedates", method = RequestMethod.GET)
-    public ResponseEntity <Registro> findEmailUpdateDates (@RequestParam(value = "value") String email) {
-      Registro obj = registroService.findByEmailSendEmailHtmlUpdateDates(email);  
+
+//enviar email nova conta
+    @RequestMapping(value = "/send_email_new_account", method = RequestMethod.GET)
+    public ResponseEntity <Registro> emailNewAccount (@RequestParam(value = "value") String email) {
+      Registro obj = registroService.emailNewAccount(email);  
       return ResponseEntity.ok().body(obj);
     }
-//findByEmailSendEmailHtml
-    @RequestMapping(value = "/emailsendemail", method = RequestMethod.GET)
-    public ResponseEntity <Registro> findEmail (@RequestParam(value = "value") String email) {
-      Registro obj = registroService.findByEmailSendEmailHtml(email);  
-      return ResponseEntity.ok().body(obj);
-    }
+//enviar email atulizacao de registro
+@RequestMapping(value = "/send_email_update", method = RequestMethod.GET)
+public ResponseEntity <Registro> emailUpdateAccount (@RequestParam(value = "value") String email) {
+  Registro obj = registroService.emailUpdateAccount(email);  
+  return ResponseEntity.ok().body(obj);
+}
 // inserir registro
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity <Void> insert ( @Valid @RequestBody NewRegistroDTO objDto) {
@@ -65,7 +66,7 @@ public class RegistroResouce {
       .path("/{id}").buildAndExpand(obj.getId()).toUri();
       return ResponseEntity.created(uri).build();
     }
-//atualizando registro sem retorno
+//atualizando email
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity <Void> update (@Valid @RequestBody RegistroDTO objDto, @PathVariable Integer id) {
       Registro obj = registroService.fromDTOO(objDto);

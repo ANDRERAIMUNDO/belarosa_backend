@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Bela Rosa </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <img src="https://thumbs2.imgbox.com/77/05/7jtneUmg_t.png" style="width:400px;height:160px;">
+		<br>
+        <h5> Sr(a) <span th:text="${pixPayment.registro.cliente.name}"> </span> recebemos seu pedido.  </h5>
+        <p> Você socilitou um pagamento via PIX. </p>
+		<h5> Está chave tem validade de 24 horas, apos a data, seu pedido sera cancelado.</h5>
+        <br>
+        <img src= "${'data:image/jpeg;base64,' + qr_code_base64}"/>
+        <br>
+        <br>
+        <h5>Escanei o QRCode ou copie o codigo de pagamneto</h5>
+        <p> "${qr_code}" </p>
+        <br>
+		<br>
+		<p> Valor total: <span th:text="${#numbers.formatDecimal(pixPayment.pixTransactionDetails.total_paid_amount, 0, 'POINT', 2, 'COMMA')}"></span></p>
+		<br>
+        <a>@BelaRosa 2022 - todos os direitos reservados </a>
+</body>
+</html>

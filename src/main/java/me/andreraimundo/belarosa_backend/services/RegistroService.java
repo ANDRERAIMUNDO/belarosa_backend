@@ -39,8 +39,9 @@ public class RegistroService {
 //busca por id 
     public Registro find (Integer id){
         UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado! .");
+        if (!user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
+        {
+            throw new AuthorizationException("Somente administrador! .");
         }
         Optional <Registro> obj = registroRepository.findById(id);
         return obj.orElseThrow(()-> new 
@@ -56,25 +57,32 @@ public class RegistroService {
         }
         obj.setId(null);
         obj = registroRepository.save(obj);
-     //   emailService.newAccountHtml(obj);
         return obj;
     }
-//atualizar registro    
+//atualizar email
     public Registro update (Registro obj) {
+        UserSS user = UserService.authenticated();
+        if (!user.hasRole(Perfil.ADMIN) && !obj.getId().equals(user.getId()))
+        {
+            throw new AuthorizationException("Somente administrador! .");
+        }
         Registro newObj = find(obj.getId());
         Registro aux = registroRepository.findByEmail(obj.getEmail());
         if (aux != null) {
             throw new DataIntegrityException("Email já existe! ");
         }        
         updateDataEmail(newObj, obj);
-        emailService.sendNoticationChangerHtmlRegistro(obj);
         return registroRepository.save(newObj);
 }
 //atualizar senha
     public Registro updatePassword (Registro obj) {
+        UserSS user = UserService.authenticated();
+        if (!user.hasRole(Perfil.ADMIN) && !obj.getId().equals(user.getId()))
+        {
+            throw new AuthorizationException("Somente administrador! .");
+        }
         Registro newObj = find (obj.getId());
         updateDataPassword(newObj, obj);
-       // emailService.sendNoticationChangerHtmlRegistro(obj);
         return registroRepository.save(newObj);
     }
 //deleta senha
@@ -99,29 +107,7 @@ public class RegistroService {
             + "Tipo: " + Registro.class.getName());
         }
         return obj;
-    }
-//busca email e enviar email de confirmacao da alteração de dados
-public Registro findByEmailSendEmailHtmlUpdateDates (String email) {
-    Registro obj = registroRepository.findByEmail(email);
-
-    if (obj == null) {
-        throw new ObjectNotFoundException("Email não encontrado! "
-        + "Tipo: " + Registro.class.getName());
-    }
-    emailService.sendNoticationChangerHtmlRegistro(obj);
-    return obj;
-}   
-//busca email e enviar email de confirmacao
-    public Registro findByEmailSendEmailHtml (String email) {
-        Registro obj = registroRepository.findByEmail(email);
-
-        if (obj == null) {
-            throw new ObjectNotFoundException("Email não encontrado! "
-            + "Tipo: " + Registro.class.getName());
-        }
-        emailService.newAccountHtml(obj);
-        return obj;
-    }   
+    } 
 //busca registro com paginas
     public Page<Registro> search(String email, Integer page, Integer linesPerPages, String orderBy, String direction) {
 		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
@@ -139,7 +125,6 @@ public Registro findByEmailSendEmailHtmlUpdateDates (String email) {
 // registro dto atualização de senha
     public Registro fromDTO (UpdatePassowordDTO objDto) {
         return new Registro(objDto.getId(), null, pe.encode(objDto.getPassword()));
-      // return new Registro(null, null, pe.encode(objDto.getPassword()));
     }
 // registro dto novo registro
     public Registro fromDTO (NewRegistroDTO objDto) {
@@ -158,6 +143,39 @@ public Registro findByEmailSendEmailHtmlUpdateDates (String email) {
 // void atualização senha
     private void updateDataPassword (Registro newObj, Registro obj) {
         newObj.setPassword(obj.getPassword());
+    }
+
+    //enviar email nova conta
+    public Registro emailNewAccount (String email) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado! .");
+        }
+        
+        Registro obj = registroRepository.findByEmail(email);
+
+        if (obj == null) {
+            throw new ObjectNotFoundException("Email não encontrado! "
+            + "Tipo: " + Registro.class.getName());
+        }
+        emailService.newAccountHtml(obj);
+        return obj;
+    }
+    //enviar email atulizacao de registro
+    public Registro emailUpdateAccount (String email) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado! .");
+        }
+        
+        Registro obj = registroRepository.findByEmail(email);
+
+        if (obj == null) {
+            throw new ObjectNotFoundException("Email não encontrado! "
+            + "Tipo: " + Registro.class.getName());
+        }
+        emailService.sendNoticationChangerHtmlRegistro(obj);
+        return obj;
     }
 }
 

@@ -21,7 +21,16 @@ import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
 import me.andreraimundo.belarosa_backend.domain.Produto;
 import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.domain.ReservaDePedido;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PayerUser;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PixApplicationData;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PixPayment;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PixPointOfInteraction;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PixTransactionData;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PixTransactionDetails;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.ProcessPayment;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.StatusPayment;
 import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.repositories.CategoriaRepository;
 import me.andreraimundo.belarosa_backend.repositories.ClienteRepository;
@@ -29,9 +38,17 @@ import me.andreraimundo.belarosa_backend.repositories.DescricaoRepository;
 import me.andreraimundo.belarosa_backend.repositories.EnderecoRepository;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.PayerUserRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.PixApplicationDataRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.PixPaymentRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.PixPointOfInteractionRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.PixTransactionDataRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.PixTransactionDetailsRepository;
 import me.andreraimundo.belarosa_backend.repositories.PedidoRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.ProcessPaymentRepository;
 import me.andreraimundo.belarosa_backend.repositories.ProdutoRepository;
 import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
+import me.andreraimundo.belarosa_backend.repositories.mercadopago.StatusPaymentRepository;
 
 @Service
 public class DBInitialService {
@@ -54,7 +71,23 @@ public class DBInitialService {
 	PedidoRepository pedidoRepository;
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+	ProcessPaymentRepository processPaymentRepository;
+	@Autowired
+    private StatusPaymentRepository statusPaymentRepository;
+	@Autowired
+	private PixApplicationDataRepository pixApplicationDataRepository;
+	@Autowired
+	private PixPaymentRepository  pixPaymentRepository;
+	@Autowired
+	private PixPointOfInteractionRepository pixPointOfInteractionRepository;
+	@Autowired
+	private PixTransactionDataRepository pixTransactionDataRepository;
+	@Autowired
+	private PixTransactionDetailsRepository pixTransactionDetailsRepository;
 
+	@Autowired
+	PayerUserRepository payerRepository;
 	@Autowired
     private BCryptPasswordEncoder pe;
 
@@ -127,7 +160,7 @@ public class DBInitialService {
 		Produto prod25 = new Produto(null, "Produto 20", 99.99);
 		Produto prod26 = new Produto(null, "Produto 21", 99.99);
 		Produto prod27 = new Produto(null, "Fantazia Noturna Dracula", 129.90);
-		Produto prod28 = new Produto(null, "Rabo de gato", 9.90);
+		Produto prod28 = new Produto(null, "Rabo de gato", 10.00);
 		Produto prod29 = new Produto(null, "Tapa olho do pirata", 7.00);
 		Produto prod30 = new Produto(null, "Oculos bifocal dia", 90.00);
 
@@ -234,62 +267,70 @@ public class DBInitialService {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8,prod9, prod10, prod11, prod12, prod13, prod14, prod15, prod16, prod17, prod18, prod19, prod20, prod21, prod22, prod23,prod24, prod25, prod26,prod27,prod28, prod29, prod30));
 		
-		Registro reg1 = new Registro(null, "9000andre@gmail.com", pe.encode("1402"));
+		Registro reg1 = new Registro (null, "9000andre@gmail.com", pe.encode("1402"));
 		reg1.addPerfil(Perfil.ADMIN); 
-		Registro reg2 = new Registro(null, "andrefake@gmail.com", pe.encode("1402"));
+		Registro reg2 = new Registro (null, "andrefake@gmail.com", pe.encode("1402"));
 		Registro reg3 = new Registro (null, "gizelamgro@gmail.com", pe.encode("1402"));
 		reg3.addPerfil(Perfil.ADMIN);
-		Registro reg4 = new Registro(null, "robertolcm92@gmail.com", pe.encode("1402"));
+		Registro reg4 = new Registro (null, "robertolcm92@gmail.com", pe.encode("1402"));
 		reg4.addPerfil(Perfil.ADMIN);
-		Registro reg5 = new Registro(null, "terezinhajro@gmail.com", pe.encode("1402"));
+		Registro reg5 = new Registro (null, "terezinhajro@gmail.com", pe.encode("1402"));
 		reg5.addPerfil(Perfil.ADMIN);
-
+		Registro reg6 = new Registro (null, "test_user_3815517@testuser.com", pe.encode("qatest2132"));
+		Registro reg7 = new Registro (null, "andreraimundoo@hotmail.com", pe.encode("1402"));
+		
 		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "86773894077", "24061993", "91984001327");
 		Cliente cl2 = new Cliente(reg2, null, "Andre Fake User", "63079207009", "30111991", "91987567180");
 		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena Fake User", "29167241093", "10031991", "91999001422");
 		Cliente cl4 = new Cliente(reg4, null, "Gizela Rodrigues de Oliveira", "01011990","82640149253", "91999132862");
 		Cliente cl5 = new Cliente(reg5, null, "Roberto Luiz Cabral Moraes", "63079207009", "13122009", "91988646337");
+		Cliente cl6 = new Cliente(reg6, null, "TESTYPLFCXOQ", "11111111111", "30/11/1998", "91987654472");
+		Cliente cl7 = new Cliente(reg7, null, "Andre Raimundoo Oliveira", "22501422031", "30/11/1998", "91987654472");
 
-		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4, reg5));
-		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4, cl5));
+		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4, reg5, reg6, reg7));
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4, cl5, cl6, cl7));
 
 		Endereco end1 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg1, cl1);
 		Endereco end2 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg2, cl2);
 		Endereco end3 = new Endereco(null, "68655000", "Rua Bom Sossego", "34", "centro","Vila Nova", "Irituia", "PA",reg3, cl3);
-		Endereco end4 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro","Vila Nova", "Irituia", "PA",reg4, cl5);
+		Endereco end4 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro","Vila Nova", "Irituia", "PA",reg4, cl4);
 		Endereco end5 = new Endereco(null, "68655000", "Rua Coronel Jose Vieira", "38", "centro", "Vila Nova", "Irituia", "PA",reg5, cl5);
+		Endereco end6 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg6, cl6);
+		Endereco end7 = new Endereco(null, "68655000", "Rua Coronel Joao Cancio","20", "Comercio", "Centro", "Irituia", "PA",reg7, cl7);
 
 		cl1.getEnderecos().addAll(Arrays.asList(end1));
 		cl2.getEnderecos().addAll(Arrays.asList(end2));
 		cl3.getEnderecos().addAll(Arrays.asList(end3));	
 		cl4.getEnderecos().addAll(Arrays.asList(end4));
 		cl5.getEnderecos().addAll(Arrays.asList(end5));		
+		cl6.getEnderecos().addAll(Arrays.asList(end6));
+		cl7.getEnderecos().addAll(Arrays.asList(end7));		
 
-		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5));
+		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5, end6, end7));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 
-		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg2, cl2, end2);
-		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg2, cl2, end2);
-		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg2, cl2, end2);
-		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg2, cl2, end2);
-		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg2, cl2, end2);
-		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg2, cl2, end2);
-		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg2, cl2, end2);
-		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg2, cl2, end2);
-		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg2, cl2, end2);
-		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg2, cl2, end2);
-		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg2, cl2, end2);
-		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg2, cl2, end2);
-		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg2, cl2, end2);
-		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg2, cl2, end2);
-		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg2, cl2, end2);
+		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg7, cl7, end7);
+		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg7, cl7, end7);
+		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg7, cl7, end7);
+		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg7, cl7, end7);
+		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg7, cl7, end7);
+		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg7, cl7, end7);
+		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg7, cl7, end7);
+		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg7, cl7, end7);
+		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg7, cl7, end7);
+		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg7, cl7, end7);
+		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg7, cl7, end7);
+		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg7, cl7, end7);
+		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg7, cl7, end7);
+		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg7, cl7, end7);
+		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg7, cl7, end7);
 		
 		Pagamento pgt1 = new PagamentoCartao(null, SituacaoPedido.PENDENTE, pedido1, 10);
 		pedido1.setPagamento(pgt1);
 		Pagamento pgt2 = new PagamentoBoleto(null, SituacaoPedido.PENDENTE, pedido2, sdf.parse("10/04/2021 23:59"), null);
 		pedido2.setPagamento(pgt2);
-		Pagamento pgt3 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido3, sdf.parse("21/03/2021 20:00"));
+		Pagamento pgt3 = new ReservaDePedido (null, SituacaoPedido.QUITADO, pedido3, sdf.parse("21/03/2021 20:00"), "Retirar na loja");
 		pedido3.setPagamento(pgt3);
 		Pagamento pgt4 = new PagamentoCartao(null, SituacaoPedido.QUITADO, pedido4, 4);
 		pedido4.setPagamento(pgt4);
@@ -370,5 +411,33 @@ public class DBInitialService {
 		prod15.getItens().addAll(Arrays.asList(itemPedido15));
 
 		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4, itemPedido5, itemPedido6, itemPedido7, itemPedido8, itemPedido9, itemPedido10, itemPedido11, itemPedido12, itemPedido13, itemPedido14, itemPedido15));
-    }
-}
+
+		ProcessPayment pp1 = new ProcessPayment(null, 19.90, "ae806f1f4ede27b833a843805a375b81", "pagamento com cartao master", 4, "master", 24);
+		processPaymentRepository.saveAll(Arrays.asList(pp1));
+
+		PayerUser pay1 = new PayerUser(null, "test_user_3815517@testuser.com", pp1);
+		pp1.getPayers().addAll(Arrays.asList(pay1));
+
+		payerRepository.saveAll(Arrays.asList(pay1));
+
+		StatusPayment stp1 = new StatusPayment(reg6, pp1, null, "1212122", "aproved", "payment aproved", "master", "credit card", sdf.parse(("23/03/2022 22:00")));
+
+		statusPaymentRepository.saveAll(Arrays.asList(stp1));
+
+		PixPayment pxp1 = new PixPayment(reg6, null, "5466317", "pending", "pending_waiting_transfer");
+
+		PixTransactionDetails ptdl1 = new PixTransactionDetails(null, 0.0, 10.00, 0.0, "linkpix", 2.0, "mp", pxp1);
+		PixPointOfInteraction ppi1 = new PixPointOfInteraction(null, "PIX", null, pxp1);
+
+		pixPaymentRepository.saveAll(Arrays.asList(pxp1));
+		pixTransactionDetailsRepository.saveAll(Arrays.asList(ptdl1));
+		pixPointOfInteractionRepository.saveAll(Arrays.asList(ppi1));
+
+		PixApplicationData pad1 = new PixApplicationData(null, "VERSION_NUMBER", "NAME_SDK", ppi1);
+	
+		PixTransactionData ptd1  = new PixTransactionData(null, "iVBORw0KGgoAAAANSUhEUgAABRQAAAUUCAYAAACu5p7oAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAIABJREFUeJzs2luO3LiWQNFmI+Y/Zd6vRt36KGNXi7ZOBtcagHD4kNLeiLX33v8DAAAAABD879sDAAAAAAA/h6AIAAAAAGSCIgAAAACQCYoAAAAAQCYoAgAAAACZoAgAAAAAZIIiAAAAAJAJigAAAABAJigCAAAAAJmgCAAAAABkgiIAAAAAkAmKAAAAAEAmKAIAAAAAmaAIAAAAAGSCIgAAAACQCYoAAAAAQCYoAgAAAACZoAgAAAAAZIIiAAAAAJAJigAAAABAJigCA", "00020126600014br.gov.bcb.pix0117john@yourdomain.com0217additionaldata520400005303986540510.005802BR5913MariaSilva6008Brasilia62070503***6304E2CA", ppi1);
+		
+		pixApplicationDataRepository.saveAll(Arrays.asList(pad1));
+		pixTransactionDataRepository.saveAll(Arrays.asList(ptd1));
+	}
+ }

@@ -15,6 +15,7 @@ import org.thymeleaf.context.Context;
 
 import me.andreraimundo.belarosa_backend.domain.Pedido;
 import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.dto.mercadopago.PixPayment;
 
 public abstract class AbstractEmailService implements EmailService {
 
@@ -203,6 +204,50 @@ protected String htmlFromTemplatesendNewPasswordHtmlEmail(Registro obj, String n
 	mmh.setSentDate(new Date(System.currentTimeMillis()));
 	mmh.setText(htmlFromTemplatenewAccountHtml(obj), true);
 	return mimeMessage;
+	}
+//pix simple email
+    @Override
+    public void sendPixCode (PixPayment px) {
+        SimpleMailMessage sm =  SimpleMailMessageFromPixPayment(px);
+        sendEmail(sm);     
+    }
+
+	protected  SimpleMailMessage SimpleMailMessageFromPixPayment(PixPayment px) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(px.getRegistro().getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Solicitação de email");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Sr(a) " + px.getRegistro().getCliente().getName() + ", " + "Você solicitou email com codigo de pagamento.");
+		return sm;
+	}
+//pix html email
+	protected String htmlFromTemplatePixPayment(PixPayment px) {
+		Context context = new Context();
+		context.setVariable("pixPayment", px);
+		return templateEngine.process("chavePix", context);
+	}
+
+	protected MimeMessage prepareMimeMessageFromPixPayment(PixPayment px) throws MessagingException {
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);
+		mmh.setTo(px.getRegistro().getEmail());
+		mmh.setFrom(sender);
+		mmh.setSubject("sr(a) " + px.getRegistro().getCliente().getName() + ", " + " Enviamos sua solicitação de pagamento");
+		mmh.setSentDate(new Date(System.currentTimeMillis()));
+		mmh.setText(htmlFromTemplatePixPayment(px), true);
+		return mimeMessage;
+		}
+
+	@Override
+	public void sendPixCodeHtml (PixPayment px) {
+	try {
+		MimeMessage mm = prepareMimeMessageFromPixPayment(px);
+		sendHtmlEmail(mm);
+	}
+	catch (MessagingException e) {
+		SimpleMailMessageFromPixPayment(px);
+		}
 	}
 
 }   

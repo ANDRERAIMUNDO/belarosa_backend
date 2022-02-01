@@ -13,8 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import me.andreraimundo.belarosa_backend.domain.ItemPedido;
 import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
+import me.andreraimundo.belarosa_backend.domain.PagamentoPix;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
 import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.domain.ReservaDePedido;
+import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
@@ -52,15 +55,19 @@ public class PedidoService {
     DinheiroService dinheiroService;
 
     @Autowired
+    ReservaDePedidoService reservaDePedidoService;
+
+    @Autowired
+    PagamentoPixService pagamentoPixService;
+
+    @Autowired
     EmailService emailService;
 //find pedido
     public Pedido find (Integer id) {
         UserSS user = UserService.authenticated();
-        //if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-            //throw new AuthorizationException("Acesso negado! .");
-        //}
-        if (user == null) {
-            throw new AuthorizationException("Acesso negado! ");
+        if (!user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
+        {
+            throw new AuthorizationException("Somente administrador! .");
         }
         Optional <Pedido> obj = pedidoRepository.findById(id);
         return obj.orElseThrow(()-> new 
@@ -74,7 +81,7 @@ public class PedidoService {
         obj.setInstante(new Date());
         obj.setRegistro(registroService.find(obj.getRegistro().getId()));
         obj.setCliente(clienteService.find(obj.getCliente().getId()));
-        obj.getPagamento().setSituacaoPedido(SituacaoPedido.PENDENTE);
+        obj.getPagamento().setSituacaoPedido(SituacaoPedido.QUITADO);
         obj.getPagamento().setPedido(obj);
 
         if (obj.getPagamento() instanceof PagamentoBoleto) {
@@ -86,6 +93,16 @@ public class PedidoService {
             dinheiroService.pagamentoAvista(pagamentoDinheiro, obj.getInstante());
             obj.getPagamento().setSituacaoPedido(SituacaoPedido.QUITADO);
         }
+        if (obj.getPagamento() instanceof ReservaDePedido) {
+            ReservaDePedido reservaDePedido = (ReservaDePedido) obj.getPagamento();
+            reservaDePedidoService.reservaDePedido(reservaDePedido, obj.getInstante());
+            obj.getPagamento().setSituacaoPedido(SituacaoPedido.PENDENTE);
+        }
+        if (obj.getPagamento() instanceof PagamentoPix) {
+            PagamentoPix pagamentoPix = (PagamentoPix) obj.getPagamento();
+            pagamentoPixService.pagamentoPix(pagamentoPix, obj.getInstante());
+            obj.getPagamento().setSituacaoPedido(SituacaoPedido.PENDENTE);
+        }
         obj = pedidoRepository.save(obj);
         pagamentoRepository.save(obj.getPagamento());
         for (ItemPedido itemPedido : obj.getItens()) {
@@ -95,7 +112,7 @@ public class PedidoService {
             itemPedido.setPedido(obj);
         }   
         itemPedidoRepository.saveAll(obj.getItens());
-         emailService.sendOrderConfirmationHtmlPedido(obj);//alterando em 18 de agosto de 2021
+         //emailService.sendOrderConfirmationHtmlPedido(obj);//alterando em 18 de agosto de 2021
         
         return obj;
     }
@@ -111,3 +128,5 @@ public class PedidoService {
 	}
 
 }
+
+///implementar put pedido
