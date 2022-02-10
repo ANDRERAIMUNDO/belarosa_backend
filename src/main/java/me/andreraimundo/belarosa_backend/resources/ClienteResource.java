@@ -21,6 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.dto.ClienteDTO;
 import me.andreraimundo.belarosa_backend.dto.NewClienteDTO;
+import me.andreraimundo.belarosa_backend.dto.PageClienteDTO;
+import me.andreraimundo.belarosa_backend.resources.utils.URL;
 import me.andreraimundo.belarosa_backend.services.ClienteService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -78,18 +80,18 @@ public class ClienteResource {
       .collect(Collectors.toList());
       return ResponseEntity.ok().body(listDto);
     }
-//get cliente por paginas somente admn
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public ResponseEntity<Page<ClienteDTO>> findPage(
-        @RequestParam(value="page", defaultValue = "0")Integer page, 
-        @RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPages, 
-        @RequestParam(value="orderBy", defaultValue = "nome")String orderBy, 
-        @RequestParam(value="direction", defaultValue = "ASC")String direction) {
-      Page <Cliente> list = clienteService.findPage(page, linesPerPages, orderBy, direction);
-      Page<ClienteDTO>listDto = list.map(obj -> new ClienteDTO(obj));
-      return ResponseEntity.ok().body(listDto);
-    }
+//findPage
+   // @PreAuthorize("hasRole('ADMIN')")
+     @RequestMapping(value = "/page", method = RequestMethod.GET)
+     public ResponseEntity<Page<PageClienteDTO>> findPage(
+            @RequestParam(value="name", defaultValue = "")String name,
+            @RequestParam(value="page", defaultValue = "0")Integer page, 
+            @RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPages) {
+          String nomeDecoded = URL.decodeParam(name);
+          Page <Cliente> list = clienteService.findPage(nomeDecoded, page, linesPerPages);
+          Page<PageClienteDTO>listDto = list.map(obj -> new PageClienteDTO(obj));
+          return ResponseEntity.ok().body(listDto);
+      }
 
 //post imagem 
   	@RequestMapping(value="/imageprofile", method=RequestMethod.POST)

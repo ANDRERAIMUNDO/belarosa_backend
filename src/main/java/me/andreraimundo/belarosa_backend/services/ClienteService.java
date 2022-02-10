@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,10 +131,10 @@ public class ClienteService {
         return obj;
     }
 //findPage
-    public Page<Cliente> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
-		PageRequest pageResquest = PageRequest.of(page, linesPerPages,Direction.valueOf(direction), orderBy);
-		return clienteRepository.findAll(pageResquest);
-	}
+    public Page<Cliente> findPage (String name, Integer page, Integer linesPerPages) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPages);
+        return clienteRepository.findByFirstNameIgnoreCase (name, pageRequest);
+    } 
 
     public Cliente fromDTO (ClienteDTO objDto) {
         return new Cliente(null, null, null, null, null, objDto.getPhone());
