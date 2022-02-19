@@ -81,7 +81,7 @@ public class ClienteResource {
       return ResponseEntity.ok().body(listDto);
     }
 //findPage
-   // @PreAuthorize("hasRole('ADMIN')")
+     //@PreAuthorize("hasRole('ADMIN')")
      @RequestMapping(value = "/page", method = RequestMethod.GET)
      public ResponseEntity<Page<PageClienteDTO>> findPage(
             @RequestParam(value="name", defaultValue = "")String name,

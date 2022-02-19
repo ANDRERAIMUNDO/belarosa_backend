@@ -281,9 +281,9 @@ public class DBInitialService {
 		
 		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "86773894077", "24061993", "91984001327");
 		Cliente cl2 = new Cliente(reg2, null, "Andre Fake User", "63079207009", "30111991", "91987567180");
-		Cliente cl3 = new Cliente(reg3, null, "Pamela Lorena Fake User", "29167241093", "10031991", "91999001422");
-		Cliente cl4 = new Cliente(reg4, null, "Gizela Rodrigues de Oliveira", "01011990","82640149253", "91999132862");
-		Cliente cl5 = new Cliente(reg5, null, "Roberto Luiz Cabral Moraes", "63079207009", "13122009", "91988646337");
+		Cliente cl3 = new Cliente(reg3, null, "Gisela Rodrigues de Oliveira", "29167241093", "10031991", "91999001422");
+		Cliente cl4 = new Cliente(reg4, null, "Roberto Luiz Cabral Moraes", "01011990","82640149253", "91999132862");
+		Cliente cl5 = new Cliente(reg5, null, "Terezinha de Oliveira", "63079207009", "13122009", "91988646337");
 		Cliente cl6 = new Cliente(reg6, null, "TESTYPLFCXOQ", "11111111111", "30/11/1998", "91987654472");
 		Cliente cl7 = new Cliente(reg7, null, "Andre Raimundoo Oliveira", "22501422031", "30/11/1998", "91987654472");
 
@@ -415,16 +415,16 @@ public class DBInitialService {
 		ProcessPayment pp1 = new ProcessPayment(null, 19.90, "ae806f1f4ede27b833a843805a375b81", "pagamento com cartao master", 4, "master", 24);
 		processPaymentRepository.saveAll(Arrays.asList(pp1));
 
-		PayerUser pay1 = new PayerUser(null, "test_user_3815517@testuser.com", pp1);
+		PayerUser pay1 = new PayerUser(null, "andreraimundoo@hotmail.com", pp1);
 		pp1.getPayers().addAll(Arrays.asList(pay1));
 
 		payerRepository.saveAll(Arrays.asList(pay1));
 
-		StatusPayment stp1 = new StatusPayment(reg6, pp1, null, "1212122", "aproved", "payment aproved", "master", "credit card", sdf.parse(("23/03/2022 22:00")));
+		StatusPayment stp1 = new StatusPayment(reg7, pp1, null, "1212122", "aproved", "payment aproved", "master", "credit card", sdf.parse(("23/03/2022 22:00")));
 
 		statusPaymentRepository.saveAll(Arrays.asList(stp1));
 
-		PixPayment pxp1 = new PixPayment(reg6, null, "5466317", "pending", "pending_waiting_transfer");
+		PixPayment pxp1 = new PixPayment(reg7, null, "5466317", "pending", "pending_waiting_transfer");
 
 		PixTransactionDetails ptdl1 = new PixTransactionDetails(null, 0.0, 10.00, 0.0, "linkpix", 2.0, "mp", pxp1);
 		PixPointOfInteraction ppi1 = new PixPointOfInteraction(null, "PIX", null, pxp1);

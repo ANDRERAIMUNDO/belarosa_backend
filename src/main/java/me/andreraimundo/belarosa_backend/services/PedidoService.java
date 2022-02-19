@@ -65,7 +65,7 @@ public class PedidoService {
 //find pedido
     public Pedido find (Integer id) {
         UserSS user = UserService.authenticated();
-        if (!user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
+        if (!user.hasRole(Perfil.ADMIN))//alterado em 13-02-2022
         {
             throw new AuthorizationException("Somente administrador! .");
         }
@@ -117,16 +117,20 @@ public class PedidoService {
         return obj;
     }
 //find page pedido
-    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+    public Page<Pedido> findPage(Integer page, Integer linesPerPages, String orderBy, String direction) {
         UserSS user = UserService.authenticated();
-        if (user == null) {
-            throw new AuthorizationException("Acesso negado! ");
+        if( user == null){
+            throw new AuthorizationException("Acesso negado");
         }
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        PageRequest pageRequest = PageRequest.of(page, linesPerPages, Direction.valueOf(direction), orderBy);
 		Registro registro =  registroService.find(user.getId());
-		return pedidoRepository.findByRegistro(registro, pageRequest);
+		return pedidoRepository.findByRegistro(registro, pageRequest);    
 	}
-
+//pesquisar pedidos de cliente id
+    public Page<Pedido> findByPedidoId (String name, Integer page, Integer linesPerPages) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPages);
+        return pedidoRepository.findByPedidoId(name, pageRequest);
+    } 
 }
 
 ///implementar put pedido
