@@ -17,6 +17,6 @@ public interface PedidoRepository extends JpaRepository <Pedido, Integer> {
 	Page<Pedido> findByRegistro(Registro registro, Pageable pageRequest);
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT * FROM pedido WHERE registro_id LIKE %:name%", nativeQuery = true)
-    Page <Pedido> findByPedidoId(@Param("name") String name, Pageable pageRequest);
+    @Query(value = "SELECT * FROM pedido WHERE pedido.registro_id LIKE %:id%", nativeQuery = true)
+    Page <Pedido> findByPedidoId(@Param("id") String id, Pageable pageRequest);
 }

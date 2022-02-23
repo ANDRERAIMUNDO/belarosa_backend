@@ -54,11 +54,11 @@ public class PedidoResource {
   @PreAuthorize("hasRole('ADMIN')")
   @RequestMapping(value = "/id", method = RequestMethod.GET)
   public ResponseEntity<Page<PedidoDTO>> findPage(
-         @RequestParam(value="name", defaultValue = "")String name,
+         @RequestParam(value="id", defaultValue = "")String id,
          @RequestParam(value="page", defaultValue = "0")Integer page, 
          @RequestParam(value="linesPerPages", defaultValue = "24")Integer linesPerPages) {
-       String nomeDecoded = URL.decodeParam(name);
-       Page <Pedido> list = pedidoService.findByPedidoId(nomeDecoded, page, linesPerPages);
+       //String nomeDecoded = URL.decodeParam(id);
+       Page <Pedido> list = pedidoService.findByPedidoId(id, page, linesPerPages);
        Page<PedidoDTO>listDto = list.map(obj -> new PedidoDTO(obj));
        return ResponseEntity.ok().body(listDto);
    }

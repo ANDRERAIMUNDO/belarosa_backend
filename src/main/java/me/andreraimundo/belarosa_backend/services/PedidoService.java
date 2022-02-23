@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.yaml.snakeyaml.events.Event.ID;
 
 import me.andreraimundo.belarosa_backend.domain.ItemPedido;
 import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
@@ -126,11 +127,11 @@ public class PedidoService {
 		Registro registro =  registroService.find(user.getId());
 		return pedidoRepository.findByRegistro(registro, pageRequest);    
 	}
-//pesquisar pedidos de cliente id
-    public Page<Pedido> findByPedidoId (String name, Integer page, Integer linesPerPages) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPages);
-        return pedidoRepository.findByPedidoId(name, pageRequest);
-    } 
+ //pesquisar pedidos de cliente id
+    public Page<Pedido> findByPedidoId (String id, Integer page, Integer linesPerPages) {
+    PageRequest pageRequest = PageRequest.of(page, linesPerPages);
+    return pedidoRepository.findByPedidoId(id, pageRequest);
+} 
 }
 
 ///implementar put pedido
