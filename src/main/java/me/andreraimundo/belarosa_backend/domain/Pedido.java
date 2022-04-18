@@ -35,7 +35,7 @@ public class Pedido implements Serializable{
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
-
+    
     @ManyToOne 
     @JoinColumn(name = "registro_id")
     private Registro registro;
@@ -50,18 +50,21 @@ public class Pedido implements Serializable{
 
     @OneToMany(mappedBy = "id.pedido")
     private Set <ItemPedido> itens = new HashSet<>();
-
+    
+    private Integer statusPayment;
+    
     public Pedido() {
 
     }
 
-    public Pedido(Integer id, Date instante, Registro registro, Cliente cliente, Endereco enderecoDeEntrega) {
+    public Pedido(Integer id, Date instante, Registro registro, Cliente cliente, Endereco enderecoDeEntrega,Integer statusPayment) {
         super();
         this.id = id;
         this.instante = instante;
         this.registro= registro;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
+        this.statusPayment = statusPayment;
     }
 
     public double getValorTotal() {
@@ -126,8 +129,16 @@ public class Pedido implements Serializable{
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
-    
-    @Override
+
+	public Integer getStatusPayment() {
+		return statusPayment;
+	}
+
+	public void setStatusPayment(Integer statusPayment) {
+		this.statusPayment = statusPayment;
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

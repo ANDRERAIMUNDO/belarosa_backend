@@ -26,6 +26,7 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer situacaoPedido;
     
+    
     @JsonBackReference
     @OneToOne   
     @JoinColumn(name = "pedido_id")

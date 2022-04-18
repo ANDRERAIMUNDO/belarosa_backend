@@ -307,24 +307,24 @@ public class DBInitialService {
 		cl7.getEnderecos().addAll(Arrays.asList(end7));		
 
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5, end6, end7));
-
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
-
-		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg7, cl7, end7);
-		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg7, cl7, end7);
-		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg7, cl7, end7);
-		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg7, cl7, end7);
-		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg7, cl7, end7);
-		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg7, cl7, end7);
-		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg7, cl7, end7);
-		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg7, cl7, end7);
-		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg7, cl7, end7);
-		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg7, cl7, end7);
-		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg7, cl7, end7);
-		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg7, cl7, end7);
-		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg7, cl7, end7);
-		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg7, cl7, end7);
-		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg7, cl7, end7);
+		
+		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg7, cl7, end7, null);
+		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg7, cl7, end7, null);
+		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg7, cl7, end7, null);
+		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg7, cl7, end7, null);
+		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg7, cl7, end7, null);
+		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg7, cl7, end7, null);
+		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg7, cl7, end7, null);
+		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg7, cl7, end7, null);
+		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg7, cl7, end7, null);
+		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg7, cl7, end7, null);
+		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg7, cl7, end7, null);
+		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg7, cl7, end7, null);
+		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg7, cl7, end7, null);
+		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg7, cl7, end7, null);
+		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg6, cl6, end6, null);
 		
 		Pagamento pgt1 = new PagamentoCartao(null, SituacaoPedido.PENDENTE, pedido1, 10);
 		pedido1.setPagamento(pgt1);
@@ -356,7 +356,6 @@ public class DBInitialService {
 		pedido14.setPagamento(pgt14);
 		Pagamento pgt15 = new PagamentoDinheiro(null, SituacaoPedido.QUITADO, pedido15, sdf.parse("27/08/2021 20:00"));
 		pedido15.setPagamento(pgt15);
-		
 
 		cl2.getPedidos().addAll(Arrays.asList(pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9, pedido10, pedido11, pedido12, pedido13, pedido14, pedido15));
 
@@ -411,20 +410,21 @@ public class DBInitialService {
 		prod15.getItens().addAll(Arrays.asList(itemPedido15));
 
 		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4, itemPedido5, itemPedido6, itemPedido7, itemPedido8, itemPedido9, itemPedido10, itemPedido11, itemPedido12, itemPedido13, itemPedido14, itemPedido15));
+	
 
-		ProcessPayment pp1 = new ProcessPayment(null, 19.90, "ae806f1f4ede27b833a843805a375b81", "pagamento com cartao master", 4, "master", 24);
+		//mercado pago
+		ProcessPayment pp1 = new ProcessPayment(null, 99.99, "ae806f1f4ede27b833a843805a375b81", "pagamento com cartao master", 1, "master", 24);
 		processPaymentRepository.saveAll(Arrays.asList(pp1));
 
-		PayerUser pay1 = new PayerUser(null, "andreraimundoo@hotmail.com", pp1);
+		PayerUser pay1 = new PayerUser(null, "test_user_3815517@testuser.com", pp1);
 		pp1.getPayers().addAll(Arrays.asList(pay1));
 
 		payerRepository.saveAll(Arrays.asList(pay1));
 
-		StatusPayment stp1 = new StatusPayment(reg7, pp1, null, "1212122", "aproved", "payment aproved", "master", "credit card", sdf.parse(("23/03/2022 22:00")));
-
+		StatusPayment stp1 = new StatusPayment(reg6, pp1, null, "1212122", "aproved", "payment aproved", "master", "credit card", sdf.parse(("27/08/2021 20:00")));
 		statusPaymentRepository.saveAll(Arrays.asList(stp1));
 
-		PixPayment pxp1 = new PixPayment(reg7, null, "5466317", "pending", "pending_waiting_transfer");
+		PixPayment pxp1 = new PixPayment(reg6, null, "5466317", "pending", "pending_waiting_transfer");
 
 		PixTransactionDetails ptdl1 = new PixTransactionDetails(null, 0.0, 10.00, 0.0, "linkpix", 2.0, "mp", pxp1);
 		PixPointOfInteraction ppi1 = new PixPointOfInteraction(null, "PIX", null, pxp1);
@@ -439,5 +439,6 @@ public class DBInitialService {
 		
 		pixApplicationDataRepository.saveAll(Arrays.asList(pad1));
 		pixTransactionDataRepository.saveAll(Arrays.asList(ptd1));
+		//fim mercado pago
 	}
  }

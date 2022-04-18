@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yaml.snakeyaml.events.Event.ID;
 
+import me.andreraimundo.belarosa_backend.domain.Cliente;
+import me.andreraimundo.belarosa_backend.domain.Endereco;
 import me.andreraimundo.belarosa_backend.domain.ItemPedido;
 import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
@@ -20,9 +22,12 @@ import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.domain.ReservaDePedido;
 import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
+import me.andreraimundo.belarosa_backend.dto.ClienteDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdateStatusPaymentPedidoDTO;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PedidoRepository;
+import me.andreraimundo.belarosa_backend.repositories.RegistroRepository;
 import me.andreraimundo.belarosa_backend.security.UserSS;
 import me.andreraimundo.belarosa_backend.services.emails.EmailService;
 import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
@@ -34,6 +39,9 @@ public class PedidoService {
     @Autowired
     PedidoRepository pedidoRepository;
 
+    @Autowired
+    RegistroRepository registroRepository;
+    
     @Autowired
     BoletoService boletoService;
 
@@ -65,12 +73,16 @@ public class PedidoService {
     EmailService emailService;
 //find pedido
     public Pedido find (Integer id) {
+    	Optional <Pedido> obj = pedidoRepository.findById(id);
         UserSS user = UserService.authenticated();
-        if (!user.hasRole(Perfil.ADMIN))//alterado em 13-02-2022
-        {
-            throw new AuthorizationException("Somente administrador! .");
-        }
-        Optional <Pedido> obj = pedidoRepository.findById(id);
+    	Registro registro = registroRepository.findByEmail(user.getUsername());
+    	var registroId = registro.getId();
+    	var pedidoId = obj.get().getRegistro().getId();
+    		if (!user.hasRole(Perfil.ADMIN) && !registroId.equals(pedidoId))
+    			{
+                	throw new AuthorizationException("Pedido não pertence ao Usuario requisitado!, ou não possui privilégios necessarios.");
+    			}
+       //
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Pedido não encontrado Id: "+ id + " Tipo: "
          + Pedido.class.getName()));
@@ -117,6 +129,33 @@ public class PedidoService {
         
         return obj;
     }
+    
+    public Pedido updateStatusPaymenty(Pedido obj) {
+    	Optional <Pedido> objPedido = pedidoRepository.findById(obj.getId());
+        UserSS user = UserService.authenticated();
+    	Registro registro = registroRepository.findByEmail(user.getUsername());
+    	var registroId = registro.getId();
+    	var pedidoId = objPedido.get().getRegistro().getId();
+    	
+    		if (!user.hasRole(Perfil.ADMIN) && !registroId.equals(pedidoId))
+    			{
+                	throw new AuthorizationException("Pedido não pertence ao Usuario requisitado!, ou não possui privilégios necessarios.");
+    			}
+          Pedido newObj = find(obj.getId());
+          updateStatusPaymenty(newObj, obj);
+             
+          return pedidoRepository.save(newObj);
+    }
+    
+    private void updateStatusPaymenty (Pedido newObj, Pedido obj) {
+        newObj.setStatusPayment(obj.getStatusPayment());
+    }
+    
+    public Pedido updateStatusPaymentyfromDTO (UpdateStatusPaymentPedidoDTO objDto) {
+  
+    	return new Pedido(null, null, null, null, null, objDto.getStatusPayment());
+    }
+    
 //find page pedido
     public Page<Pedido> findPage(Integer page, Integer linesPerPages, String orderBy, String direction) {
         UserSS user = UserService.authenticated();

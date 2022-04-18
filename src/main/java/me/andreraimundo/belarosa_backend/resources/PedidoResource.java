@@ -2,6 +2,8 @@ package me.andreraimundo.belarosa_backend.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
+import me.andreraimundo.belarosa_backend.domain.Registro;
+import me.andreraimundo.belarosa_backend.dto.ClienteDTO;
 import me.andreraimundo.belarosa_backend.dto.PedidoDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdatePassowordDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdateStatusPaymentPedidoDTO;
 import me.andreraimundo.belarosa_backend.resources.utils.URL;
 import me.andreraimundo.belarosa_backend.services.PedidoService;
 
@@ -62,5 +69,13 @@ public class PedidoResource {
        Page<PedidoDTO>listDto = list.map(obj -> new PedidoDTO(obj));
        return ResponseEntity.ok().body(listDto);
    }
+  
+  @RequestMapping(value = "stp/{id}", method = RequestMethod.PUT)
+  public ResponseEntity <Void> updateStatusPaymenty (@Valid @RequestBody UpdateStatusPaymentPedidoDTO objDto, @PathVariable Integer id) {
+    Pedido obj = pedidoService.updateStatusPaymentyfromDTO(objDto);
+    obj.setId(id);
+    obj = pedidoService.updateStatusPaymenty(obj);
+    return ResponseEntity.noContent().build();
+  }
+  }
 	
-}
