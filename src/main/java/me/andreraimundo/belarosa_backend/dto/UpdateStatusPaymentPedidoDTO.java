@@ -9,7 +9,7 @@ public class UpdateStatusPaymentPedidoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Integer id;
-    private Integer statusPayment;
+    private String statusPayment;
     
     public UpdateStatusPaymentPedidoDTO() {
     	
@@ -28,12 +28,11 @@ public class UpdateStatusPaymentPedidoDTO implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getStatusPayment() {
+	public String getStatusPayment() {
 		return statusPayment;
 	}
 
-
-	public void setStatusPayment(Integer statusPayment) {
+	public void setStatusPayment(String statusPayment) {
 		this.statusPayment = statusPayment;
 	}
 

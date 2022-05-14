@@ -9,10 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.yaml.snakeyaml.events.Event.ID;
 
-import me.andreraimundo.belarosa_backend.domain.Cliente;
-import me.andreraimundo.belarosa_backend.domain.Endereco;
 import me.andreraimundo.belarosa_backend.domain.ItemPedido;
 import me.andreraimundo.belarosa_backend.domain.PagamentoBoleto;
 import me.andreraimundo.belarosa_backend.domain.PagamentoDinheiro;
@@ -22,7 +19,8 @@ import me.andreraimundo.belarosa_backend.domain.Registro;
 import me.andreraimundo.belarosa_backend.domain.ReservaDePedido;
 import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.domain.enums.SituacaoPedido;
-import me.andreraimundo.belarosa_backend.dto.ClienteDTO;
+import me.andreraimundo.belarosa_backend.dto.ReservaPedidoDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdatePixPedidoDTO;
 import me.andreraimundo.belarosa_backend.dto.UpdateStatusPaymentPedidoDTO;
 import me.andreraimundo.belarosa_backend.repositories.ItemPedidoRepository;
 import me.andreraimundo.belarosa_backend.repositories.PagamentoRepository;
@@ -153,7 +151,61 @@ public class PedidoService {
     
     public Pedido updateStatusPaymentyfromDTO (UpdateStatusPaymentPedidoDTO objDto) {
   
-    	return new Pedido(null, null, null, null, null, objDto.getStatusPayment());
+    	return new Pedido(null, null, null, null, null, objDto.getStatusPayment(), null, null);
+    }
+    
+    
+    public Pedido updatePixPaymenty(Pedido obj) {
+    	Optional <Pedido> objPedido = pedidoRepository.findById(obj.getId());
+        UserSS user = UserService.authenticated();
+    	Registro registro = registroRepository.findByEmail(user.getUsername());
+    	var registroId = registro.getId();
+    	var pedidoId = objPedido.get().getRegistro().getId();
+    	
+    		if (!user.hasRole(Perfil.ADMIN) && !registroId.equals(pedidoId))
+    			{
+                	throw new AuthorizationException("Pedido não pertence ao Usuario requisitado!, ou não possui privilégios necessarios.");
+    			}
+          Pedido newObj = find(obj.getId());
+          updatePixPaymenty(newObj, obj);
+             
+          return pedidoRepository.save(newObj);
+    }
+    
+    private void updatePixPaymenty (Pedido newObj, Pedido obj) {
+        newObj.setPixPayment_id(obj.getPixPayment_id());
+    }
+    
+    public Pedido updatePixPaymentyfromDTO (UpdatePixPedidoDTO objDto) {
+  
+    	return new Pedido(null, null, null, null, null, null, objDto.getPixPayment_id(), null);
+    }
+    
+    
+    public Pedido updatePedidoReseva(Pedido obj) {
+    	Optional <Pedido> objPedido = pedidoRepository.findById(obj.getId());
+        UserSS user = UserService.authenticated();
+    	Registro registro = registroRepository.findByEmail(user.getUsername());
+    	var registroId = registro.getId();
+    	var pedidoId = objPedido.get().getRegistro().getId();
+    	
+    		if (!user.hasRole(Perfil.ADMIN) && !registroId.equals(pedidoId))
+    			{
+                	throw new AuthorizationException("Pedido não pertence ao Usuario requisitado!, ou não possui privilégios necessarios.");
+    			}
+          Pedido newObj = find(obj.getId());
+          updatePedidoReserv(newObj, obj);
+             
+          return pedidoRepository.save(newObj);
+    }
+    
+    private void updatePedidoReserv (Pedido newObj, Pedido obj) {
+        newObj.setReservaPedido(obj.getReservaPedido());
+    }
+    
+    public Pedido updatePedidoResevafromDTO (ReservaPedidoDTO objDto) {
+  
+    	return new Pedido(null, null, null, null, null, null, null, objDto.getReservaPedido());
     }
     
 //find page pedido

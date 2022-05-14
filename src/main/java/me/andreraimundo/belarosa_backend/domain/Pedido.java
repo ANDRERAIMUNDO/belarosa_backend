@@ -51,13 +51,17 @@ public class Pedido implements Serializable{
     @OneToMany(mappedBy = "id.pedido")
     private Set <ItemPedido> itens = new HashSet<>();
     
-    private Integer statusPayment;
+    private String statusPayment;
+    
+    private String pixPayment_id;
+    
+    private String reservaPedido;
     
     public Pedido() {
 
     }
 
-    public Pedido(Integer id, Date instante, Registro registro, Cliente cliente, Endereco enderecoDeEntrega,Integer statusPayment) {
+    public Pedido(Integer id, Date instante, Registro registro, Cliente cliente, Endereco enderecoDeEntrega,String statusPayment, String pixPayment_id, String reservaPedido) {
         super();
         this.id = id;
         this.instante = instante;
@@ -65,6 +69,8 @@ public class Pedido implements Serializable{
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
         this.statusPayment = statusPayment;
+        this.pixPayment_id = pixPayment_id;
+        this.reservaPedido = reservaPedido;
     }
 
     public double getValorTotal() {
@@ -130,12 +136,28 @@ public class Pedido implements Serializable{
 		this.itens = itens;
 	}
 
-	public Integer getStatusPayment() {
+	public String getStatusPayment() {
 		return statusPayment;
 	}
 
-	public void setStatusPayment(Integer statusPayment) {
+	public void setStatusPayment(String statusPayment) {
 		this.statusPayment = statusPayment;
+	}
+
+	public String getPixPayment_id() {
+		return pixPayment_id;
+	}
+
+	public void setPixPayment_id(String pixPayment_id) {
+		this.pixPayment_id = pixPayment_id;
+	}
+
+	public String getReservaPedido() {
+		return reservaPedido;
+	}
+
+	public void setReservaPedido(String reservaPedido) {
+		this.reservaPedido = reservaPedido;
 	}
 
 	@Override

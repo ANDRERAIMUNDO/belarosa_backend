@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class StandardError implements Serializable {
 
-    private Long timestamp;
+	private static final long serialVersionUID = 1L;
+	private Long timestamp;
 	private Integer status;
 	private String error;
 	private String message;

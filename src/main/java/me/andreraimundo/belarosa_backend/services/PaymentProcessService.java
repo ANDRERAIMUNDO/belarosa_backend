@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import me.andreraimundo.belarosa_backend.domain.Registro;
-import me.andreraimundo.belarosa_backend.domain.enums.Perfil;
 import me.andreraimundo.belarosa_backend.dto.mercadopago.PayerUser;
 import me.andreraimundo.belarosa_backend.dto.mercadopago.ProcessPayment;
 import me.andreraimundo.belarosa_backend.dto.mercadopago.ProcessPaymentDTO;
@@ -28,8 +27,6 @@ import me.andreraimundo.belarosa_backend.dto.mercadopago.StatusPayment;
 import me.andreraimundo.belarosa_backend.repositories.mercadopago.PayerUserRepository;
 import me.andreraimundo.belarosa_backend.repositories.mercadopago.ProcessPaymentRepository;
 import me.andreraimundo.belarosa_backend.repositories.mercadopago.StatusPaymentRepository;
-import me.andreraimundo.belarosa_backend.security.UserSS;
-import me.andreraimundo.belarosa_backend.services.exception.AuthorizationException;
 import me.andreraimundo.belarosa_backend.services.exception.MercadoPagoException;
 import me.andreraimundo.belarosa_backend.services.exception.ObjectNotFoundException;
 
@@ -51,16 +48,12 @@ public class PaymentProcessService {
     private static final Logger LOG = LoggerFactory.getLogger(PaymentProcessService.class);
 //busca por id 
     public ProcessPayment find (Integer id){
-        UserSS user = UserService.authenticated();
-        if (!user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
-        {
-            throw new AuthorizationException("Somente administrador! .");
-        }
         Optional <ProcessPayment> obj = processPaymentRepository.findById(id);
         return obj.orElseThrow(()-> new 
         ObjectNotFoundException("Processp de pagamento não encontrado Id: "+ id + " Tipo: "
          + ProcessPayment.class.getName()));
     }
+    
 //findById    
     public StatusPayment findById (Integer id){
         Optional <StatusPayment> obj = statusPaymentRepository.findById(id);

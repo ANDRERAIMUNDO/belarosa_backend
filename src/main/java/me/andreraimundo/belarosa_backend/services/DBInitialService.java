@@ -276,7 +276,7 @@ public class DBInitialService {
 		reg4.addPerfil(Perfil.ADMIN);
 		Registro reg5 = new Registro (null, "terezinhajro@gmail.com", pe.encode("1402"));
 		reg5.addPerfil(Perfil.ADMIN);
-		Registro reg6 = new Registro (null, "test_user_3815517@testuser.com", pe.encode("qatest2132"));
+		Registro reg6 = new Registro (null, "test_user_44554176@testuser.com", pe.encode("qatest5398"));
 		Registro reg7 = new Registro (null, "andreraimundoo@hotmail.com", pe.encode("1402"));
 		
 		Cliente cl1 = new Cliente(reg1, null, "Andre Raimundo Rodrigues de Oliveira", "86773894077", "24061993", "91984001327");
@@ -284,7 +284,7 @@ public class DBInitialService {
 		Cliente cl3 = new Cliente(reg3, null, "Gisela Rodrigues de Oliveira", "29167241093", "10031991", "91999001422");
 		Cliente cl4 = new Cliente(reg4, null, "Roberto Luiz Cabral Moraes", "01011990","82640149253", "91999132862");
 		Cliente cl5 = new Cliente(reg5, null, "Terezinha de Oliveira", "63079207009", "13122009", "91988646337");
-		Cliente cl6 = new Cliente(reg6, null, "TESTYPLFCXOQ", "11111111111", "30/11/1998", "91987654472");
+		Cliente cl6 = new Cliente(reg6, null, "TESTV6SUUCNO", "11111111111", "30/11/1998", "91987654472");
 		Cliente cl7 = new Cliente(reg7, null, "Andre Raimundoo Oliveira", "22501422031", "30/11/1998", "91987654472");
 
 		registroRepository.saveAll(Arrays.asList(reg1, reg2, reg3, reg4, reg5, reg6, reg7));
@@ -310,27 +310,27 @@ public class DBInitialService {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 		
-		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg7, cl7, end7, null);
-		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg7, cl7, end7, null);
-		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg7, cl7, end7, null);
-		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg7, cl7, end7, null);
-		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg7, cl7, end7, null);
-		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg7, cl7, end7, null);
-		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg7, cl7, end7, null);
-		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg7, cl7, end7, null);
-		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg7, cl7, end7, null);
-		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg7, cl7, end7, null);
-		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg7, cl7, end7, null);
-		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg7, cl7, end7, null);
-		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg7, cl7, end7, null);
-		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg7, cl7, end7, null);
-		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg6, cl6, end6, null);
+		Pedido pedido1 = new Pedido(null, sdf.parse("23/03/2021 22:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido2 = new Pedido(null, sdf.parse("22/03/2021 21:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido3 = new Pedido(null, sdf.parse("21/03/2021 20:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido4 = new Pedido(null, sdf.parse("03/01/2021 22:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido5 = new Pedido(null, sdf.parse("22/01/2021 21:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido6 = new Pedido(null, sdf.parse("27/01/2021 20:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido7 = new Pedido(null, sdf.parse("12/03/2021 22:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido8 = new Pedido(null, sdf.parse("20/06/2021 21:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido9 = new Pedido(null, sdf.parse("14/07/2021 20:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido10 = new Pedido(null, sdf.parse("23/07/2021 22:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido11 = new Pedido(null, sdf.parse("30/07/2021 21:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido12 = new Pedido(null, sdf.parse("01/08/2021 20:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido13 = new Pedido(null, sdf.parse("06/08/2021 22:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido14 = new Pedido(null, sdf.parse("12/08/2021 21:00"), reg7, cl7, end7, null, null, null);
+		Pedido pedido15 = new Pedido(null, sdf.parse("27/08/2021 20:00"), reg6, cl6, end6, "1", null, null);
 		
 		Pagamento pgt1 = new PagamentoCartao(null, SituacaoPedido.PENDENTE, pedido1, 10);
 		pedido1.setPagamento(pgt1);
 		Pagamento pgt2 = new PagamentoBoleto(null, SituacaoPedido.PENDENTE, pedido2, sdf.parse("10/04/2021 23:59"), null);
 		pedido2.setPagamento(pgt2);
-		Pagamento pgt3 = new ReservaDePedido (null, SituacaoPedido.QUITADO, pedido3, sdf.parse("21/03/2021 20:00"), "Retirar na loja");
+		Pagamento pgt3 = new ReservaDePedido (null, SituacaoPedido.PENDENTE, pedido3, sdf.parse("21/03/2021 20:00"), "Retirar na loja");
 		pedido3.setPagamento(pgt3);
 		Pagamento pgt4 = new PagamentoCartao(null, SituacaoPedido.QUITADO, pedido4, 4);
 		pedido4.setPagamento(pgt4);

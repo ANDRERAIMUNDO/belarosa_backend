@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import me.andreraimundo.belarosa_backend.domain.Cliente;
 import me.andreraimundo.belarosa_backend.domain.Pedido;
-import me.andreraimundo.belarosa_backend.domain.Registro;
-import me.andreraimundo.belarosa_backend.dto.ClienteDTO;
 import me.andreraimundo.belarosa_backend.dto.PedidoDTO;
-import me.andreraimundo.belarosa_backend.dto.UpdatePassowordDTO;
+import me.andreraimundo.belarosa_backend.dto.ReservaPedidoDTO;
+import me.andreraimundo.belarosa_backend.dto.UpdatePixPedidoDTO;
 import me.andreraimundo.belarosa_backend.dto.UpdateStatusPaymentPedidoDTO;
-import me.andreraimundo.belarosa_backend.resources.utils.URL;
 import me.andreraimundo.belarosa_backend.services.PedidoService;
 
 @RestController
@@ -75,6 +72,22 @@ public class PedidoResource {
     Pedido obj = pedidoService.updateStatusPaymentyfromDTO(objDto);
     obj.setId(id);
     obj = pedidoService.updateStatusPaymenty(obj);
+    return ResponseEntity.noContent().build();
+  }
+  
+  @RequestMapping(value = "stppix/{id}", method = RequestMethod.PUT)
+  public ResponseEntity <Void> updatePixPaymenty (@Valid @RequestBody UpdatePixPedidoDTO objDto, @PathVariable Integer id) {
+    Pedido obj = pedidoService.updatePixPaymentyfromDTO(objDto);
+    obj.setId(id);
+    obj = pedidoService.updatePixPaymenty(obj);
+    return ResponseEntity.noContent().build();
+  }
+  
+  @RequestMapping(value = "stpreserv/{id}", method = RequestMethod.PUT)
+  public ResponseEntity <Void> updateReservaPedido (@Valid @RequestBody ReservaPedidoDTO objDto, @PathVariable Integer id) {
+    Pedido obj = pedidoService.updatePedidoResevafromDTO(objDto);
+    obj.setId(id);
+    obj = pedidoService.updatePedidoReseva(obj);
     return ResponseEntity.noContent().build();
   }
   }

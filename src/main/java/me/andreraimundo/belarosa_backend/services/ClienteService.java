@@ -33,7 +33,7 @@ import me.andreraimundo.belarosa_backend.services.utils.CPFBR;
 
 @Service
 public class ClienteService {
-
+	
     @Autowired  
     private ClienteRepository clienteRepository;
 
@@ -50,11 +50,8 @@ public class ClienteService {
     private ImagesService imagesService;
 
     @Autowired
-    EmailService emailService;
-	
-    @Autowired
-    RegistroService registroService;
-	
+    private EmailService emailService;
+    
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
 	
@@ -189,4 +186,28 @@ public class ClienteService {
 		return s3Service.uploadFile(imagesService.getInputStream(pngImage, "png"), fileName, "image");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
